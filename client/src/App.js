@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/Navbar.js';
-import OurModal from './components/Navbar.js/OurModal';
+import OurModal from './components/OurModal';
 import Modal from 'react-modal';
 
 class App extends Component {
