@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 3001;
 const app = express();
 const body_parser = require('body-parser');
 const db = require('./client/config/db');
