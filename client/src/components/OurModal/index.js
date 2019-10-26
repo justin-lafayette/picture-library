@@ -1,6 +1,6 @@
 import React from "react";
 
-function OurModal(props) {
+export function SignInModal(props) {
     return(
 
         <div>
@@ -11,24 +11,51 @@ function OurModal(props) {
 
             <button onClick={props.closeModal}>Close Modal</button>
 
-            <div>Modal body</div>
+            <div>
+           
+                <form>
 
-            <form>
+                    <div className="form-group">
+                        <label htmlFor="sign_name" style={`font-family: moonsans; font-size: 30px;`}>Email:</label>
+                        <input name="username" type="email" id="sign_name" />
+                    </div>
 
-                <input />
+                    <div className="form-group">
+                        <label htmlFor="sign_pass" style={`font-family: moonsans; font-size: 30px;`}>Password:</label>
+                        <input type="password" name="password" id="sign_pass" />
+                    </div>
+                    
+                    <div className="form-group">
+                        <div className="login-error"></div>
+                        <button id="signin" className="btn btn-secondary"
+                        style={`font-family: moonsans; font-size: 30px;`}>Submit</button>
+                    </div>
 
-                <button>tab navigation</button>
-                
-                <button>stays</button>
-                
-                <button>inside</button>
-                
-                <button>the modal</button>
+                </form>
 
-            </form>
+            </div>
 
         </div>
-    );
-};
 
-export default OurModal;
+    );
+}
+
+export function SignUpModal(props) {
+    return (
+
+        <div>
+
+        </div>
+        
+    );
+}
+
+export function UploadPicModal(props) {
+    return (
+
+        <div>
+
+        </div>
+
+    );
+}
