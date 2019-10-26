@@ -1,10 +1,9 @@
 import React from "react";
 
 function OurModal(props) {
+    const stylez = {fontFamily: "moonsans", fontSize: 30};
     return(
-
         <div>
-
             {/* <button onClick={props.openModal}>Open Modal</button> */}
 
             <h2>Modal Title</h2>
@@ -15,15 +14,21 @@ function OurModal(props) {
 
             <form>
 
-                <input />
+                <div className="form-group">
+                <label for="sign_name" style={stylez}>Email:</label>
+                <input name="username" type="email" id="sign_name" />
+                </div>
+                
+                <div className="form-group">
+                <p style={stylez}>Password:</p>
+                <input type="password" name="password" id="sign_pass" />
+                </div>
 
-                <button>tab navigation</button>
-                
-                <button>stays</button>
-                
-                <button>inside</button>
-                
-                <button>the modal</button>
+                <div className="form-group">
+                <div class="login-error"></div>
+                <button id="signin" class="btn btn-secondary"
+                style={stylez}>Submit</button>
+                </div>
 
             </form>
 
@@ -32,3 +37,4 @@ function OurModal(props) {
 };
 
 export default OurModal;
+
