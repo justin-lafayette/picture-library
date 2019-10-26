@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { Container } from '../components/Grid';
 import Modal from 'react-modal';
 import { SignInModal } from '../components/OurModal';
-import Jumbotron from '../components/Jumbotron';
+// import Jumbotron from '../components/Jumbotron';
 
 class Home extends Component {
 
@@ -33,10 +33,9 @@ closeModal = () => {
             <Container fluid>
         
                 <Navbar
-                openModal={this.openModal}
-                >
-                    
-                </Navbar>
+                    openModal={this.openModal}
+                />
+                
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -51,7 +50,7 @@ closeModal = () => {
                     />
                 </Modal>
 
-                <Jumbotron fluid />
+                {/* <Jumbotron fluid /> */}
                 
             </Container>
                         

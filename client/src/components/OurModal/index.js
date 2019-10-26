@@ -15,11 +15,6 @@ export function SignInModal(props) {
                 <form>
 
                     <div className="form-group">
-                        <label htmlFor="sign_name" style={`font-family: moonsans; font-size: 30px;`}>Email:</label>
-                        <input name="username" type="email" id="sign_name" />
-                    </div>
-
-                    <div className="form-group">
                         <label htmlFor="sign_name" style={stylez}>Email:</label>
                         <input name="username" type="email" id="sign_name" />
                     </div>
@@ -30,8 +25,8 @@ export function SignInModal(props) {
                     </div>
 
                     <div className="form-group">
-                        <div class="login-error"></div>
-                        <button id="signin" class="btn btn-secondary" style={stylez}>Submit</button>
+                        <div className="login-error"></div>
+                        <button id="signin" className="btn btn-secondary" style={stylez}>Submit</button>
                     </div>
 
                 </form>
