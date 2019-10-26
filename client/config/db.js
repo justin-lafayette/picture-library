@@ -5,4 +5,5 @@ const db = new Sequelize('', 'admin', 'Apa05Sak', {
     dialect: 'mysql' 
   });
 
+  
   module.exports = db;
