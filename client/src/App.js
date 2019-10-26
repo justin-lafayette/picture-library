@@ -1,81 +1,80 @@
-import React, { Component } from 'react';
+import React/* , { Component } */ from 'react';
 import './App.css';
-import Navbar from './components/Navbar.js';
-import OurModal from './components/OurModal';
-import Modal from 'react-modal';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import PageNotFound from './pages/PageNotFound';
+import Profile from './pages/Profile';
 
-class App extends Component {
+// import Navbar from './components/Navbar.js';
+// import OurModal from './components/OurModal';
+// import Modal from 'react-modal';
 
-  state = {
+// class App extends Component {
 
-    modalIsOpen: false
+//   state = {
+
+//     modalIsOpen: false
     
 
-  };
+//   };
 
-  openModal = () => {
-    this.setState({modalIsOpen: true});
-  }
+  // openModal = () => {
+  //   this.setState({modalIsOpen: true});
+  // }
 
-  afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
+  // afterOpenModal = () => {
+  //   // references are now sync'd and can be accessed.
     
-  }
+  // }
 
-  closeModal = () => {
-    this.setState({modalIsOpen: false});
-  }
+  // closeModal = () => {
+  //   this.setState({modalIsOpen: false});
+  // }
 
-  render() {
-    return(
+  // render() {
+  //   return(
 
-      <div>
+      // <div>
 
-        <Navbar
-          openModal={this.openModal}
-        />
+      //   <Navbar
+      //     openModal={this.openModal}
+      //   />
         
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          // closeModal={this.closeModal}
-          // openModal={this.openModal}
-          contentLabel="Example Modal" 
-          appElement={document.getElementById("root")}
-          >
-          <OurModal 
-            closeModal={this.closeModal}
-          />
-        </Modal>
+      //   <Modal
+      //     isOpen={this.state.modalIsOpen}
+      //     onAfterOpen={this.afterOpenModal}
+      //     onRequestClose={this.closeModal}
+      //     // closeModal={this.closeModal}
+      //     // openModal={this.openModal}
+      //     contentLabel="Example Modal" 
+      //     appElement={document.getElementById("root")}
+      //     >
+      //     <OurModal 
+      //       closeModal={this.closeModal}
+      //     />
+      //   </Modal>
 
-      </div>
-    )
-  }
+      // </div>
+//     )
+//   }
 
-}
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-
-//       <Modal />
-//     </div>
-//   );
 // }
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <Switch>
+
+          <Route exact path="/" component={Home} />
+          <Route exact path="/event" component={Event} />
+          <Route exact path="/404" component={PageNotFound} />
+          <Route exact path="/profile" component={Profile} />
+          
+        </Switch>
+      </div>
+    </Router>
+  );
+}
 
 export default App;
