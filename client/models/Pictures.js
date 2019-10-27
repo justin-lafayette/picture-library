@@ -1,20 +1,28 @@
-module.expots = function(sequelize, DataTypes){
-    var pictures = sequelize.define('Pictures',
-        {
-            picture_id: {
-                type : DataTypes.integer,
-                primaryKey : true,
-                autoIncrement : true
-            },
-            title: DataTypes.String,
-            picture_url: DataTypes.String,
-            picture_file: DataTypes.BLOB('long'),
-            freezeTableName: true
-        });
+const Sequelize = require("sequelize");
 
-        pictures.sync()
-        .then(()=> console.log('Sync successful'))
-        .catch((err)=>{'Unable to sync-'+err});
+const sequelize = require("../config/connection");
 
-        return pictures;
+const pictures = sequelize.define(
+  "pictures",
+  {
+    picture_id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    title: Sequelize.STRING,
+    picture_url: Sequelize.STRING,
+    picture_file: Sequelize.BLOB
+  },
+  {
+    freezeTableName: true
+  },
+  
+);
+
+pictures.associate = function(models){
+    pictures.belongsTo(models.User);
 };
+
+
+module.exports = pictures;
