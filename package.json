@@ -29,8 +29,11 @@
   "homepage": "https://github.com/justin-barfield/picture-library#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "if-env": "^1.0.4",
+    "model": "^6.0.1",
     "mongoose": "^5.7.6",
     "multer": "^1.4.2",
     "mysql2": "^1.7.0",
