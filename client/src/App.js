@@ -2,6 +2,7 @@ import React/* , { Component } */ from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
+import Event from './pages/Event';
 import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
 

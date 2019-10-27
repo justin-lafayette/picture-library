@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Container } from '../components/Grid';
+import { Container, Col } from '../components/Grid';
 import Modal from 'react-modal';
 import { SignInModal } from '../components/OurModal';
-// import Jumbotron from '../components/Jumbotron';
+import Jumbotron from '../components/Jumbotron';
+
 
 class Home extends Component {
 
@@ -50,7 +51,9 @@ closeModal = () => {
                     />
                 </Modal>
 
-                {/* <Jumbotron fluid /> */}
+                <Col num="md-10">
+                    <Jumbotron fluid />
+                </Col>
                 
             </Container>
                         

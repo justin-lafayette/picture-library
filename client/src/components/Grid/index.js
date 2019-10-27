@@ -16,18 +16,18 @@ export function Row({ fluid, children }) {
     );
 }
 
-// export function Col({ num, children }) {
-//     return (
+export function Col({ num, center, children }) {
+    return (
 
-//         <div
-//             className={size
-//             .split(" ")
-//             .map(size => "col-" + size)
-//             .join(" ")}
-//         >
-//             {children}
+        <div
+            className={num
+            .split(" ")
+            .map(num => "col-" + num)
+            .join(" ")` ${center ? "text-center" : ""}`} 
+        >
+            {children}
         
-//         </div>
+        </div>
 
-//     );
-// }
+    );
+}
