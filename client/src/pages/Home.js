@@ -17,18 +17,18 @@ class Home extends Component {
     
     openModal = () => {
         this.setState({modalIsOpen: true});
-}
+    }
 
-afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
+    afterOpenModal = () => {
+        // references are now sync'd and can be accessed.
 
-}
+    }
 
-closeModal = () => {
-    this.setState({modalIsOpen: false});
-}
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+    }
 
-// Render Elements
+    // Render Elements
     render() {
         return(
             <Container fluid>
@@ -45,7 +45,7 @@ closeModal = () => {
                     // openModal={this.openModal}
                     contentLabel="Example Modal" 
                     appElement={document.getElementById("root")}
-                    >
+                >
                     <SignInModal 
                         closeModal={this.closeModal}
                     />

@@ -20,14 +20,15 @@ export function Col({ num, center, children }) {
     return (
 
         <div
-            className={num
-            .split(" ")
-            .map(num => "col-" + num)
-            .join(" ")` ${center ? "text-center" : ""}`} 
+            className={getClassName(num, center)} 
         >
             {children}
         
         </div>
 
     );
+}
+
+function getClassName(num, center) {
+    return `${num.split(" ").map(num => "col-" + num).join(" ")} ${center ? "text-center" : ""}`
 }
