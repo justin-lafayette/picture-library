@@ -3,6 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const body_parser = require('body-parser');
+var db = require("./models");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -28,39 +29,41 @@ database.authenticate()
 .catch((err)=>{console.error('Unable to connect to the database:', err);});
 
 
-const users = require('./client/models/User');
-const pictures = require('./client/models/Pictures');
-const video = require('./client/models/Video');
-const events = require('./client/models/Events');
+// const users = require('./client/models/User');
+// const pictures = require('./client/models/Pictures');
+// const video = require('./client/models/Video');
+// const events = require('./client/models/Events');
 
-users
-  .sync()
-  .then(() => console.log("Sync successful"))
-  .catch(err => {
-    "Unable to sync-" + err;
-  });
+// users
+//   .sync({force: true})
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
 
-pictures
-  .sync()
-  .then(() => console.log("Sync successful"))
-  .catch(err => {
-    "Unable to sync-" + err;
-  });
+// pictures
+//   .sync({force: true})
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
 
-  video
-  .sync()
-  .then(() => console.log("Sync successful"))
-  .catch(err => {
-    "Unable to sync-" + err;
-  });
+//   video
+//   .sync()
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
   
-  events
-  .sync()
-  .then(() => console.log("Sync successful"))
-  .catch(err => {
-    "Unable to sync-" + err;
-  });
+//   events
+//   .sync()
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
 
-app.listen(PORT, () => {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
+db.sequelize.sync({ force: true }).then(function() {
+  app.listen(PORT, function() {
+    console.log("API Server now listening on PORT " + PORT);
+  });
 });
