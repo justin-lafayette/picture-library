@@ -1,26 +1,29 @@
-const Sequelize = require("sequelize");
+module.exports = function(datatypes, DataTypes) {
 
-const sequelize = require("../config/connection");
-
-const events = sequelize.define(
+const events = datatypes.define(
   "events",
   {
     event_id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-    title : Sequelize.STRING,
-    event_date: Sequelize.DATE,
-    event_description: Sequelize.STRING
+    title : DataTypes.STRING,
+    event_date: DataTypes.DATE,
+    event_description: DataTypes.STRING
   },
   {
     freezeTableName: true
   }
 );
 
-// events.associate = function(models){
-//   events.BelongsTo(models.User);  
-// };
+events.associate = function(models){
+  events.belongsTo(models.user, {foreignKey: 'email'});
+};
 
-module.exports = events;
+events.associate = function(models){
+  events.belongsTo(models.video, {foreignKey : 'video_id'});
+};
+
+return events;
+}

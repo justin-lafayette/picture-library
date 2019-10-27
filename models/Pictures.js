@@ -14,12 +14,12 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     freezeTableName: true
-  },
+  }
   
   );
   
   pictures.associate = function(models){
-    pictures.belongsTo(models.user);
+    pictures.belongsTo(models.user, {foreignKey: 'email'});
   };
   
   return pictures;

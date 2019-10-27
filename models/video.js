@@ -1,21 +1,24 @@
-const Sequelize = require("sequelize");
+module.exports = function(sequelize, DataTypes) {
 
-const sequelize = require("../config/connection");
-
-const video = sequelize.define(
+  const video = sequelize.define(
   "video",
   {
     video_id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-    video_file : Sequelize.BLOB,
-    video_url: Sequelize.STRING
+    video_file : DataTypes.BLOB,
+    video_url: DataTypes.STRING
   },
   {
     freezeTableName: true
   }
 );
+video.associate = function(models){
+  console.log(models)
+  video.hasOne(models.events)
+};
 
-module.exports = video;
+  return video;
+}
