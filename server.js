@@ -1,9 +1,9 @@
 const express = require("express");
 const path = require("path");
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 3001;
 const app = express();
 const body_parser = require('body-parser');
-const db = require('./client/config/db');
+var db = require("./models");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -20,16 +20,50 @@ if (process.env.NODE_ENV === "production") {
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
-db.authenticate()
+//const db = require('./client/config/connection');
+
+var database = require("./client/config/connection");
+
+database.authenticate()
 .then(() => {console.log('Database connected...');})
 .catch((err)=>{console.error('Unable to connect to the database:', err);});
 
-app.listen(PORT, () => {
-  console.log(`🌎 ==> API server now on port ${PORT}!`);
-});
 
+// const users = require('./client/models/User');
+// const pictures = require('./client/models/Pictures');
+// const video = require('./client/models/Video');
+// const events = require('./client/models/Events');
 
+// users
+//   .sync({force: true})
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
 
+// pictures
+//   .sync({force: true})
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
 
-
+//   video
+//   .sync()
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
   
+//   events
+//   .sync()
+//   .then(() => console.log("Sync successful"))
+//   .catch(err => {
+//     "Unable to sync-" + err;
+//   });
+
+db.sequelize.sync({ force: true }).then(function() {
+  app.listen(PORT, function() {
+    console.log("API Server now listening on PORT " + PORT);
+  });
+});

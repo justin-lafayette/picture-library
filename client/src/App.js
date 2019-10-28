@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React/* , { Component } */ from 'react';
 import './App.css';
+<<<<<<< HEAD
 import Navbar from './components/Navbar.js';
 import OurModal from './components/OurModal';
 import Modal from 'react-modal';
@@ -51,33 +52,29 @@ class App extends Component {
           />
         </Modal>
 
+=======
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import Event from './pages/Event';
+import PageNotFound from './pages/PageNotFound';
+import Profile from './pages/Profile';
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <Switch>
+
+          <Route exact path="/" component={Home} />
+          <Route exact path="/event" component={Event} />
+          <Route exact path="/404" component={PageNotFound} />
+          <Route exact path="/profile" component={Profile} />
+          
+        </Switch>
+>>>>>>> dd2f67d08a236755d16216e65d8682b5e1c9a11e
       </div>
-    )
-  }
-
+    </Router>
+  );
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-
-//       <Modal />
-//     </div>
-//   );
-// }
 
 export default App;

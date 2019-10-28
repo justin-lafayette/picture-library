@@ -1,34 +1,43 @@
 import React from "react";
+import './style.css'
 
-function OurModal(props) {
+export function SignInModal(props) {
     return(
+        <div>
+            
+            <h2>Sign In!</h2>
+
+            {props.children}
+
+        </div>
+
+    );
+}
+
+export function SignUpModal(props) {
+    return (
 
         <div>
 
-            {/* <button onClick={props.openModal}>Open Modal</button> */}
+            <h2>Sign Up!</h2>
 
-            <h2>Modal Title</h2>
-
-            <button onClick={props.closeModal}>Close Modal</button>
-
-            <div>Modal body</div>
-
-            <form>
-
-                <input />
-
-                <button>tab navigation</button>
-                
-                <button>stays</button>
-                
-                <button>inside</button>
-                
-                <button>the modal</button>
-
-            </form>
+            {props.children}
 
         </div>
+        
     );
-};
+}
 
-export default OurModal;
+export function UploadPicModal(props) {
+    return (
+
+        <div>
+
+            <h2>Upload Pic!</h2>
+
+            {props.children}
+
+        </div>
+
+    );
+}
