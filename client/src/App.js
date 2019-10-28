@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './components/Navbar.js';
 import OurModal from './components/OurModal';
 import Modal from 'react-modal';
+import Upload from './components/Upload';
+
 
 class App extends Component {
 
@@ -27,10 +29,10 @@ class App extends Component {
   }
 
   render() {
-    return(
+    return (
 
       <div>
-
+        <Upload style={{border: "1px solid black", height: 100, width: 200, background: "#eee"}} />
         <Navbar
           openModal={this.openModal}
         />

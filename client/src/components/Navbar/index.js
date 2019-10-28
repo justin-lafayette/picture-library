@@ -23,7 +23,7 @@ function Navbar(props) {
                     <li className="nav-item">
                         <div className="nav-link">Gallery</div>
                     </li>
-
+                    
                     <li className="nav-item">
                         <div className="nav-link">Events</div>
                     </li>
@@ -34,6 +34,9 @@ function Navbar(props) {
 
                     <li className="nav-item">
                         <button id="Sign-in" className="nav-link" onClick={props.openModal}>Sign-In</button>
+                    </li>
+                    <li className="nav-item">
+                        <button id="Sign-in" className="nav-link" onClick={props.openModal}>Upload</button>
                     </li>
 
                     <li className="nav-item">

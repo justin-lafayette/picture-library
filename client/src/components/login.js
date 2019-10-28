@@ -1,7 +1,7 @@
 import React from 'react'
 
 
- export default function login (props) {
+ export default function Login (props) {
     return (
         <div>
             <img src= {props.image}></img>
