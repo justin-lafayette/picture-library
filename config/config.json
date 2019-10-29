@@ -5,6 +5,7 @@
     "database": "eventsdb",
     "host": "mydb.cwa4xgzyudas.us-east-2.rds.amazonaws.com",
     "dialect": "mysql",
+    "dialectModule": "mysql12",
     "operatorsAliases": false
   },
   "test": {
@@ -13,6 +14,7 @@
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
+    "dialectModule": "mysql12",
     "operatorsAliases": false
   },
   "production": {
@@ -21,6 +23,7 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
+    "dialectModule": "mysql12",
     "operatorsAliases": false
   }
 }
