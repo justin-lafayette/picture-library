@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Col } from '../components/Grid';
+import { Col, Container, Row } from '../components/Grid';
+import { Card, Button, Dropdown } from 'react-bootstrap';
 import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 
@@ -11,10 +12,10 @@ class Home extends Component {
         modalIsOpen: false,
         signInModal: false,
         signUpModal: false,
-        username: "",
-        password: "",
-        firstname: "",
-        lastname: ""
+        events: [],
+        title: "",
+        description: "",
+        id: ""
 
     }
     
@@ -69,6 +70,17 @@ class Home extends Component {
         });
     }
     
+    loadEvents = ()=> {
+        Api.getEvents()
+            .then(res => {
+                this.setState({ events: res.data, title:"", description:"", id:""})
+            })
+            .catch(err => console.log( err ))
+    }
+
+    componentDidMount() {
+        this.loadEvents();
+    }
 
 
     // Render Elements
@@ -81,12 +93,81 @@ class Home extends Component {
                 <Navbar
                     openModal={(modalToOpen) => this.openModal(modalToOpen)}
                 />
-                
-                
 
-                <Col num="md-10">
-                    <Jumbotron fluid />
-                </Col>
+                <Container>
+
+                    <Col
+                    num={"12"}
+                    >
+                        <Row>
+                            <Col
+                            num="10"
+                            >
+                                {/* TODO: convert to custom dropdown component like in docs online */}
+                                <Dropdown>
+
+                                    <Dropdown.Toggle 
+                                    variant="success"
+                                    id="events-dropdown"
+                                    >
+                                        Search Events!
+                                    </Dropdown.Toggle>
+
+                                    {this.state.events.length ? (
+                                        
+                                        <Dropdown.Menu>
+                                            {this.state.events.map(events => (
+                                                <Dropdown.Item
+                                                key={events.id}
+                                                /* html link for events */
+                                                >
+                                                    {events.title}
+                                                </Dropdown.Item>
+                                                ))}
+                                        </Dropdown.Menu>
+
+                                    ) : (
+
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item>No Events Available</Dropdown.Item>
+                                        </Dropdown.Menu>
+
+                                    )}
+                                    
+                                </Dropdown>
+
+                            </Col>
+                        </Row>
+                    {this.state.events.length ? (
+                        
+                        <Row
+                        center
+                        >
+                            <Col
+                            num={"10"}
+                            >
+                                {this.state.events.map(events => (
+
+                                    <Row key={events._id}>
+                                        <Card>
+                                            <Card.Body>
+                                                <Card.Title>Card Title</Card.Title>
+                                                <Card.Text>Card Body</Card.Text>
+                                                <Button>Button</Button>
+                                            </Card.Body>
+                                        </Card>
+                                    </Row>
+
+                                ))}
+                            </Col>
+
+                        </Row>
+
+                    ) : (<h3>Nothing</h3>)}
+                    
+                    </Col>
+                    
+                </Container>
                 
             </div>
                         
