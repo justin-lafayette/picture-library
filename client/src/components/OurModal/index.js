@@ -41,3 +41,5 @@ export function UploadPicModal(props) {
 
     );
 }
+
+export default OurModal;
