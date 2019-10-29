@@ -34,13 +34,14 @@ function Upload () {
             </section>
           )}
         </Dropzone>
-        <button type="submit" class="btn btn-primary mb-2">
+        <button>
           Upload
         </button>
       </form>
     </div>
     );
 }
+// type="submit" class="btn btn-primary mb-2"
 
 export default Upload;
 
