@@ -31,4 +31,20 @@ export default {
     uploadPic: function(/* pass data here */) {
         return axios.post("/api/uploadpics", /* and here */)
     },
+
+    // Load Events
+    loadEvents: function() {
+        return axios.get("/api/allevents")
+    },
+
+    // Get event subscription status
+    getSubStatus: function(/* Logged in user info here */) {
+        return axios.get("/api/substatus")
+    },
+
+    // Subscribe a user to an event based on their email address and event ID
+    /* TODO: verify api routes are valid syntax */
+    subscribe: function( data ) {
+        return axios.post("/api/:id/subscribe" + data)
+    }
 }

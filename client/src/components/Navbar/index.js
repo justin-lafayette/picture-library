@@ -16,16 +16,16 @@ function Navbar(props) {
                 <ul className="navbar-nav mr-auto">
 
                     <li className="nav-item active">
-                        {/* add state to change the "current" per page */}
-                        <div className="nav-link">Home <span className="sr-only">(current)</span></div>
+                        {/* TODO: add state to change the "current" per page */}
+                        <div className="nav-link" href="/">Home <span className="sr-only">(current)</span></div>
                     </li>
 
                     <li className="nav-item">
-                        <div className="nav-link">Gallery</div>
+                        <div className="nav-link" href="/eventsearch">Events</div>
                     </li>
 
                     <li className="nav-item">
-                        <div className="nav-link">Events</div>
+                        <div className="nav-link" href="/createevent">Create Event</div>
                     </li>
 
                 </ul>

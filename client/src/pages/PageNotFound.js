@@ -8,7 +8,7 @@ import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 
 
-class Home extends Component {
+class PageNotFound extends Component {
 
     state = {
         modalIsOpen: false,
@@ -239,4 +239,4 @@ class Home extends Component {
     }
 };
 
-export default Home;
+export default PageNotFound;

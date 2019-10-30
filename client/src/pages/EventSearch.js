@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import { Col, Container, Row } from '../components/Grid';
 import { Card, Button, Dropdown } from 'react-bootstrap';
-import Jumbotron from '../components/Jumbotron';
+// import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 
 
-class Home extends Component {
+class EventSearch extends Component {
 
     state = {
         modalIsOpen: false,
@@ -15,7 +15,8 @@ class Home extends Component {
         events: [],
         title: "",
         description: "",
-        id: ""
+        id: "",
+        eventLink: ""
 
     }
     
@@ -73,7 +74,7 @@ class Home extends Component {
     loadEvents = ()=> {
         Api.getEvents()
             .then(res => {
-                this.setState({ events: res.data, title:"", description:"", id:""})
+                this.setState({ events: res.data, title:"", description:"", id:"", eventLink:"" })
             })
             .catch(err => console.log( err ))
     }
@@ -119,7 +120,7 @@ class Home extends Component {
                                             {this.state.events.map(events => (
                                                 <Dropdown.Item
                                                 key={events.id}
-                                                /* html link for events */
+                                                /* TODO: href={{events.eventLink}} */
                                                 >
                                                     {events.title}
                                                 </Dropdown.Item>
@@ -151,9 +152,31 @@ class Home extends Component {
                                     <Row key={events._id}>
                                         <Card>
                                             <Card.Body>
-                                                <Card.Title>Card Title</Card.Title>
-                                                <Card.Text>Card Body</Card.Text>
-                                                <Button>Button</Button>
+
+                                                <Col
+                                                num={"4"}
+                                                >
+                                                    <Image 
+                                                    /* TODO: href={{events.eventLink}} */
+                                                    />
+                                                </Col>
+
+                                                <Col
+                                                num={"8"}
+                                                >
+                                                    <Row>
+                                                        <Card.Title>{events.title}</Card.Title>
+                                                    </Row>
+                                                    <Row>
+                                                        <Card.Text>{events.description}</Card.Text>
+                                                        <Button
+                                                        /* TODO: href={{events.eventLink}} */
+                                                        >
+                                                            See More
+                                                        </Button>
+                                                    </Row>
+                                                </Col>
+
                                             </Card.Body>
                                         </Card>
                                     </Row>
@@ -163,7 +186,7 @@ class Home extends Component {
 
                         </Row>
 
-                    ) : (<h3>Nothing</h3>)}
+                    ) : (<h3>No events to display!</h3>)}
                     
                     </Col>
                     
@@ -176,4 +199,4 @@ class Home extends Component {
     }
 };
 
-export default Home;
+export default EventSearch;
