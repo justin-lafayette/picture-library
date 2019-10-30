@@ -1,4 +1,5 @@
 const db = require("../models");
+const userController = require("./userController");
 
 // Defining methods for the booksController
 module.exports = {
@@ -20,10 +21,15 @@ module.exports = {
   }
 ,
   create: function(req, res) {
-    db.Events.create(req.body)
-      .then(function(event){
-        res.json(event);
-      });
+    // check if the user record exists
+    userController.findById(req.id,response);
+    // if we find the user id
+    if(response) {  
+      db.Events.create(req.body)
+        .then(function(event){
+          res.json(event);
+        });
+    }
   }
   //,
 //   update: function(req, res) {
