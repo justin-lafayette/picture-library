@@ -4,6 +4,10 @@ import Dropzone from 'react-dropzone';
 import './style.css'
 
 function Upload () {
+    const maxSize = 1048576;
+    // onDrop = (acceptedFiles) => {
+    //     console.log(acceptedFiles);
+    //   }
     return (
         
         // we will need to replace the console.log with our own function that reads the file
@@ -22,7 +26,7 @@ function Upload () {
         </div>
         {/* // we will need to replace the console.log with our own function that
         reads the file */}
-        <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+        {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
           {({ getRootProps, getInputProps }) => (
             <section>
               <div {...getRootProps()}>
@@ -33,7 +37,32 @@ function Upload () {
               </div>
             </section>
           )}
-        </Dropzone>
+        </Dropzone> */}
+         <div className="text-center mt-5">
+      <Dropzone
+        onDrop={this.onDrop}
+        accept="image/png"
+        minSize={0}
+        maxSize={maxSize}
+      >
+        {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles}) => {
+          const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
+          return (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {!isDragActive && 'Click here or drop a file to upload!'}
+              {isDragActive && !isDragReject && "Drop it like it's hot!"}
+              {isDragReject && "File type not accepted, sorry!"}
+              {isFileTooLarge && (
+                <div className="text-danger mt-2">
+                  File is too large.
+                </div>
+              )}
+            </div>
+          )}
+        }
+      </Dropzone>
+    </div>
         <button>
           Upload
         </button>
