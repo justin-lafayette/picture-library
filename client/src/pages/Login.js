@@ -20,11 +20,6 @@ class Login extends Component {
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        
-    }
-
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;

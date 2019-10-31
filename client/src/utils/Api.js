@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+/* TODO: validate api calls' syntax */
 export default {
 
     // Sign up
@@ -46,5 +46,10 @@ export default {
     /* TODO: verify api routes are valid syntax */
     subscribe: function( data ) {
         return axios.post("/api/:id/subscribe" + data)
+    },
+
+    // Load specific event
+    loadSingleEvent: function( data ) {
+        return axios.get("/api/:eventId" + data )
     }
 }

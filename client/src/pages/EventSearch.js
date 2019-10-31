@@ -15,8 +15,7 @@ class EventSearch extends Component {
         events: [],
         title: "",
         description: "",
-        id: "",
-        eventLink: ""
+        id: ""
 
     }
     
@@ -62,11 +61,19 @@ class EventSearch extends Component {
             .then(res => {
                 this.setState({ events: res.data, title:"", description:"", id:"", eventLink:"" })
             })
-            .catch(err => console.log( err ))
+            .catch( err => console.log( err ) )
     }
 
     componentDidMount() {
         this.loadEvents();
+    }
+
+    goToEvent = () => {
+        Api.loadSingleEvent()
+            .then( res => {
+
+            })
+            .catch( err => console.log( err ) )
     }
 
 
@@ -106,7 +113,7 @@ class EventSearch extends Component {
                                             {this.state.events.map(events => (
                                                 <Dropdown.Item
                                                 key={events.id}
-                                                /* TODO: href={{events.eventLink}} */
+                                                /* TODO: onClick() */
                                                 >
                                                     {events.title}
                                                 </Dropdown.Item>
