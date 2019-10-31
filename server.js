@@ -22,14 +22,16 @@ if (process.env.NODE_ENV === "production") {
 // });
 //const db = require('./client/config/connection');
 
-var database = require("./client/config/connection");
+// var database = require("./client/config/connection");
 
-database.authenticate()
-.then(() => {console.log('Database connected...');})
-.catch((err)=>{console.error('Unable to connect to the database:', err);});
+// database.authenticate()
+// .then(() => {console.log('Database connected...');})
+// .catch((err)=>{console.error('Unable to connect to the database:', err);});
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: true })
+.then(function() {
   app.listen(PORT, function() {
     console.log("API Server now listening on PORT " + PORT);
   });
-});
+})
+.catch((err)=>console.log('err:',err));
