@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import { Col, Container, Row } from '../components/Grid';
-import { Card, Button, Dropdown } from 'react-bootstrap';
+import { Card, Button, Dropdown, Image } from 'react-bootstrap';
 // import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 
@@ -24,20 +24,6 @@ class EventSearch extends Component {
     /* Switch case added to take in the value from the navbar component and set the state to the proper Modal to be displayed. */
     openModal = (modalToOpen) => {
         switch (modalToOpen) {
-            case 1:
-                /* Sign-In modal */
-                this.setState({ signInModal : true, signUpModal: false, modalIsOpen: true });
-                break;
-
-            case 2:
-                /* Sign-Up modal */
-                this.setState({ signUpModal : true, signInModal: false, modalIsOpen: true });
-                break;
-
-            case 3:
-                /* Picture upload */
-
-                break;
         
             default:
                 break;

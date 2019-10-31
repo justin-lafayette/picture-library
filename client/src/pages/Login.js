@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
 import { Col, Row, Container } from '../components/Grid';
 // import Jumbotron from '../components/Jumbotron';
-// import Api from '../utils/Api';
+import Api from '../utils/Api';
 
 
 class Login extends Component {

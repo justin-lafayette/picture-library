@@ -13,6 +13,22 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+/* For Passport and Session Authentication */
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
+
+const app = express()
+app.use(session({
+  store: new RedisStore({
+    url: config.redisStore.url
+  }),
+  secret: config.redisStore.secret,
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
 // Define API routes here
 
 // Send every other request to the React app

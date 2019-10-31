@@ -40,6 +40,10 @@ function Navbar(props) {
                         <button id="sign-up" className="nav-link" onClick={()=>props.openModal(2)}>Sign-Up</button>
                     </li>
 
+                    {/* <li className="nav-item">
+                        <button id="sign-up" className="nav-link" onClick={()=>props.openModal(3)}>Sign-Up</button>
+                    </li> */}
+
                     <li className="nav-item">
                         {/* Possible profile image? */}
                         <div className="nav-link">Profile</div>
