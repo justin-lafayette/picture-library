@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Event from './pages/Event';
 import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
-import Upload from "./components/Upload";
+
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/event" component={Event} />
           <Route exact path="/404" component={PageNotFound} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/upload" Component={Upload} />
+        
           
         </Switch>
       </div>
