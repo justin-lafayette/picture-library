@@ -4,6 +4,7 @@ export default {
 
     // Sign up
     signUp: function(data) {
+        console.log('in api.signUp');
         console.log(data)
         return axios.post("/api/signup", data );
     },
