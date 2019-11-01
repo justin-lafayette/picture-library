@@ -17,7 +17,7 @@ const pictures = sequelize.define(
   {
     freezeTableName: true
   },
-  
+                                                                                    
 );
 
 pictures.associate = function(models){
