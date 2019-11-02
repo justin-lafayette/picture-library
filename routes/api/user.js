@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controller/userController")
+const passportController = require("../../controller/passportController");
 
 // Matches with "/api/user"
 router.route("/")
@@ -9,6 +10,8 @@ router.route("/")
   router.route("/signup")
   .post(userController.create);
 
+  router.route("/signin")
+  .get(passportController.signIn);
   // Matches with "/api/books/:id"
 router
   .route("/:id")
