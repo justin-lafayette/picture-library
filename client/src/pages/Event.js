@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { Container } from '../components/Grid';
 import Modal from 'react-modal';
 import { SignInModal } from '../components/OurModal';
-import Upload from '../components/Upload';
+
 
 class Event extends Component {
 
@@ -52,7 +52,7 @@ class Event extends Component {
                     />
 
                 </Modal>
-                <Upload/>
+               
                 
             </Container>
             
