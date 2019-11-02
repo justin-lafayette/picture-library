@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
 import { Col } from '../components/Grid';
 import Modal from 'react-modal';
-import { SignInModal, SignUpModal } from '../components/OurModal';
+import { SignInModal, SignUpModal, CreateEventModal } from '../components/OurModal';
 import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 
@@ -17,7 +17,8 @@ class Home extends Component {
         email: "",
         password: "",
         firstname: "",
-        lastname: ""
+        lastname: "",
+        auth: false
 
     }
     
@@ -31,6 +32,10 @@ class Home extends Component {
 
             case 2:
                 this.setState({ signUpModal : true, signInModal: false, modalIsOpen: true });
+                break;
+
+            case 3:
+                this.setState({ createEvent : true, modalIsOpen: true });
                 break;
         
             default:
@@ -100,6 +105,7 @@ class Home extends Component {
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
                     openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                    auth={this.state.auth}
                 />
                 
                 <Modal
@@ -111,6 +117,10 @@ class Home extends Component {
                 >
                     {/* If the state for signInModal is true render this. If not render the other. */}
                     {/* Nesting components like this requires you to pass {props.children} into the parent component so the children can be rendered. */}
+                    {this.state.auth }
+
+                    <CreateEventModal />
+                    
                     {this.state.signInModal ? 
                     <SignInModal 
                         closeModal={this.closeModal}
