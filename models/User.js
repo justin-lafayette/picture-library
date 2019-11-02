@@ -11,8 +11,8 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         len: [1]
       },
-      first_name: DataTypes.STRING,
-      last_name: DataTypes.STRING
+      firstname: DataTypes.STRING,
+      lastname: DataTypes.STRING
     },
     {
       freezeTableName: true

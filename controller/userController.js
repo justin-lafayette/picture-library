@@ -20,8 +20,10 @@ module.exports = {
   }
 ,
   create: function(req, res) {
-    db.User.create(req.body)
+    console.log('in create user');
+    db.user.create(req.body)
       .then(function(user){
+        console.log('in then of create user');
         res.json(user);
       });
   }
