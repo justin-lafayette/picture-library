@@ -50,7 +50,7 @@ app.use(routes);
 // .then(() => {console.log('Database connected...');})
 // .catch((err)=>{console.error('Unable to connect to the database:', err);});
 
-db.sequelize.sync({ force: true })
+db.sequelize.sync()
 .then(function() {
   app.listen(PORT, function() {
     console.log("API Server now listening on PORT " + PORT);
