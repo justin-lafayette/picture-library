@@ -3,13 +3,13 @@ const db = require("../models");
 // Defining methods for the booksController
 module.exports = {
   findAll: function(req, res) {
-    db.User.findAll({
+    db.user.findAll({
     }).then(function(user){
         res.json(user);
     });
   },
    findById: function(email, res) {
-    db.User
+    db.user
       .findone({
           where: {
               email : email

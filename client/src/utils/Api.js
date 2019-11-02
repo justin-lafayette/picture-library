@@ -10,7 +10,7 @@ export default {
     },
 
     signIn: function(data) {
-        return axios.get("/api/signin/" +  data )
+        return axios.post("/api/signin/" ,  data )
     },
 
     // Get all pictures for event
