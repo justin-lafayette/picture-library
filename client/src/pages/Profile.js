@@ -1,3 +1,7 @@
+/* TODO: Render events that are subscribed to */
+/* TODO: Render all pictures associated with account */
+/* TODO: Render personal info */
+
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import { Container } from '../components/Grid';
