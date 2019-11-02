@@ -126,7 +126,7 @@ class Home extends Component {
                                     value={this.state.email}
                                     onChange={this.handleInputChange}
                                     type="email"
-                                    name="username" 
+                                    name="email" 
                                     placeholder="Email"
                                 />
                             </FormGroup>
@@ -194,7 +194,7 @@ class Home extends Component {
                                 <Input
                                     value={this.state.email}
                                     onChange={this.handleInputChange}
-                                    name="username"
+                                    name="email"
                                     type="email"
                                     placeholder="Email"
                                 />
