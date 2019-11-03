@@ -13,7 +13,7 @@ export function Input(props) {
 export function InputLabel(props) {
     return (
 
-        <label htmlFor={props.labelFor} id={props.id} className="form-control">{props.labelName}</label>
+        <label {...props}>{props.label}</label>
 
     );
 
@@ -22,7 +22,7 @@ export function InputLabel(props) {
 export function FormGroup(props) {
     return (
 
-        <div className="form-group">
+        <div className="form-group" {...props} >
 
         </div>
 
@@ -51,9 +51,9 @@ export function ImageUploadButton(props) {
 // js below needed for drag & drop functionality. To be placed in page container as function and passed as prop?
 
 // $('.file-upload').file_upload();
-export function ImageUploadDrop(props) {
+// export function ImageUploadDrop(props) {
 
-    <div class="file-upload-wrapper">
-        <input type="file" id={props.id} class="file-upload" />
-    </div>
-}
+//     <div class="file-upload-wrapper">
+//         <input type="file" id={props.id} class="file-upload" />
+//     </div>
+// }

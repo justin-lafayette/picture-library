@@ -2,7 +2,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 //
 //We will need the models folder to check passport agains
-var db = require("../../models"); 
+var db = require("../models"); 
 //
 // Telling passport we want to use a Local Strategy. In other words,
 //we want login with a username/email and password
@@ -50,5 +50,3 @@ passport.deserializeUser(function(obj, cb) {
 //
 // Exporting our configured passport
 module.exports = passport;
-
-

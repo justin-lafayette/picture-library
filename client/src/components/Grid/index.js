@@ -1,9 +1,13 @@
 import React from 'react';
 
-export function Container({ fluid, children }) {
+export function Container({ props, children }) {
     return (
 
-        <div className={`container${fluid ? "-fluid" : ""}`}>{children}</div>
+        <div className="container col-sm-10">
+                
+            {children} 
+                
+        </div>
 
     );
 }
@@ -16,18 +20,19 @@ export function Row({ fluid, children }) {
     );
 }
 
-// export function Col({ num, children }) {
-//     return (
+export function Col({ num, center, children }) {
+    return (
 
-//         <div
-//             className={size
-//             .split(" ")
-//             .map(size => "col-" + size)
-//             .join(" ")}
-//         >
-//             {children}
+        <div
+            className={getClassName(num, center)} 
+        >
+            {children}
         
-//         </div>
+        </div>
 
-//     );
-// }
+    );
+}
+
+function getClassName(num, center) {
+    return `${num.split(" ").map(num => "col-" + num).join(" ")} ${center ? "text-center" : ""}`
+}
