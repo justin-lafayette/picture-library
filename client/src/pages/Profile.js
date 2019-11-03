@@ -5,57 +5,122 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import { Container } from '../components/Grid';
-import Modal from 'react-modal';
-import { SignInModal } from '../components/OurModal';
+import { Row, Col, Card, Image } from 'react-bootstrap';
+import { Input } from '../components/Form';
+import { List, ListItem } from '../components/List';
+import Api from '../utils/Api';
+
+
 
 class Profile extends Component {
 
     state = {
-        modalIsOpen: false
+        modalIsOpen: false,
+        events: [],
+        title: "",
+        description: "",
+        id: "",
+        eventLink: "",
+        images:[],
+        imagesId: "",
+        picture: ""
 
     }
 
     // Functions
     
-    openModal = () => {
-        this.setState({modalIsOpen: true});
+    loadEvents = ()=> {
+        Api.getEvents()
+            .then(res => {
+                this.setState({ events: res.data, title:"", description:"", id:"", eventLink:"" })
+            })
+            .catch( err => console.log( err ) )
     }
-    
-    afterOpenModal = () => {
-        // references are now sync'd and can be accessed.
-    
-    }
-    
-    closeModal = () => {
-        this.setState({modalIsOpen: false});
+
+    loadMyPictures =() => {
+        Api.getMyPics()
+            .then(res => {
+                this.setState({images: res.data, imagesId: "", picture: ""})
+            })
     }
     
     // Render Elements
     render() {
         return(
-            <Container fluid>
+            <div>
         
                 <Navbar
-                openModal={this.openModal}
+                    openModal={this.openModal}
                 />
 
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    // closeModal={this.closeModal}
-                    // openModal={this.openModal}
-                    contentLabel="Example Modal" 
-                    appElement={document.getElementById("root")}
-                >
+                <Container>
 
-                    <SignInModal 
-                        closeModal={this.closeModal}
-                    />
+                    <Row>
+                        {/* Personal info */}
+                        <Col
+                            num={"8"}
+                        >
+                            <Row>
+                                <form>
+                                    <Input 
+                                        disabled={true}
+                                    />
+                                    <Input 
+                                        disabled={true}
+                                    />
+                                    <Input 
+                                        disabled={true}
+                                    />
+                                </form>
 
-                </Modal>
-                
-            </Container>
+                            </Row>
+                        </Col>
+                        {/* Subscribed events */}
+                        <Col
+                            num={"6"}
+                        >
+                            <Row>
+
+                                {this.state.events.length ? (
+                                    <List>
+                                        {this.state.events.map(events => (
+                                            <ListItem
+                                                key={events.id}
+                                            >
+                                                {events.title}
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                ):(
+                                    <h3>No Events Available!</h3>
+                                )}
+
+                            </Row>
+                        </Col>
+                    </Row>
+
+                    {/* Pictures */}
+                    {this.state.images.length ? (
+                        <Row>
+                            {this.state.images.map(images => (
+                                <Card
+                                    key={images.imagesId}
+                                >
+                                    <Card.Body>
+                                        <Image
+                                            src={images.picture}
+                                        />
+                                    </Card.Body>
+                                </Card>
+                            ))}
+                        </Row>
+                    ):(
+                        <h3>No Pictures Available!</h3>
+                    )}
+
+                </Container>
+
+            </div>
                             
         );
             

@@ -28,6 +28,20 @@ export function SignUpModal(props) {
     );
 }
 
+export function CreateEventModal(props) {
+    return (
+
+        <div>
+
+            <h2>Create Event</h2>
+
+            {props.children}
+
+        </div>
+
+    )
+}
+
 export function UploadPicModal(props) {
     return (
 
