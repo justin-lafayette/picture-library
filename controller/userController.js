@@ -8,14 +8,20 @@ module.exports = {
         res.json(user);
     });
   },
-   findById: function(email, res) {
+   findById: function(req, res) {
+     console.log('in userController.js - req ', req.body);
     db.user
-      .findone({
+      .findOne({
           where: {
-              email : email
+              email : req.body.email
           }
-      }).then(function(email){
-        res.json(email);
+      }).then(function(user){
+        console.log('in userController - found the user ');
+        res.json(user);
+      })
+      .catch((err) => {
+        console.log('in userController - error finding user ');
+        console.log(err);
       });
   }
 ,

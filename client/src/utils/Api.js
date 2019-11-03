@@ -8,7 +8,12 @@ export default {
     },
 
     signIn: function(data) {
-        return axios.post("/api/signin/",  data )
+        console.log('in Api.js signIn data', data);
+        return axios.post("/api/signin/", data ).then(function (res) {
+            console.log(res);
+            console.log("HEY!!!");
+        })
+        .catch( err => console.log(err));;;
     },
 
     // Get all pictures for event

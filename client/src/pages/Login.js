@@ -39,9 +39,7 @@ class Login extends Component {
             Api.signIn({
                 email: this.state.email,
                 password: this.state.password
-            })
-                .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
-                .catch( err => console.log(err));
+            });
         }
 
         if( this.state.signUpModal ) {
