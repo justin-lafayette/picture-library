@@ -10,7 +10,7 @@ function Sphere() {
         <p>
           Edit <code>src/Sphere.js</code> and save to reload.
         </p>
-
+{/* 
         var renderer = new THREE.WebGLRenderer();
         var w = 300;
         var h = 200;
@@ -44,7 +44,7 @@ function Sphere() {
             light3.position.set(-20, -20, -20);
             scene.add(light3);
 
-        var sphereGeom = new THREE.SphereGeometry(5, 16, 16);
+        var sphereGeom = new THREE.SphereGeometry(5, 16, 16); */}
 
         function rnd(rng) {
         return (Math.random() * rng)
