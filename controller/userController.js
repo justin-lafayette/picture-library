@@ -9,13 +9,19 @@ module.exports = {
     });
   },
    findById: function(email, res) {
+     console.log('in userController.js - email ',email);
     db.user
       .findOne({
           where: {
               email : email
           }
-      }).then(function(email){
-        res.json(email);
+      }).then(function(user){
+        console.log('in userController - found the user ');
+        res.json(user);
+      })
+      .catch((err) => {
+        console.log('in userController - error finding user ');
+        console.log(err);
       });
   }
 ,

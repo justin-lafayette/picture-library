@@ -14,11 +14,11 @@ passport.use(
       usernameField: "email"
     },
     function(email, password, done) {
-      console.log("in passport.js function email ");
+      console.log("in passport.js function email ", email);
       // When a user tries to sign in this code runs
       userController.findById(email,res) 
       .then(function(dbUser) {
-        console.log('dbUser');
+        //console.log('dbUser');
         // If there's no user with the given email
         if (!dbUser) {
           return done(null, false, {
