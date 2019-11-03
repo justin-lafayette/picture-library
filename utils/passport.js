@@ -1,5 +1,7 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
+
+const userController = require("../controller/userController");
 //
 //We will need the models folder to check passport agains
 var db = require("../models"); 
@@ -12,12 +14,11 @@ passport.use(
       usernameField: "email"
     },
     function(email, password, done) {
+      console.log("in passport.js function email ");
       // When a user tries to sign in this code runs
-      db.user.findOne({
-        where: {
-          email: email
-        }
-      }).then(function(dbUser) {
+      userController.findById(email,res) 
+      .then(function(dbUser) {
+        console.log('dbUser');
         // If there's no user with the given email
         if (!dbUser) {
           return done(null, false, {
@@ -36,6 +37,7 @@ passport.use(
     }
   )
 );
+    
 //
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user

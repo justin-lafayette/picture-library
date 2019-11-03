@@ -5,6 +5,7 @@ const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const body_parser = require('body-parser');
+const passport = require("passport");
 
 var db = require("./models");
 
@@ -42,13 +43,10 @@ app.use(routes);
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
-//const db = require('./client/config/connection');
 
-// var database = require("./client/config/connection");
-
-// database.authenticate()
-// .then(() => {console.log('Database connected...');})
-// .catch((err)=>{console.error('Unable to connect to the database:', err);});
+// for passport functionality
+app.use(passport.initialize());
+app.use(passport.session());
 
 db.sequelize.sync()
 .then(function() {
