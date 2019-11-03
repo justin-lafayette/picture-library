@@ -35,10 +35,6 @@ function Navbar(props) {
                     <ul className="navbar-nav">
 
                         <li className="nav-item">
-                            <button id="sign-up" className="nav-link" onClick={()=>props.openModal(3)}>Create Event</button>
-                        </li>
-
-                        <li className="nav-item">
                             {/* Possible profile image? */}
                             <a className="nav-link" href="/profile">Profile</a>
                         </li>

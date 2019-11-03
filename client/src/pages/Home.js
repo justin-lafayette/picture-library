@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
-import { Col } from '../components/Grid';
+import { Col, Container } from '../components/Grid';
 import Modal from 'react-modal';
 import { SignInModal, SignUpModal, CreateEventModal } from '../components/OurModal';
 import Jumbotron from '../components/Jumbotron';
@@ -18,7 +18,7 @@ class Home extends Component {
         password: "",
         firstname: "",
         lastname: "",
-        auth: false
+        auth: true
 
     }
     
@@ -99,148 +99,178 @@ class Home extends Component {
 
     // Render Elements
     render() {
-        return(
-            <div>
+        if( this.state.auth ) {
+            return (
+
+                <div>
         
-                {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
-                <Navbar
-                    openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                    auth={this.state.auth}
-                />
-                
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    contentLabel="Example Modal" 
-                    appElement={document.getElementById("root")}
-                >
-                    {/* If the state for signInModal is true render this. If not render the other. */}
-                    {/* Nesting components like this requires you to pass {props.children} into the parent component so the children can be rendered. */}
-                    {this.state.auth }
+                    {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
+                    <Navbar
+                        openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                        auth={this.state.auth}
+                    />
 
-                    <CreateEventModal />
-                    
-                    {this.state.signInModal ? 
-                    <SignInModal 
-                        closeModal={this.closeModal}
-                    >
-                        <form>
-
-                            <FormGroup>
-                                <InputLabel
-                                    htmlFor="" /* TODO: ID needed for input */
-                                    label="Username"
-                                />
-                                <Input
-                                    value={this.state.email}
-                                    onChange={this.handleInputChange}
-                                    type="email"
-                                    name="email" 
-                                    placeholder="Email"
-                                />
-                            </FormGroup>
-
-                            <FormGroup>
-                                <InputLabel
-                                    htmlFor="" /* TODO: ID needed for input */
-                                    label="Password"
-                                />
-                                <Input 
-                                    value={this.state.password}
-                                    onChange={this.handleInputChange}
-                                    name="password" 
-                                    placeholder="Password"
-                                />
-                            </FormGroup>
-
-                            <FormSubmit
-                                // disabled={!(this.state.email && this.state.password)}
-                                onClick={this.handleFormSubmit}
-                            />
-
-                        </form>
-
-                    </SignInModal> : ""}
-
-                    {this.state.signUpModal ? <SignUpModal 
-                        closeModal={this.closeModal}
-                    >
-                        <form>
-
-                            <FormGroup>
-                                <InputLabel
-                                    htmlFor="" /* TODO: ID needed for input */
-                                    label="First Name"
-                                />
-                                <Input
-                                    value={this.state.firstname}
-                                    onChange={this.handleInputChange}
-                                    name="firstname"
-                                    type="text"
-                                    placeholder="First Name"
-                                />
-                            </FormGroup>
-
-                            <FormGroup>
-                                <InputLabel
-                                    htmlFor="" /* TODO: ID needed for input */
-                                    label="Last Name"
-                                />
-                                <Input
-                                    value={this.state.lastname}
-                                    onChange={this.handleInputChange}
-                                    name="lastname"
-                                    type="text"
-                                    placeholder="Last Name"
-                                />
-                            </FormGroup>
-
-                            <FormGroup>
-                                <InputLabel
-                                    htmlFor="" /* TODO: ID needed for input */
-                                    label="Username"
-                                />
-                                <Input
-                                    value={this.state.email}
-                                    onChange={this.handleInputChange}
-                                    name="email"
-                                    type="email"
-                                    placeholder="Email"
-                                />
-                            </FormGroup>
-
-                            <FormGroup>
-                                <InputLabel
-                                    htmlFor="" /* TODO: ID needed for input */
-                                    label="Password"
-                                />
-                                <Input 
-                                    value={this.state.password}
-                                    onChange={this.handleInputChange}
-                                    name="password"
-                                    placeholder="Password"
-                                />
-                            </FormGroup>
-
-                            <FormSubmit
-                                // disabled={!(this.state.email && this.state.password)}
-                                onClick={this.handleFormSubmit}
-                            />
-
-                        </form>
-
-                        </SignUpModal> : ""}
-
-                </Modal>
-
-                <Col num="md-10">
-                    <Jumbotron fluid />
-                </Col>
-                
-            </div>
+                    <Container>
                         
-        );
+                        <Jumbotron fluid >
+                            <p>App description to go here.</p>
+                        </Jumbotron>
+
+                    </Container>
+                    
+                </div>
+
+            )
+        } else {
+            
+            return(
+                <div>
+            
+                    {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
+                    <Navbar
+                        openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                        auth={this.state.auth}
+                    />
+                    
+                    <Modal
+                        isOpen={this.state.modalIsOpen}
+                        onAfterOpen={this.afterOpenModal}
+                        onRequestClose={this.closeModal}
+                        contentLabel="Example Modal" 
+                        appElement={document.getElementById("root")}
+                    >
+                        {/* If the state for signInModal is true render this. If not render the other. */}
+                        {/* Nesting components like this requires you to pass {props.children} into the parent component so the children can be rendered. */}
+                        {this.state.auth }
+
+                        <CreateEventModal />
+                        
+                        {this.state.signInModal ? 
+                        <SignInModal 
+                            closeModal={this.closeModal}
+                        >
+                            <form>
+
+                                <FormGroup>
+                                    <InputLabel
+                                        htmlFor="" /* TODO: ID needed for input */
+                                        label="Username"
+                                    />
+                                    <Input
+                                        value={this.state.email}
+                                        onChange={this.handleInputChange}
+                                        type="email"
+                                        name="email" 
+                                        placeholder="Email"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <InputLabel
+                                        htmlFor="" /* TODO: ID needed for input */
+                                        label="Password"
+                                    />
+                                    <Input 
+                                        value={this.state.password}
+                                        onChange={this.handleInputChange}
+                                        name="password" 
+                                        placeholder="Password"
+                                    />
+                                </FormGroup>
+
+                                <FormSubmit
+                                    // disabled={!(this.state.email && this.state.password)}
+                                    onClick={this.handleFormSubmit}
+                                />
+
+                            </form>
+
+                        </SignInModal> : ""}
+
+                        {this.state.signUpModal ? <SignUpModal 
+                            closeModal={this.closeModal}
+                        >
+                            <form>
+
+                                <FormGroup>
+                                    <InputLabel
+                                        htmlFor="" /* TODO: ID needed for input */
+                                        label="First Name"
+                                    />
+                                    <Input
+                                        value={this.state.firstname}
+                                        onChange={this.handleInputChange}
+                                        name="firstname"
+                                        type="text"
+                                        placeholder="First Name"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <InputLabel
+                                        htmlFor="" /* TODO: ID needed for input */
+                                        label="Last Name"
+                                    />
+                                    <Input
+                                        value={this.state.lastname}
+                                        onChange={this.handleInputChange}
+                                        name="lastname"
+                                        type="text"
+                                        placeholder="Last Name"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <InputLabel
+                                        htmlFor="" /* TODO: ID needed for input */
+                                        label="Username"
+                                    />
+                                    <Input
+                                        value={this.state.email}
+                                        onChange={this.handleInputChange}
+                                        name="email"
+                                        type="email"
+                                        placeholder="Email"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <InputLabel
+                                        htmlFor="" /* TODO: ID needed for input */
+                                        label="Password"
+                                    />
+                                    <Input 
+                                        value={this.state.password}
+                                        onChange={this.handleInputChange}
+                                        name="password"
+                                        placeholder="Password"
+                                    />
+                                </FormGroup>
+
+                                <FormSubmit
+                                    // disabled={!(this.state.email && this.state.password)}
+                                    onClick={this.handleFormSubmit}
+                                />
+
+                            </form>
+
+                            </SignUpModal> : ""}
+
+                    </Modal>
+
+                    <Container>
+
+                        <Jumbotron fluid >
+                            <p>App description to go here.</p>
+                        </Jumbotron>
+
+                    </Container>
+                    
+                </div>
+                            
+            );
+        
+        }
         
     }
 };
