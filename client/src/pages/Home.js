@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
-import { Col, Container } from '../components/Grid';
+import { Container } from '../components/Grid';
 import Modal from 'react-modal';
 import { SignInModal, SignUpModal, CreateEventModal } from '../components/OurModal';
 import Jumbotron from '../components/Jumbotron';
@@ -18,7 +18,7 @@ class Home extends Component {
         password: "",
         firstname: "",
         lastname: "",
-        auth: true
+        auth: false
 
     }
     

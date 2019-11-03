@@ -4,13 +4,11 @@ export default {
 
     // Sign up
     signUp: function(data) {
-        console.log('in api.signUp');
-        console.log(data)
         return axios.post("/api/signup", data );
     },
 
     signIn: function(data) {
-        return axios.get("/api/signin/" +  data )
+        return axios.post("/api/signin/",  data )
     },
 
     // Get all pictures for event
@@ -46,11 +44,11 @@ export default {
     // Subscribe a user to an event based on their email address and event ID
     /* TODO: verify api routes are valid syntax */
     subscribe: function( data ) {
-        return axios.post("/api/:id/subscribe" + data)
+        return axios.post("/api/:id/subscribe", data)
     },
 
     // Load specific event
     loadSingleEvent: function( data ) {
-        return axios.get("/api/:eventId" + data )
+        return axios.get("/api/:eventId", data )
     }
 }
