@@ -28,5 +28,6 @@ module.exports = function(sequelize, DataTypes) {
     console.log(models)
     user.hasMany(models.events)
   };
+
   return user;
 }
