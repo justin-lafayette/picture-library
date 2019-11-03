@@ -50,5 +50,10 @@ export default {
     // Load specific event
     loadSingleEvent: function( data ) {
         return axios.get("/api/:eventId", data )
+    },
+
+    // Load images uploaded by one person
+    getMyPics: function( data ) {
+        return axios.get("/api/:id/pictures", data)
     }
 }
