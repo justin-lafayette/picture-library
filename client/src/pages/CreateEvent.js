@@ -8,7 +8,7 @@ import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 
 
-class Home extends Component {
+class CreateEvent extends Component {
 
     state = {
         
@@ -113,4 +113,4 @@ class Home extends Component {
     }
 };
 
-export default Home;
+export default CreateEvent;
