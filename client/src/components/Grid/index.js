@@ -4,7 +4,7 @@ export function Container({ props, children }) {
     return (
 
         <div className="container col-sm-10">
-                
+                {/*  */}
             {children} 
                 
         </div>
