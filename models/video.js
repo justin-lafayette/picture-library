@@ -15,10 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true
   }
 );
-video.associate = function(models){
-  console.log(models)
-  video.hasOne(models.events)
-};
+// video.associate = function(models){
+//   console.log(models)
+//   video.hasOne(models.events)
+// };
 
   return video;
 }

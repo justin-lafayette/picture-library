@@ -8,12 +8,12 @@ module.exports = {
         res.json(user);
     });
   },
-   findById: function(email, res) {
-     console.log('in userController.js - email ',email);
+   findById: function(req, res) {
+     console.log('in userController.js - req ', req.body);
     db.user
       .findOne({
           where: {
-              email : email
+              email : req.body.email
           }
       }).then(function(user){
         console.log('in userController - found the user ');
