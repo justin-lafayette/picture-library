@@ -1,9 +1,14 @@
 import React from "react";
 import './style.css'
 
+// const signIn = {
+//     background: 'blue',
+//     color: 'white'
+     
+// }
 export function SignInModal(props) {
     return(
-        <div>
+        <div {...props} >
             
             <h2>Sign In!</h2>
 

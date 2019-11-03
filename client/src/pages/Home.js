@@ -6,6 +6,8 @@ import Modal from 'react-modal';
 import { SignInModal, SignUpModal } from '../components/OurModal';
 import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
+import {Button} from 'react-bootstrap'
+
 
 
 class Home extends Component {
@@ -155,6 +157,7 @@ class Home extends Component {
 
                     {this.state.signUpModal ? <SignUpModal 
                         closeModal={this.closeModal}
+                        className ={"background: 'blue'; color: 'white'"}
                     >
                         <form>
 
@@ -213,10 +216,12 @@ class Home extends Component {
                                 />
                             </FormGroup>
 
-                            <FormSubmit
+                            <Button
                                 // disabled={!(this.state.email && this.state.password)}
                                 onClick={this.handleFormSubmit}
-                            />
+                                // variant="flat"
+                                // className ={"background: 'purple',color:'white'"}
+                            ></Button>
 
                         </form>
 

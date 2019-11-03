@@ -1,3 +1,18 @@
 div {
     border: black solid 1px;
 }
+
+
+.nav-item {
+    background-color:darkgray;
+    color: white;
+    font-display: white;
+  }
+
+  /* .jumbortonFluid{
+      background-color: grey;
+  } */
+
+  .container{
+      background-color: teal;
+  }

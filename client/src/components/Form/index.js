@@ -32,7 +32,7 @@ export function FormGroup(props) {
 export function FormSubmit(props) {
     return(
 
-        <button {...props} className="btn btn-success" id={props.id}>Submit</button>
+        <button {...props} id={props.id}>Submit</button>
 
     );
 }
