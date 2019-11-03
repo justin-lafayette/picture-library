@@ -1,11 +1,22 @@
 import React from 'react';
 
 function Navbar(props) {
-    return(
-        
+    return (
+
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-            <div className="navbar-brand">LOGO</div>
+            <div className="navbar-brand" href="/">
+                {/* TODO: remove hard codded require for img */}
+                <img
+                    alt=""
+                    src={require('../../assets/pixpectivetoo.png')}
+                    width="150"
+                    height="50"
+                    padding="0"
+                    margin="0"
+                    className="d-inline-block align-top"
+                /> 
+            </div>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -33,11 +44,11 @@ function Navbar(props) {
                 <ul className="navbar-nav">
 
                     <li className="nav-item">
-                        <button id="Sign-in" className="nav-link" onClick={()=>props.openModal(1)}>Sign-In</button>
+                        <button id="Sign-in" className="nav-link" onClick={() => props.openModal(1)}>Sign-In</button>
                     </li>
 
                     <li className="nav-item">
-                        <button id="sign-up" className="nav-link" onClick={()=>props.openModal(2)}>Sign-Up</button>
+                        <button id="sign-up" className="nav-link" onClick={() => props.openModal(2)}>Sign-Up</button>
                     </li>
 
                     {/* <li className="nav-item">
