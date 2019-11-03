@@ -50,13 +50,7 @@ app.use(routes);
 // .then(() => {console.log('Database connected...');})
 // .catch((err)=>{console.error('Unable to connect to the database:', err);});
 
-<<<<<<< HEAD
-db.sequelize.sync({ 
-  //force: true 
-})
-=======
 db.sequelize.sync()
->>>>>>> 20cd4328a6f0685530ddbf88b34d6a8c1921c20c
 .then(function() {
   app.listen(PORT, function() {
     console.log("API Server now listening on PORT " + PORT);
