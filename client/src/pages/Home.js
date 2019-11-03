@@ -14,7 +14,7 @@ class Home extends Component {
         modalIsOpen: false,
         signInModal: false,
         signUpModal: false,
-        username: "",
+        email: "",
         password: "",
         firstname: "",
         lastname: ""
@@ -53,10 +53,10 @@ class Home extends Component {
         event.preventDefault();
         if( this.state.signInModal ) {
             console.log("sign-in form:")
-            console.log(this.state.username);
+            console.log(this.state.email);
             console.log(this.state.password);
             Api.signIn({
-                email: this.state.username,
+                email: this.state.email,
                 password: this.state.password
             })
                 .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
@@ -67,12 +67,12 @@ class Home extends Component {
             console.log("sign-up form:")
             console.log(this.state.firstname);
             console.log(this.state.lastname);
-            console.log(this.state.username);
+            console.log(this.state.email);
             console.log(this.state.password);
             Api.signUp({
                 firstname: this.state.firstname,
                 lastname: this.state.lastname,
-                email: this.state.username,
+                email: this.state.email,
                 password: this.state.password
             })
                 .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
@@ -123,10 +123,10 @@ class Home extends Component {
                                     label="Username"
                                 />
                                 <Input
-                                    value={this.state.username}
+                                    value={this.state.email}
                                     onChange={this.handleInputChange}
                                     type="email"
-                                    name="username" 
+                                    name="email" 
                                     placeholder="Email"
                                 />
                             </FormGroup>
@@ -145,7 +145,7 @@ class Home extends Component {
                             </FormGroup>
 
                             <FormSubmit
-                                // disabled={!(this.state.username && this.state.pass)}
+                                // disabled={!(this.state.email && this.state.password)}
                                 onClick={this.handleFormSubmit}
                             />
 
@@ -192,9 +192,9 @@ class Home extends Component {
                                     label="Username"
                                 />
                                 <Input
-                                    value={this.state.username}
+                                    value={this.state.email}
                                     onChange={this.handleInputChange}
-                                    name="username"
+                                    name="email"
                                     type="email"
                                     placeholder="Email"
                                 />
@@ -206,7 +206,7 @@ class Home extends Component {
                                     label="Password"
                                 />
                                 <Input 
-                                    value={this.state.pass}
+                                    value={this.state.password}
                                     onChange={this.handleInputChange}
                                     name="password"
                                     placeholder="Password"
@@ -214,7 +214,7 @@ class Home extends Component {
                             </FormGroup>
 
                             <FormSubmit
-                                // disabled={!(this.state.username && this.state.pass)}
+                                // disabled={!(this.state.email && this.state.password)}
                                 onClick={this.handleFormSubmit}
                             />
 

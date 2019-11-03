@@ -18,6 +18,22 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+/* For Passport and Session Authentication */
+// const session = require('express-session')
+// const RedisStore = require('connect-redis')(session)
+
+// const app = express()
+// app.use(session({
+//   store: new RedisStore({
+//     url: config.redisStore.url
+//   }),
+//   secret: config.redisStore.secret,
+//   resave: false,
+//   saveUninitialized: false
+// }))
+// app.use(passport.initialize())
+// app.use(passport.session())
+
 // Define API routes here
 app.use(routes);
 
@@ -34,9 +50,13 @@ app.use(routes);
 // .then(() => {console.log('Database connected...');})
 // .catch((err)=>{console.error('Unable to connect to the database:', err);});
 
+<<<<<<< HEAD
 db.sequelize.sync({ 
   //force: true 
 })
+=======
+db.sequelize.sync()
+>>>>>>> 20cd4328a6f0685530ddbf88b34d6a8c1921c20c
 .then(function() {
   app.listen(PORT, function() {
     console.log("API Server now listening on PORT " + PORT);

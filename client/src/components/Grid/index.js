@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function Container({ fluid, children }) {
+export function Container({ props, children }) {
     return (
 
-        <div className={`container${fluid ? "-fluid" : ""}`}>
+        <div className="container col-sm-10">
                 
             {children} 
                 
