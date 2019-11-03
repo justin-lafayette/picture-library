@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
 );
 // video.associate = function(models){
 //   console.log(models)
-//   video.hasOne(models.events)
+  // video.hasOne(models.events)
 // };
 
   return video;
