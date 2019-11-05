@@ -18,11 +18,11 @@ module.exports = function(sequelize, DataTypes) {
   );
   
   events.associate = function(models){
-    events.belongsTo(models.user, {foreignKey: 'email'});
+    events.belongsToMany(models.users, {through: events});
   };
   
   events.associate = function(models){
-    events.belongsTo(models.video, {foreignKey : 'video_id'});
+    events.belongsTo(models.videos, {foreignKey : 'video_id'});
   };
   
   return events;

@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
 
-  const video = sequelize.define(
-  "video",
+  const videos = sequelize.define(
+  "videos",
   {
     video_id: {
         type: DataTypes.INTEGER,
@@ -20,5 +20,5 @@ module.exports = function(sequelize, DataTypes) {
   // video.hasOne(models.events)
 // };
 
-  return video;
+  return videos;
 }
