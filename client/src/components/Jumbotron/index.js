@@ -3,9 +3,12 @@ import React from "react";
 import "./style.css";
 import { Button } from "react-bootstrap";
 // import Jumbotron from 'react-bootstrap/Jumbotron';
+// function Jumbotron({ fluid, children }) {
+//     return(
+        
+//         <div className={`jumbotron${fluid ? "-fluid" : ""},`}>
 
 function Jumbotron(props) {
-//   let className = props.primary ? "primary" : "";
 
   return (
      <div>

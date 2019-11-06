@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
-  const user = sequelize.define(
-    "user",
+  const users = sequelize.define(
+    "users",
     {
       email: {
         type: DataTypes.STRING,
@@ -19,14 +19,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  user.associate = function(models){
+  users.associate = function(models){
     console.log(models)
-    user.hasMany(models.pictures)
+    users.hasMany(models.pictures)
   };
 
-  user.associate = function(models){
+  users.associate = function(models){
     console.log(models)
-    user.hasMany(models.events)
+    users.belongsToMany(models.events, {through: models.users})
   };
-  return user;
+
+  return users;
 }

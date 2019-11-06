@@ -9,7 +9,8 @@ import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
 import Event from './pages/Event';
 import Login from './pages/Login';
-import HooksProfile from './pages/HooksProfile'
+import HooksProfile from './pages/HooksProfile';
+import CreateEvent from './pages/CreateEvent';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/event" component={Event} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/hooksprofile" component={HooksProfile} />
+          <Route exact path="/createevent" component={CreateEvent} />
           
         </Switch>
       </div>

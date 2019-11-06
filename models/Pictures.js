@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
   );
   
   pictures.associate = function(models){
-    pictures.belongsTo(models.user, {foreignKey: 'email'});
+    pictures.belongsTo(models.users, {foreignKey: 'email'});
   };
   
   return pictures;

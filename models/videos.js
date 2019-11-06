@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
 
-  const video = sequelize.define(
-  "video",
+  const videos = sequelize.define(
+  "videos",
   {
     video_id: {
         type: DataTypes.INTEGER,
@@ -15,10 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true
   }
 );
-video.associate = function(models){
-  console.log(models)
-  video.hasOne(models.events)
-};
+// video.associate = function(models){
+//   console.log(models)
+  // video.hasOne(models.events)
+// };
 
-  return video;
+  return videos;
 }

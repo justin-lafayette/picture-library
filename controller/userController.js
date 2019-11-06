@@ -1,27 +1,32 @@
 const db = require("../models");
 
-// Defining methods for the booksController
 module.exports = {
   findAll: function(req, res) {
-    db.User.findAll({
-    }).then(function(user){
-        res.json(user);
+    db.users.findAll({
+    }).then(function(users){
+        res.json(users);
     });
   },
-   findById: function(email, res) {
-    db.User
-      .findone({
+   findById: function(req, res) {
+     console.log('in userController.js - req ', req.body);
+    db.users
+      .findOne({
           where: {
-              email : email
+              email : req.body.email
           }
-      }).then(function(email){
-        res.json(email);
+      }).then(function(user){
+        console.log('in userController - found the user ');
+        res.json(user);
+      })
+      .catch((err) => {
+        console.log('in userController - error finding user ');
+        console.log(err);
       });
   }
 ,
   create: function(req, res) {
     console.log('in create user');
-    db.user.create(req.body)
+    db.users.create(req.body)
       .then(function(user){
         console.log('in then of create user');
         res.json(user);

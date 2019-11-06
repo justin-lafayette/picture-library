@@ -1,11 +1,6 @@
 import React from "react";
 import './style.css'
 
-const signIn = {
-    background: 'blue',
-    color: 'white'
-     
-}
 export function SignInModal(props) {
     return(
         <div {...props} >
@@ -32,6 +27,20 @@ export function SignUpModal(props) {
         
     );
 }
+
+// export function CreateEventModal(props) {
+//     return (
+
+//         <div>
+
+//             <h2>Create Event</h2>
+
+//             {props.children}
+
+//         </div>
+
+//     )
+// }
 
 export function UploadPicModal(props) {
     return (

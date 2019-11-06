@@ -46,6 +46,12 @@ export function ImageUploadButton(props) {
     );
 }
 
+export function FormTextarea(props) {
+    return (
+        <textarea className="form-control" {...props} ></textarea>
+    )
+}
+
 // js below needed for drag & drop functionality. To be placed in page container as function and passed as prop?
 
 // $('.file-upload').file_upload();
