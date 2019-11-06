@@ -10,7 +10,8 @@ module.exports = function (router, passport) {
   .get(userController.findAll)
   .post(userController.create);
   
-  router.route("/signup").post(userController.create);
+  router.route("/signup")
+  .post(userController.create);
   
   router.route("/signin")
   .post(passport.authenticate("local-signin"), passportController.signIn);

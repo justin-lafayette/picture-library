@@ -18,37 +18,16 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-/* For Passport and Session Authentication */
-// const session = require('express-session')
-// const RedisStore = require('connect-redis')(session)
-
-// const app = express()
-// app.use(session({
-//   store: new RedisStore({
-//     url: config.redisStore.url
-//   }),
-//   secret: config.redisStore.secret,
-//   resave: false,
-//   saveUninitialized: false
-// }))
-// app.use(passport.initialize())
-// app.use(passport.session())
-
-// Send every other request to the React app
-// Define any API routes before this runs
-// app.get("*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  // });
   
   // for passport functionality
-  app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true}))
+  app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized:true}))
   app.use(passport.initialize());
   app.use(passport.session());
   
   // Define API routes here
-  require("./routes/api")(router, passport);
+  require("./routes/api", "./routes/authRoutes.js")(router, passport);
   app.use("/api", router);
+  app.use("/auth", router);
   
   //for post routes
   app.use(body_parser.json());

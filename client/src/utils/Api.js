@@ -11,9 +11,9 @@ export default {
         console.log('in Api.js signIn data', data);
         return axios.post("/api/signin/", data ).then(function (res) {
             console.log(res);
-            console.log("HEY!!!");
+            console.log("HEY IT WOOOORKED!!!");
         })
-        .catch( err => console.log(err));;;
+        .catch( err => console.log(err.response));
     },
 
     // Get all pictures for event
@@ -60,5 +60,10 @@ export default {
     // Load images uploaded by one person
     getMyPics: function( data ) {
         return axios.get("/api/:id/pictures", data)
+    },
+
+    // Is auth
+    isAuth: function() {
+        return axios.get("/auth/isauth")
     }
 }
