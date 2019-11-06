@@ -7,13 +7,13 @@ module.exports = {
         res.json(users);
     });
   },
-  findEvents: function(req,res) {
-    db.events.findAll().then(function(events){
-      res.json(events)
-    })
-  },
+  // findEvents: function(req,res) {
+  //   db.events.findAll().then(function(events){
+  //     res.json(events)
+  //   })
+  // },
    findById: function(req, res) {
-     console.log('in userController.js - req ', req);
+     console.log('in userController.js - req ', req.params.id);
     db.users
       .findOne({
           where: {

@@ -8,8 +8,18 @@ module.exports = {
         res.json(events);
     });
   },
+  findByUserEmail: function(req,res){
+      console.log('in findByUserEmail');
+      db.events.findAll({
+        where: {
+          email:req.params.email
+        }
+      }).then(function(event){
+        res.json(event);
+      })
+  },
    findById: function(req, res) {
-     console.log('in eventsController.js - req ', req.params);
+     console.log('in eventsController.js - req event id ', req.params.event_id);
     db.events
       .findOne({
           where: {

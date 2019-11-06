@@ -18,17 +18,20 @@ export default {
 
     // Get all pictures for event
     getEventPics: function() {
-        return axios.get("/api/pics");
+        return axios.get("/event/pics");
     },
 
     // Get all events (list)
     getEvents: function() {
-        return axios.get("/api/events");
+        return axios.get("/events");
     },
 
+    getEventsByUserEmail: function(data){
+        return axios.post("/:email/events", data)
+    },
     // Create event
     createEvent: function(data) {
-        return axios.post("/api/newevent", data)
+        return axios.post("/newevent", data)
     },
 
     // Upload picture
@@ -54,7 +57,7 @@ export default {
 
     // Load specific event
     loadSingleEvent: function( data ) {
-        return axios.get("/api/events/:eventId", data )
+        return axios.get("/events/:eventId", data )
     },
 
     // Load images uploaded by one person
