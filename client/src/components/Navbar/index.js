@@ -91,14 +91,6 @@ function Navbar(props) {
 
                         {props.children}
 
-                        {/* <li className="nav-item">
-                            <button id="Sign-in" className="nav-link" onClick={() => props.openModal(1)}>Sign-In</button>
-                        </li>
-
-                        <li className="nav-item">
-                            <button id="sign-up" className="nav-link" onClick={() => props.openModal(2)}>Sign-Up</button>
-                        </li> */}
-
                     </ul>
 
                 </div>

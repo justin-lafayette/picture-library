@@ -8,9 +8,6 @@ import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar } from 'react-
 class Home extends Component {
 
     state = {
-        modalIsOpen: false,
-        signInModal: false,
-        signUpModal: false,
         email: "",
         password: "",
         firstname: "",
@@ -19,8 +16,7 @@ class Home extends Component {
         signinClose: true,
         signinShow: false,
         signupClose: true,
-        signupShow: false,
-
+        signupShow: false
     }
     
     // Functions
@@ -45,35 +41,6 @@ class Home extends Component {
                 this.props.history.push('/')
             }
         });
-    }
-
-    /* Switch case added to take in the value from the navbar component and set the state to the proper Modal to be displayed. */
-    openModal = (modalToOpen) => {
-        switch (modalToOpen) {
-            case 1:
-                this.setState({ signInModal : true, signUpModal: false, modalIsOpen: true });
-                break;
-
-            case 2:
-                this.setState({ signUpModal : true, signInModal: false, modalIsOpen: true });
-                break;
-
-            case 3:
-                this.setState({ createEvent : true, modalIsOpen: true });
-                break;
-        
-            default:
-                break;
-        }
-    }
-
-    afterOpenModal = () => {
-        // references are now sync'd and can be accessed.
-
-    }
-
-    closeModal = () => {
-        this.setState({modalIsOpen: false});
     }
 
     /* TODO: Function to show event search if sign-in is valid */
@@ -115,7 +82,6 @@ class Home extends Component {
     }
 
     /* react-bootstrap modal functions */
-    // handleClose = () => this.setState({setShow: false});
     handleSigninShow= () => this.setState({signinShow: true});
     handleSignupShow= () => this.setState({signupShow: true});
     
@@ -126,11 +92,9 @@ class Home extends Component {
         if( this.state.auth ) {
             return (
 
-                <div>
+                <>
         
-                    {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                     <Navbar
-                        openModal={(modalToOpen) => this.openModal(modalToOpen)}
                         auth={this.state.auth}
                     />
 
@@ -142,17 +106,15 @@ class Home extends Component {
 
                     </Container>
                     
-                </div>
+                </>
 
             )
         } else {
             
             return(
                 <>
-            
-                    {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
+
                     <Navbar
-                        openModal={(modalToOpen) => this.openModal(modalToOpen)}
                         auth={this.state.auth}
                     >
                         <ButtonToolbar>
