@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import Modal from 'react-modal';
-import { Container } from '../components/Grid'
-import { InputLabel, Input, FormSubmit, FormGroup } from '../components/Form';
-import { SignInModal, SignUpModal, CreateEventModal } from '../components/OurModal';
-import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
 // import { withRouter } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
+import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
 
 
 class Home extends Component {
@@ -20,7 +15,11 @@ class Home extends Component {
         password: "",
         firstname: "",
         lastname: "",
-        auth: false
+        auth: false,
+        signinClose: true,
+        signinShow: false,
+        signupClose: true,
+        signupShow: false,
 
     }
     
@@ -81,7 +80,7 @@ class Home extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if( this.state.signInModal ) {
+        if( this.state.signinShow ) {
             Api.signIn({
                 email: this.state.email,
                 password: this.state.password
@@ -92,7 +91,7 @@ class Home extends Component {
                 .catch( err => console.log(err));
         }
 
-        if( this.state.signUpModal ) {
+        if( this.state.signupShow ) {
             Api.signUp({
                 firstname: this.state.firstname,
                 lastname: this.state.lastname,
@@ -109,10 +108,16 @@ class Home extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(value)
         this.setState({
             [name]: value
         });
     }
+
+    /* react-bootstrap modal functions */
+    // handleClose = () => this.setState({setShow: false});
+    handleSigninShow= () => this.setState({signinShow: true});
+    handleSignupShow= () => this.setState({signupShow: true});
     
 
 
@@ -143,139 +148,167 @@ class Home extends Component {
         } else {
             
             return(
-                <div>
+                <>
             
                     {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                     <Navbar
                         openModal={(modalToOpen) => this.openModal(modalToOpen)}
                         auth={this.state.auth}
-                    />
-                    
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        contentLabel="Example Modal" 
-                        appElement={document.getElementById("root")}
                     >
-                        {/* If the state for signInModal is true render this. If not render the other. */}
-                        {/* Nesting components like this requires you to pass {props.children} into the parent component so the children can be rendered. */}
-                        {this.state.auth }
+                        <ButtonToolbar>
 
-                        <CreateEventModal />
-                        
-                        {this.state.signInModal ? 
-                        <SignInModal 
-                            closeModal={this.closeModal}
-                        >
-                            <Form>
+                            <Button
+                                onClick={() => this.handleSigninShow()}
+                            >
+                                Sign-In
+                            </Button>
 
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Username"
-                                    />
-                                    <Form.Control
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange}
-                                        type="email"
-                                        name="email" 
-                                        placeholder="Email"
-                                    />
-                                </Form.Group>
+                            <Button
+                                onClick={() => this.handleSignupShow()}
+                            >
+                                Sign-Up
+                            </Button>
 
-                                <Form.Group>
-                                    <InputLabel
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Password"
-                                    />
-                                    <Input 
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                        name="password" 
-                                        placeholder="Password"
-                                    />
-                                </Form.Group>
+                            <Modal
+                                size="md"
+                                show={this.state.signinShow}
+                                onHide={() => this.setState({signinShow: false})}
+                                aria-labelledby="signin-modal"
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title id="signin-modal">
+                                        Sign-In
+                                    </Modal.Title>
+                                </Modal.Header>
 
-                                <FormSubmit
-                                    // disabled={!(this.state.email && this.state.password)}
-                                    onClick={this.handleFormSubmit}
-                                />
+                                <Modal.Body>
+                                    <Form>
 
-                            </Form>
+                                        <Form.Group>
+                                            <Form.Label
+                                                htmlFor="" /* TODO: ID needed for input */
+                                                label="Username"
+                                            ></Form.Label>
+                                            <Form.Control
+                                                value={this.state.email}
+                                                onChange={this.handleInputChange}
+                                                type="email"
+                                                name="email" 
+                                                placeholder="Email"
+                                            />
+                                        </Form.Group>
 
-                        </SignInModal> : ""}
+                                        <Form.Group>
+                                            <Form.Label
+                                                htmlFor="" /* TODO: ID needed for input */
+                                                label="Password"
+                                            ></Form.Label>
+                                            <Form.Control 
+                                                value={this.state.password}
+                                                onChange={this.handleInputChange}
+                                                name="password" 
+                                                placeholder="Password"
+                                            />
+                                        </Form.Group>
 
-                        {this.state.signUpModal ? <SignUpModal 
-                            closeModal={this.closeModal}
-                        >
-                            <form>
+                                        <Button
+                                            disabled={!(this.state.email && this.state.password)}
+                                            onClick={this.handleFormSubmit}
+                                        >
+                                            Submit
+                                        </Button>
 
-                                <FormGroup>
-                                    <InputLabel
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="First Name"
-                                    />
-                                    <Input
-                                        value={this.state.firstname}
-                                        onChange={this.handleInputChange}
-                                        name="firstname"
-                                        type="text"
-                                        placeholder="First Name"
-                                    />
-                                </FormGroup>
+                                    </Form>
 
-                                <FormGroup>
-                                    <InputLabel
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Last Name"
-                                    />
-                                    <Input
-                                        value={this.state.lastname}
-                                        onChange={this.handleInputChange}
-                                        name="lastname"
-                                        type="text"
-                                        placeholder="Last Name"
-                                    />
-                                </FormGroup>
+                                </Modal.Body>
+                            </Modal>
+                            
+                            {/* Sign-Up Modal */}
+                            <Modal
+                                size="md"
+                                show={this.state.signupShow}
+                                onHide={() => this.setState({signupShow: false})}
+                                aria-labelledby="signup-modal"
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title id="signup-modal">
+                                        Sign-Up
+                                    </Modal.Title>
+                                </Modal.Header>
 
-                                <FormGroup>
-                                    <InputLabel
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Username"
-                                    />
-                                    <Input
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange}
-                                        name="email"
-                                        type="email"
-                                        placeholder="Email"
-                                    />
-                                </FormGroup>
+                                <Modal.Body>
+                                    <Form>
 
-                                <FormGroup>
-                                    <InputLabel
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Password"
-                                    />
-                                    <Input 
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                        name="password"
-                                        placeholder="Password"
-                                    />
-                                </FormGroup>
+                                        <Form.Group>
+                                            <Form.Label
+                                                htmlFor="" /* TODO: ID needed for input */
+                                                label="First Name"
+                                            ></Form.Label>
+                                            <Form.Control
+                                                value={this.state.firstname}
+                                                onChange={this.handleInputChange}
+                                                name="firstname"
+                                                type="text"
+                                                placeholder="First Name"
+                                            />
+                                        </Form.Group>
 
-                                <FormSubmit
-                                    // disabled={!(this.state.email && this.state.password)}
-                                    onClick={this.handleFormSubmit}
-                                />
+                                        <Form.Group>
+                                            <Form.Label
+                                                htmlFor="" /* TODO: ID needed for input */
+                                                label="Last Name"
+                                            ></Form.Label>
+                                            <Form.Control
+                                                value={this.state.lastname}
+                                                onChange={this.handleInputChange}
+                                                name="lastname"
+                                                type="text"
+                                                placeholder="Last Name"
+                                            />
+                                        </Form.Group>
 
-                            </form>
+                                        <Form.Group>
+                                            <Form.Label
+                                                htmlFor="" /* TODO: ID needed for input */
+                                                label="Username"
+                                            ></Form.Label>
+                                            <Form.Control
+                                                value={this.state.email}
+                                                onChange={this.handleInputChange}
+                                                name="email"
+                                                type="email"
+                                                placeholder="Email"
+                                            />
+                                        </Form.Group>
 
-                            </SignUpModal> : ""}
+                                        <Form.Group>
+                                            <Form.Label
+                                                htmlFor="" /* TODO: ID needed for input */
+                                                label="Password"
+                                            ></Form.Label>
+                                            <Form.Control 
+                                                value={this.state.password}
+                                                onChange={this.handleInputChange}
+                                                name="password"
+                                                placeholder="Password"
+                                            />
+                                        </Form.Group>
 
-                    </Modal>
+                                        <Button
+                                            disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
+                                            onClick={this.handleFormSubmit}
+                                        >
+                                            Submit
+                                        </Button>
+
+                                    </Form>
+                                </Modal.Body>
+                            </Modal>
+
+                        </ButtonToolbar>
+                    </Navbar>
+                    
+                    
 
                     <Container>
 
@@ -285,7 +318,7 @@ class Home extends Component {
 
                     </Container>
                     
-                </div>
+                </>
                             
             );
         
