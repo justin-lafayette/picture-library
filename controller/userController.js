@@ -7,12 +7,17 @@ module.exports = {
         res.json(users);
     });
   },
+  findEvents: function(req,res) {
+    db.events.findAll().then(function(events){
+      res.json(events)
+    })
+  },
    findById: function(req, res) {
-     console.log('in userController.js - req ', req.body);
+     console.log('in userController.js - req ', req);
     db.users
       .findOne({
           where: {
-              email : req.body.email
+              email : req.params.id
           }
       }).then(function(user){
         console.log('in userController - found the user ');
@@ -31,7 +36,8 @@ module.exports = {
         console.log('in then of create user');
         res.json(user);
       });
-  }
+  },
+
   //,
 //   update: function(req, res) {
 //     db.User

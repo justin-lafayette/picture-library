@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-// const routes = require("./routes");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -8,6 +7,8 @@ const body_parser = require('body-parser');
 const passport = require("passport");
 const session = require("express-session");
 const router = express.Router();
+const apiRoutes = require("./routes/api");
+const eventRoutes = require("./routes/events");
 
 var db = require("./models");
 
@@ -46,9 +47,16 @@ if (process.env.NODE_ENV === "production") {
   app.use(passport.initialize());
   app.use(passport.session());
   
-  // Define API routes here
-  require("./routes/api")(router, passport);
-  app.use("/api", router);
+  // // Define API routes here
+  // require("./routes")(router, passport);
+  router.use("/api", apiRoutes);
+  router.use("/events", eventRoutes);
+  //if no other routes are hit, send the react app
+  router.use(function(req, res) {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  });
+
+  app.use(router);
   
   //for post routes
   app.use(body_parser.json());

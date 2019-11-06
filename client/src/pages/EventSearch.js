@@ -59,6 +59,7 @@ class EventSearch extends Component {
     loadEvents = ()=> {
         Api.getEvents()
             .then(res => {
+                console.log('in EventsSearch.js - res ',res);
                 this.setState({ events: res.data, title:"", description:"", id:"", eventLink:"" })
             })
             .catch( err => console.log( err ) )

@@ -13,7 +13,7 @@ export default {
             console.log(res);
             console.log("HEY!!!");
         })
-        .catch( err => console.log(err));;;
+        .catch( err => console.log(err));
     },
 
     // Get all pictures for event
@@ -27,19 +27,19 @@ export default {
     },
 
     // Create event
-    createEvent: function(/* pass data here */) {
-        return axios.post("/api/newevent", /* and here */)
+    createEvent: function(data) {
+        return axios.post("/api/newevent", data)
     },
 
     // Upload picture
-    uploadPic: function(/* pass data here */) {
-        return axios.post("/api/uploadpics", /* and here */)
+    uploadPic: function(data) {
+        return axios.post("/api/uploadpics", data)
     },
 
     // Load Events
-    loadEvents: function() {
-        return axios.get("/api/allevents")
-    },
+    // loadEvents: function() {
+    //     return axios.get("/api/allevents")
+    // },
 
     // Get event subscription status
     getSubStatus: function(/* Logged in user info here */) {
@@ -54,7 +54,7 @@ export default {
 
     // Load specific event
     loadSingleEvent: function( data ) {
-        return axios.get("/api/:eventId", data )
+        return axios.get("/api/events/:eventId", data )
     },
 
     // Load images uploaded by one person
