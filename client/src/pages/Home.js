@@ -274,7 +274,7 @@ class Home extends Component {
 
                     <Container>
 
-                        <Jumbotron fluid >
+                        <Jumbotron>
                             <p>App description to go here.</p>
                         </Jumbotron>
 
