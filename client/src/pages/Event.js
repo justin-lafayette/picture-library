@@ -2,6 +2,7 @@
 /* TODO: create a landing page for non-authenticated users */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
+import ImageUpload from '../components/ImageUpload';
 // import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
 // import { Col, Row, Container } from '../components/Grid';
 import {Row, Col, Container, Image, Button} from 'react-bootstrap';
@@ -131,7 +132,8 @@ class Event extends Component {
                     </Col>
 
                 </Container>
-                
+                {/* rendering imageupload button */}
+                <ImageUpload/>
                 
             </div>
                         

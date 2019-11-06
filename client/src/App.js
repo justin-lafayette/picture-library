@@ -1,4 +1,4 @@
-import React/* , { Component } */ from 'react';
+import React  from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
@@ -9,6 +9,8 @@ import Event from './pages/Event';
 import Login from './pages/Login';
 import HooksProfile from './pages/HooksProfile';
 import CreateEvent from './pages/CreateEvent';
+import Upload from './pages/Upload'
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/hooksprofile" component={HooksProfile} />
           <Route exact path="/createevent" component={CreateEvent} />
+          <Route exact path="/Upload" component={Upload} />
           
         </Switch>
       </div>
