@@ -1,0 +1,15 @@
+/* .primary{
+    background-color:red;
+    color: orange;
+} */
+
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    /* border-radius: 50px; */
+    background-color: gray;
+    border : 2px black;
+  }

@@ -1,18 +1,67 @@
-div {
+/* div {
     border: black solid 1px;
+} */
+    body{
+        background-color: grey;
+    }
+
+  /* .btn-flat {
+    background-color: purple;
+    color: white;
+  }
+
+
+  .primary{
+      background-color:red;
+      color: orange;
+  } */
+
+  /* .container{
+      background-color: teal;
+  } */
+
+  .label{
+    background: blue;
+    color: whiite;
+  }
+  #sign-up{
+      background-color: black;
+      color: white;
+  }
+
+  #sign-in{
+    background-color: black;
+    color: white;
+}
+.Jumbotron{
+background-color: blue;
+}
+.container.login.row{
+    background-color: gray;
+    margin:0;
+
+
 }
 
 
-.nav-item {
-    background-color:darkgray;
-    color: white;
-    font-display: white;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-radius: 25%;
+    /* border : black solid 1px; */
+    /* justify-items: center; */
+
   }
 
-  /* .jumbortonFluid{
-      background-color: grey;
+  /* #root {
+      background-color:white;
+      background-size: 100%;
+      
   } */
 
-  .container{
-      background-color: teal;
-  }
+  /* * {
+    background-color: green;
+  } */
+ 

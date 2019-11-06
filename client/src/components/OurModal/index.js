@@ -1,11 +1,11 @@
 import React from "react";
 import './style.css'
 
-// const signIn = {
-//     background: 'blue',
-//     color: 'white'
+const signIn = {
+    background: 'blue',
+    color: 'white'
      
-// }
+}
 export function SignInModal(props) {
     return(
         <div {...props} >
@@ -23,8 +23,8 @@ export function SignUpModal(props) {
     return (
 
         <div>
-
             <h2>Sign Up!</h2>
+            {/* <h2 style = {signIn}>Sign Up!</h2> */}
 
             {props.children}
 

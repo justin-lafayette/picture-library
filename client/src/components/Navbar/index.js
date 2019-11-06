@@ -3,9 +3,10 @@ import React from 'react';
 function Navbar(props) {
     return(
         
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-sm navbar-light bg-light">
 
-            <div className="navbar-brand">LOGO</div>
+            {/* <div className="navbar-brand">LOGO</div> */}
+            <img src="capture.png" alt="" />
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -33,7 +34,7 @@ function Navbar(props) {
                 <ul className="navbar-nav">
 
                     <li className="nav-item">
-                        <button id="Sign-in" className="nav-link" onClick={()=>props.openModal(1)}>Sign-In</button>
+                        <button id="sign-in" className="nav-link" onClick={()=>props.openModal(1)}>Sign-In</button>
                     </li>
 
                     <li className="nav-item">
