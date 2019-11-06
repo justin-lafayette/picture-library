@@ -11,6 +11,8 @@ import Api from '../utils/Api';
 class PageNotFound extends Component {
 
     state = {
+        auth: "",
+        email: "",
         modalIsOpen: false,
         signInModal: false,
         signUpModal: false,

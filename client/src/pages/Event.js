@@ -1,8 +1,7 @@
 /* This page will show specific events */
-/* TODO: create a landing page for non-authenticated users */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import {Row, Col, Container, Image, Button} from 'react-bootstrap';
+import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
 import Api from '../utils/Api';
 // import Api from '../utils/Api';
 
@@ -21,9 +20,11 @@ class Event extends Component {
         eventPlaceholder: "",
         memberOf: true,
         eventPics: "",
+        slideshow: "",
         auth: true
 
     }
+    
     
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
@@ -86,11 +87,43 @@ class Event extends Component {
                             <Button >Upload Image</Button>
                         </Navbar>
                         <div
-                            style={{backgroundColor: "black", height: "91vh"}}
+                            style={{backgroundColor: "black", height: "92vh"}}
                         ></div>
                         <Container>
 
-                            
+                            <Row>
+                                <Col>
+                                    <p>Description
+                                        {this.state.description}
+                                    </p>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col>
+                                    <div>Slideshow
+                                        {this.state.slideshow}
+                                    </div>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col>
+                                    <CardGroup>
+                                        {/* {this.state.event.map( (event) => {
+
+                                            // <Card
+                                            // key={event.eventID}
+                                            // >
+                                            //     <Card.Img>
+                                            //         {event.eventPics}
+                                            //     </Card.Img>
+                                            // </Card>
+                                        
+                                        })} */}
+                                    </CardGroup>
+                                </Col>
+                            </Row>
 
                         </Container>
                     </div>

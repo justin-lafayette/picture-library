@@ -15,6 +15,8 @@ import Api from '../utils/Api';
 class Profile extends Component {
 
     state = {
+        auth: true,
+        email: "",
         modalIsOpen: false,
         events: [],
         title: "",

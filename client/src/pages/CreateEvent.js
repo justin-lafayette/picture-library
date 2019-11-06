@@ -13,6 +13,7 @@ class CreateEvent extends Component {
     state = {
         
         auth: true,
+        email: "",
         eventTitle: "",
         eventDate: "",
         eventDescription: ""

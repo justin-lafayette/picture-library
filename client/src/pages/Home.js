@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
-import { Container } from '../components/Grid';
 import Modal from 'react-modal';
+import { Container } from '../components/Grid'
+import { InputLabel, Input, FormSubmit, FormGroup } from '../components/Form';
 import { SignInModal, SignUpModal, CreateEventModal } from '../components/OurModal';
 import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
+// import { withRouter } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 
 
 class Home extends Component {
@@ -23,6 +25,29 @@ class Home extends Component {
     }
     
     // Functions
+    /* TODO: Console log does not appear in browser or console */
+    componentDidMount() {
+        console.log("component did mount")
+        Api.isAuth('/auth/isauth')
+          .then( res => {
+              console.log("res.body", res.body)
+            if( res.data.user ) {
+                console.log("Set State true")
+                this.setState({
+                    email: this.data.user.email,
+                    auth: true
+                });
+            } else {
+                console.log("Set State false")
+                this.setState({
+                    email: null,
+                    auth: false
+                })
+                this.props.history.push('/')
+            }
+        });
+    }
+
     /* Switch case added to take in the value from the navbar component and set the state to the proper Modal to be displayed. */
     openModal = (modalToOpen) => {
         switch (modalToOpen) {
@@ -57,30 +82,26 @@ class Home extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         if( this.state.signInModal ) {
-            console.log("sign-in form:")
-            console.log(this.state.email);
-            console.log(this.state.password);
             Api.signIn({
                 email: this.state.email,
                 password: this.state.password
             })
-                .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
+                .then( res => {
+                    this.props.history("/")
+                })
                 .catch( err => console.log(err));
         }
 
         if( this.state.signUpModal ) {
-            console.log("sign-up form:")
-            console.log(this.state.firstname);
-            console.log(this.state.lastname);
-            console.log(this.state.email);
-            console.log(this.state.password);
             Api.signUp({
                 firstname: this.state.firstname,
                 lastname: this.state.lastname,
                 email: this.state.email,
                 password: this.state.password
             })
-                .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
+                .then( res => {
+                    this.setState({modalIsOpen: false, signUpModal: false})
+                })
                 .catch( err => console.log(err));
         }
     }
@@ -88,8 +109,6 @@ class Home extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
@@ -149,23 +168,23 @@ class Home extends Component {
                         <SignInModal 
                             closeModal={this.closeModal}
                         >
-                            <form>
+                            <Form>
 
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Username"
                                     />
-                                    <Input
+                                    <Form.Control
                                         value={this.state.email}
                                         onChange={this.handleInputChange}
                                         type="email"
                                         name="email" 
                                         placeholder="Email"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormGroup>
+                                <Form.Group>
                                     <InputLabel
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Password"
@@ -176,14 +195,14 @@ class Home extends Component {
                                         name="password" 
                                         placeholder="Password"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
                                 <FormSubmit
                                     // disabled={!(this.state.email && this.state.password)}
                                     onClick={this.handleFormSubmit}
                                 />
 
-                            </form>
+                            </Form>
 
                         </SignInModal> : ""}
 
@@ -275,4 +294,4 @@ class Home extends Component {
     }
 };
 
-export default Home;
+export default Home ;

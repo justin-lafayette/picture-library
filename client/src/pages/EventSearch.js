@@ -9,6 +9,8 @@ import Api from '../utils/Api';
 class EventSearch extends Component {
 
     state = {
+        auth: "",
+        email: "",
         modalIsOpen: false,
         signInModal: false,
         signUpModal: false,

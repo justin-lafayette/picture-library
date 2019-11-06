@@ -1,4 +1,5 @@
 var LocalStrategy = require("passport-local").Strategy;
+const db = require("../models");
 
 //
 //We will need the models folder to check passport agains
@@ -19,7 +20,7 @@ module.exports = function(passport, userModel) {
         console.log("in passport.js function email ", email);
         console.log("in passport.js function password ", password);
         // When a user tries to sign in this code runs
-        userModel.findOne({ where: {email: email} }).then(function(user) {
+        db.users.findOne({ where: {email: email} }).then(function(user) {
           if (!user) {
             console.log("USER NOT FOUND!"); 
             return done(null, false, { message: 'Incorrect username.' });

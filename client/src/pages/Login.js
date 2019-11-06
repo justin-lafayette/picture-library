@@ -10,6 +10,7 @@ import Api from '../utils/Api';
 class Login extends Component {
 
     state = {
+        auth: false,
         email: "",
         password: "",
         firstname: "",
