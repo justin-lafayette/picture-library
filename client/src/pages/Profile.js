@@ -4,17 +4,16 @@
 
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Container } from '../components/Grid';
-import { Row, Col, Card, Image } from 'react-bootstrap';
-import { Input } from '../components/Form';
-import { List, ListItem } from '../components/List';
+import { Row, Col, Card, Image, ListGroup, Container } from 'react-bootstrap';
 import Api from '../utils/Api';
-
-
 
 class Profile extends Component {
 
     state = {
+        auth: true,
+        firstName: "",
+        lastName: "",
+        email: "",
         modalIsOpen: false,
         events: [],
         title: "",
@@ -47,10 +46,10 @@ class Profile extends Component {
     // Render Elements
     render() {
         return(
-            <div>
+            <>
         
                 <Navbar
-                    openModal={this.openModal}
+                    
                 />
 
                 <Container>
@@ -61,17 +60,27 @@ class Profile extends Component {
                             num={"8"}
                         >
                             <Row>
-                                <form>
-                                    <Input 
+                                <ListGroup>
+
+                                    <ListGroup.Item 
                                         disabled={true}
-                                    />
-                                    <Input 
+                                    >
+                                        {this.state.firstName}
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item  
                                         disabled={true}
-                                    />
-                                    <Input 
+                                        >
+                                        {this.state.lastName}
+                                    </ListGroup.Item>
+
+                                    <ListGroup.Item  
                                         disabled={true}
-                                    />
-                                </form>
+                                        >
+                                        {this.state.email}
+                                    </ListGroup.Item>
+
+                                </ListGroup>
 
                             </Row>
                         </Col>
@@ -82,15 +91,15 @@ class Profile extends Component {
                             <Row>
 
                                 {this.state.events.length ? (
-                                    <List>
+                                    <ListGroup>
                                         {this.state.events.map(events => (
-                                            <ListItem
+                                            <ListGroup.Item 
                                                 key={events.id}
                                             >
                                                 {events.title}
-                                            </ListItem>
+                                            </ListGroup.Item >
                                         ))}
-                                    </List>
+                                    </ListGroup>
                                 ):(
                                     <h3>No Events Available!</h3>
                                 )}
@@ -120,7 +129,7 @@ class Profile extends Component {
 
                 </Container>
 
-            </div>
+            </>
                             
         );
             
