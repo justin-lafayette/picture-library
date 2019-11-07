@@ -10,6 +10,11 @@ const router = express.Router();
 const apiRoutes = require("./routes/api");
 const eventRoutes = require("./routes/events");
 
+const AWS = require("aws-sdk");
+console.log('required AWS');
+
+const fs = require("fs");
+
 var db = require("./models");
 
 // Define middleware here
@@ -51,6 +56,44 @@ app.use(body_parser.json());
 //add local passport strategy
 require("./utils/passport")(passport, db.user);
 
+// For S3 bucket code -- need to be moved to its own compenent and route
+//configuring the AWS environment
+console.log('B4 AWS.config.update');
+
+AWS.config.update({
+  accessKeyId: "AKIAW2PG6CWYEOQYRJYF",
+  secretAccessKey: "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"
+});
+
+console.log('after AWS.config.update');
+
+var s3 = new AWS.S3();
+console.log('s3 instance created');
+
+var filePath = "./client/src/assets/images/birthday_2.jpg";
+console.log('filepath');
+//configuring parameters
+var params = {
+  Bucket: "project3.pic.library",
+  Body: fs.createReadStream(filePath),
+  Key: "folder/" + Date.now() + "_" + path.basename(filePath)
+};
+
+console.log('params');
+
+s3.upload(params, function(err, data) {
+  //handle error
+  if (err) {
+    console.log("Error in s3 upload", err);
+  }
+
+  //success
+  if (data) {
+    console.log("Uploaded in:", data.Location);
+  }
+});
+console.log('S3 done');
+// end of S3 bucket code
 db.sequelize
   .sync()
   .then(function() {
