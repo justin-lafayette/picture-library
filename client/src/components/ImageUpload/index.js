@@ -1,15 +1,20 @@
-import React, { Component } from "react";
-import Dropzone from "react-dropzone";
+import React, { Component } from "react"
+import Dropzone from "react-dropzone"
 // import {Button} from 'react-bootstrap'
+// import ReactCrop from 'react-image-crop'
+// import 'react-image-crop/dist/ReactCrop.css';
 
 const imageMaxSize = 100000000;
-const acceptedFiileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
-const acceptedFiileTypesArray = acceptedFiileTypes.split(",").map((item)=>{return item.trim()})
+const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item)=>{return item.trim()})
 class ImageUpload extends Component {
   constructor(props){
     super(props)
     this.state = {
       imgSrc: null
+      // crop: {
+      //   aspect: 1/1
+      // }
     }
   }
   verifyFile = (files) =>{
@@ -21,7 +26,7 @@ class ImageUpload extends Component {
         alert("This file is not allowed. " + currentFileSize + " bytes is too large")
         return false
       }
-      if (!acceptedFiileTypesArray.includes(currentFileType)){
+      if (!acceptedFileTypesArray.includes(currentFileType)){
         alert("This file is not allowed. Only images are allowed.")
         return false
       }
@@ -50,6 +55,11 @@ class ImageUpload extends Component {
       }
     }
   }
+  handleOnCropChange = (crop)=> {
+    console.log(crop)
+    this.setState({crop})
+    console.log(this.state)
+  }
   render() {
     const {imgSrc} = this.state
     return (
@@ -58,45 +68,39 @@ class ImageUpload extends Component {
         {imgSrc !== null ?
         <div> 
           {imgSrc}
-        <img src ={imgSrc} alt = 'Preview of Uploaded image' /> 
-        </div> : ''}
-        <form>
-          {/* <div class="form-row align-items-center">
-       <div class="col-auto my-1">
-         <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-           <option selected>Choose Event</option>
-           <option value="1">One</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
-         </select>
-       </div>
-       </div> */}
-          {/* // we will need to replace the console.log with our own function that reads the file */}
+        <img src ={imgSrc} alt = ' ' /> 
+        </div>: ''}
+
+        {/* // <div>
+        // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
+        // </div>:''}  */}
+        
           <Dropzone
             onDrop={this.handleOnDrop}
             multiple={false}
-            accept={acceptedFiileTypes}
+            accept={acceptedFileTypes}
             maxSize={imageMaxSize}
             minSize={0}
           >
             {({ getRootProps, getInputProps }) => (
-              <section>
+             <section>
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <button>
+                  
                     Drag 'n' drop image here, or click to select files
-                  </button>
+                  
                 </div>
-              </section>
+                </section>
+              
             )}
           </Dropzone>
+        
           {/* <button type="submit" className="btn btn-primary mb-2">
             Upload
           </button> */}
-        </form>
+        
       </div>
-    );
+    )
   }
 }
 
