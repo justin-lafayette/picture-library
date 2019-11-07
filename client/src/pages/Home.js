@@ -6,41 +6,47 @@ import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar } from 'react-
 
 
 class Home extends Component {
-
-    state = {
-        email: "",
-        password: "",
-        firstname: "",
-        lastname: "",
-        auth: false,
-        signinClose: true,
-        signinShow: false,
-        signupClose: true,
-        signupShow: false
+    constructor(props) {
+        super(props)
+        console.log(props)
+        this.state = {
+            email: this.props.email || "" ,
+            isAuth: this.props.isAuth,
+            password: "",
+            firstname: "",
+            lastname: "",
+            signinClose: true,
+            signinShow: false,
+            signupClose: true,
+            signupShow: false
+        }
     }
     
     // Functions
     /* TODO: Console log does not appear in browser or console */
     componentDidMount() {
-        console.log("component did mount")
-        Api.isAuth('/auth/isauth')
-          .then( res => {
-              console.log("res.body", res.body)
-            if( res.data.user ) {
-                console.log("Set State true")
-                this.setState({
-                    email: this.data.user.email,
-                    auth: true
-                });
-            } else {
-                console.log("Set State false")
-                this.setState({
-                    email: null,
-                    auth: false
-                })
-                this.props.history.push('/')
-            }
-        });
+        console.log("component did mount");
+        console.log("email", this.state.email);
+        console.log("isAuth", this.state.isAuth);
+        console.log(this.props)
+    //     Api.isAuth()
+    //       .then( res => {
+    //           console.log("res.body", res.body)
+    //         if( res.data.user ) {
+    //             console.log("Set State true")
+    //             this.setState({
+    //                 email: this.data.user.email,
+    //                 isAuth: true
+    //             });
+    //         } else {
+    //             console.log("Set State false")
+    //             this.setState({
+    //                 email: null,
+    //                 isAuth: false
+    //             })
+    //             // this.props.history.push('/')
+    //         }
+    //     });
     }
 
     /* TODO: Function to show event search if sign-in is valid */
@@ -53,7 +59,8 @@ class Home extends Component {
                 password: this.state.password
             })
                 .then( res => {
-                    this.props.history("/")
+                    this.setState({signinShow: false})
+                    /* rerender home page */
                 })
                 .catch( err => console.log(err));
         }
@@ -89,13 +96,13 @@ class Home extends Component {
 
     // Render Elements
     render() {
-        if( this.state.auth ) {
+        if( this.state.isAuth ) {
             return (
 
                 <>
         
                     <Navbar
-                        auth={this.state.auth}
+                        isAuth={this.state.isAuth}
                     />
 
                     <Container>
@@ -115,7 +122,7 @@ class Home extends Component {
                 <>
 
                     <Navbar
-                        auth={this.state.auth}
+                        isAuth={this.state.isAuth}
                     >
                         <ButtonToolbar>
 
@@ -275,7 +282,7 @@ class Home extends Component {
                     <Container>
 
                         <Jumbotron>
-                            <p>App description to go here.</p>
+                            <p>{this.state.email}</p>
                         </Jumbotron>
 
                     </Container>
