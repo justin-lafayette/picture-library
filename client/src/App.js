@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import Event from './pages/Event';
 import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
-// import axios from 'axios';
+import axios from 'axios';
 
 class App extends Component {
   state= {
@@ -17,23 +17,23 @@ class App extends Component {
 
   }
 
-  // componentDidMount() {
-  //   axios.get('/auth/isauth')
-  //     .then( res => {
-  //       if( res.data.user ) {
-  //         this.setState({
-  //           email: this.data.user.email,
-  //           auth: true
-  //         });
-  //       } else {
-  //         this.setState({
-  //           email: null,
-  //           auth: false
-  //         })
-  //         this.props.history.push('/')
-  //       }
-  //     })
-  // }
+  componentDidMount() {
+    axios.get('/auth/isauth')
+      .then( res => {
+        if( res.data.user ) {
+          this.setState({
+            email: this.data.user.email,
+            auth: true
+          });
+        } else {
+          this.setState({
+            email: null,
+            auth: false
+          })
+          this.props.history.push('/')
+        }
+      })
+  }
 
   render() {
     return (

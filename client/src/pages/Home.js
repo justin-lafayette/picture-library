@@ -148,7 +148,7 @@ class Home extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Username"
                                             ></Form.Label>
                                             <Form.Control
@@ -162,7 +162,7 @@ class Home extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Password"
                                             ></Form.Label>
                                             <Form.Control 
@@ -203,7 +203,7 @@ class Home extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="First Name"
                                             ></Form.Label>
                                             <Form.Control
@@ -217,7 +217,7 @@ class Home extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Last Name"
                                             ></Form.Label>
                                             <Form.Control
@@ -231,7 +231,7 @@ class Home extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Username"
                                             ></Form.Label>
                                             <Form.Control
@@ -245,7 +245,7 @@ class Home extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Password"
                                             ></Form.Label>
                                             <Form.Control 
