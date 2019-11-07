@@ -8,4 +8,10 @@ router.route("/")
 router.route('/:id')
 .get(eventsController.findById);
 
+router.route('/:userEmail')
+.get(eventsController.findByUserEmail);
+
+router.route('/newevent')
+.post(eventsController.create);
+
 module.exports = router;

@@ -2,10 +2,8 @@
 
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Input, InputLabel, FormGroup, FormSubmit, FormTextarea } from '../components/Form';
-import { Container } from '../components/Grid';
-import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
+import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
 
 
 class CreateEvent extends Component {
@@ -13,6 +11,7 @@ class CreateEvent extends Component {
     state = {
         
         auth: true,
+        email: "",
         eventTitle: "",
         eventDate: "",
         eventDescription: ""
@@ -24,13 +23,16 @@ class CreateEvent extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-
+        // console.log('in app.js b4 Api.createevent');
         Api.createEvent({
             title: this.state.eventTitle,
             event_date: this.state.eventDate,
-            event_description: this.state.eventDescription
+            event_description: this.state.eventDescription,
+            email: this.state.email
         })
-            .then( alert("event created") )
+            .then( res => {
+                alert("success")
+            })
             .catch( err => console.log( err ) );
         
     }
@@ -38,11 +40,11 @@ class CreateEvent extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
+        // ToDo needs to be changed to email from auth.
+        this.state.email = 'codybear40@gmail.com';
     }
     
 
@@ -54,54 +56,63 @@ class CreateEvent extends Component {
         
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
-                    openModal={(modalToOpen) => this.openModal(modalToOpen)}
                     auth={this.state.auth}
                 />
 
                 <Container>
 
-                    <Jumbotron fluid >
-                        <form>
+                    <Jumbotron>
+                        <Form>
 
-                            <FormGroup>
-                                <InputLabel 
+                            <Form.Group controlId="event-name">
+                                <Form.Label 
                                     label="Event Name"
-                                />
-                                <Input 
+                                >
+                                    Event Name
+                                </Form.Label>
+                                <Form.Control 
                                     value={this.state.eventTitle}
                                     onChange={this.handleInputChange}
                                     name="eventTitle"
                                 />
-                            </FormGroup>
+                            </Form.Group>
 
-                            <FormGroup>
-                                <InputLabel
+                            <Form.Group controlId="event-date">
+                                <Form.Label
                                     label="Event Date"
-                                />
-                                <Input 
+                                >
+                                    Event Date
+                                </Form.Label>
+                                <Form.Control 
                                     value={this.state.eventDate}
                                     onChange={this.handleInputChange}
                                     name="eventDate"
                                 />
-                            </FormGroup>
+                            </Form.Group>
 
-                            <FormGroup>
-                                <InputLabel 
+                            <Form.Group controlId="event-description">
+                                <Form.Label 
                                     label="Event Description"
-                                />
-                                <FormTextarea 
+                                >
+                                    Event Description
+                                </Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows="3" 
                                     value={this.state.eventDescription}
                                     onChange={this.handleInputChange}
                                     name="eventDescription"
                                 />
-                            </FormGroup>
+                            </Form.Group>
 
-                            <FormSubmit 
+                            <Button 
                                 // disabled={!(this.state.email && this.state.password)}
                                 onClick={this.handleFormSubmit}
-                            />
+                            >
+                                Submit
+                            </Button>
 
-                        </form>
+                        </Form>
                     </Jumbotron>
 
                 </Container>

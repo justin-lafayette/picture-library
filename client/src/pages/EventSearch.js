@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Col, Container, Row } from '../components/Grid';
-import { Card, Button, Dropdown, Image } from 'react-bootstrap';
-// import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
+import { Container, Col, Row, Dropdown, Card, Image, Button } from 'react-bootstrap';
 
 
 class EventSearch extends Component {
 
     state = {
-        modalIsOpen: false,
-        signInModal: false,
-        signUpModal: false,
+        auth: "",
+        email: "",
         events: [],
         title: "",
         description: "",
@@ -20,31 +17,6 @@ class EventSearch extends Component {
     }
     
     // Functions
-    /* Switch case added to take in the value from the navbar component and set the state to the proper Modal to be displayed. */
-    openModal = (modalToOpen) => {
-        switch (modalToOpen) {
-        
-            default:
-                break;
-        }
-    }
-
-    afterOpenModal = () => {
-        // references are now sync'd and can be accessed.
-
-    }
-
-    closeModal = () => {
-        this.setState({modalIsOpen: false});
-    }
-
-    /* TODO: Function to show event search if sign-in is valid */
-
-    handleFormSubmit = event => {
-        event.preventDefault();
-        /* TODO: handle form submit for searching events */
-    }
-
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -81,22 +53,20 @@ class EventSearch extends Component {
     // Render Elements
     render() {
         return(
-            <div>
+            <>
         
-                {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
-                {/* TODO: option needed to verify if sign-in is valid. if so do not render the sign-in/sign-up buttons */}
                 <Navbar
-                    openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                
                 />
 
                 <Container>
 
                     <Col
-                    num={"12"}
+                    
                     >
                         <Row>
                             <Col
-                            num="10"
+                            
                             >
                                 {/* TODO: convert to custom dropdown component like in docs online */}
                                 <Dropdown>
@@ -136,10 +106,10 @@ class EventSearch extends Component {
                     {this.state.events.length ? (
                         
                         <Row
-                        center
+                        
                         >
                             <Col
-                            num={"10"}
+                            
                             >
                                 {this.state.events.map(events => (
 
@@ -148,7 +118,7 @@ class EventSearch extends Component {
                                             <Card.Body>
 
                                                 <Col
-                                                num={"4"}
+                                                
                                                 >
                                                     <Image 
                                                     /* TODO: href={{events.eventLink}} */
@@ -156,7 +126,7 @@ class EventSearch extends Component {
                                                 </Col>
 
                                                 <Col
-                                                num={"8"}
+                                                
                                                 >
                                                     <Row>
                                                         <Card.Title>{events.title}</Card.Title>
@@ -186,7 +156,7 @@ class EventSearch extends Component {
                     
                 </Container>
                 
-            </div>
+            </>
                         
         );
         

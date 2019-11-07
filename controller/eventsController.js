@@ -3,7 +3,6 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.events.findAll({
-
     }).then(function(events){
         res.json(events);
     });
@@ -16,7 +15,7 @@ module.exports = {
         }
       }).then(function(event){
         res.json(event);
-      })
+      });
   },
    findById: function(req, res) {
      console.log('in eventsController.js - req event id ', req.params.event_id);
@@ -33,16 +32,16 @@ module.exports = {
         console.log('in eventsController - error finding event ');
         console.log(err);
       });
+  },
+  create: function(req, res) {
+    console.log('in create event');
+    db.events.create(req.body)
+      .then(function(event){
+        console.log('in then of create event');
+        res.json(event);
+      });
   }
-// ,
-//   create: function(req, res) {
-//     console.log('in create event');
-//     db.events.create(req.body)
-//       .then(function(event){
-//         console.log('in then of create event');
-//         res.json(event);
-//       });
-//   },
+  //,
 //   findByTitle: function(req, res) {
 //     console.log('in eventsController.js - req ', req.body);
 //    db.events
