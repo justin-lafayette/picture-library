@@ -1,4 +1,5 @@
 const eventsController = require("../../controller/eventsController");
+const pictureControlller = require("../../controller/picturesController");
 const router = require("express").Router();
 
 // Matches with "/events"
@@ -13,5 +14,8 @@ router.route('/:userEmail')
 
 router.route('/newevent')
 .post(eventsController.create);
+
+router.route('/pics')
+.get(pictureControlller.findAll);
 
 module.exports = router;
