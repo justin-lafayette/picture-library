@@ -23,11 +23,12 @@ class CreateEvent extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-
+        // console.log('in app.js b4 Api.createevent');
         Api.createEvent({
             title: this.state.eventTitle,
             event_date: this.state.eventDate,
-            event_description: this.state.eventDescription
+            event_description: this.state.eventDescription,
+            email: this.state.email
         })
             .then( res => {
                 alert("success")
@@ -42,6 +43,8 @@ class CreateEvent extends Component {
         this.setState({
             [name]: value
         });
+        // ToDo needs to be changed to email from auth.
+        this.state.email = 'codybear40@gmail.com';
     }
     
 
