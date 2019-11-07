@@ -1,19 +1,19 @@
 /* TODO: create a landing page for non-authenticated users */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
-import { Col, Row, Container } from '../components/Grid';
-// import Jumbotron from '../components/Jumbotron';
 import Api from '../utils/Api';
-
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 class Login extends Component {
 
     state = {
-        email: "",
-        password: "",
-        firstname: "",
-        lastname: ""
+        auth: false,
+        rtnEmail: "",
+        rtnPassword: "",
+        newEmail: "",
+        newPassword: "",
+        newFirstname: "",
+        newLastname: ""
 
     }
     
@@ -30,160 +30,159 @@ class Login extends Component {
         });
     }
     
-    handleFormSubmit = event => {
+    handleSignIn = event => {
         event.preventDefault();
-        if( this.state.signInModal ) {
-            console.log("sign-in form:")
-            console.log(this.state.email);
-            console.log(this.state.password);
-            Api.signIn({
-                email: this.state.email,
-                password: this.state.password
-            })
-                .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
-                .catch( err => console.log(err));
-        }
 
-        if( this.state.signUpModal ) {
-            console.log("sign-up form:")
-            console.log(this.state.firstname);
-            console.log(this.state.lastname);
-            console.log(this.state.email);
-            console.log(this.state.password);
-            Api.signUp({
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
-                email: this.state.email,
-                password: this.state.password
-            })
-                .then(/* TODO: (res) => this.--Function to show event search if sign-in is valid */)
-                .catch( err => console.log(err));
-        }
+        console.log("sign-in form:")
+        console.log(this.state.rtnEmail);
+        console.log(this.state.rtnPassword);
+        Api.signIn({
+            email: this.state.rtnEmail,
+            password: this.state.rtnPassword
+        });
+    }
+
+    handleSignUp = event => {
+        event.preventDefault();
+        
+        console.log("sign-up form:")
+        console.log(this.state.newFirstname);
+        console.log(this.state.newLastname);
+        console.log(this.state.newEmail);
+        console.log(this.state.newPassword);
+        Api.signUp({
+            firstname: this.state.newFirstname,
+            lastname: this.state.newLastname,
+            email: this.state.newEmail,
+            password: this.state.newPassword
+        })
+            .then()
+            .catch( err => console.log(err));
     }
 
 
     // Render Elements
     render() {
         return(
-            <div>
+            <>
         
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
-                    openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                    
                 />
                 
                 <Container>
 
                     <Row>
                         <Col
-                        num={"5"}
                         >
-                            <form>
+                            <Form>
 
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Username"
-                                    />
-                                    <Input
-                                        value={this.state.email}
+                                    ></Form.Label>
+                                    <Form.Control
+                                        value={this.state.rtnEmail}
                                         onChange={this.handleInputChange}
                                         type="email"
-                                        name="username" 
+                                        name="rtnEmail" 
                                         placeholder="Email"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Password"
-                                    />
-                                    <Input 
-                                        value={this.state.password}
+                                    ></Form.Label>
+                                    <Form.Control 
+                                        value={this.state.rtnPassword}
                                         onChange={this.handleInputChange}
-                                        name="password" 
+                                        name="rtnPassword" 
                                         placeholder="Password"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormSubmit
-                                    disabled={!(this.state.email && this.state.password)}
-                                    onClick={this.handleFormSubmit}
-                                />
+                                <Button
+                                    disabled={!(this.state.rtnEmail && this.state.rtnPassword)}
+                                    onClick={this.handleSignIn}
+                                >
+                                    Submit
+                                </Button>
 
-                            </form>
+                            </Form>
                         
                         </Col>
 
                         <Col
-                        num={"7"}
                         >
+                            <Form>
 
-                            <form>
-
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="First Name"
-                                    />
-                                    <Input
-                                        value={this.state.firstname}
+                                    ></Form.Label>
+                                    <Form.Control
+                                        value={this.state.newFirstname}
                                         onChange={this.handleInputChange}
-                                        name="firstname"
+                                        name="newFirstname"
                                         type="text"
                                         placeholder="First Name"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Last Name"
-                                    />
-                                    <Input
-                                        value={this.state.lastname}
+                                    ></Form.Label>
+                                    <Form.Control
+                                        value={this.state.newLastname}
                                         onChange={this.handleInputChange}
-                                        name="lastname"
+                                        name="newLastname"
                                         type="text"
                                         placeholder="Last Name"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Username"
-                                    />
-                                    <Input
-                                        value={this.state.email}
+                                    ></Form.Label>
+                                    <Form.Control
+                                        value={this.state.newEmail}
                                         onChange={this.handleInputChange}
-                                        name="username"
+                                        name="newEmail"
                                         type="email"
                                         placeholder="Email"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormGroup>
-                                    <InputLabel
+                                <Form.Group>
+                                    <Form.Label
                                         htmlFor="" /* TODO: ID needed for input */
                                         label="Password"
-                                    />
-                                    <Input 
-                                        value={this.state.password}
+                                    ></Form.Label>
+                                    <Form.Control 
+                                        value={this.state.newPassword}
                                         onChange={this.handleInputChange}
-                                        name="password"
+                                        name="newPassword"
                                         placeholder="Password"
-                                        type="password"
                                     />
-                                </FormGroup>
+                                </Form.Group>
 
-                                <FormSubmit
-                                    disabled={!(this.state.email && this.state.pass && this.state.firstname && this.state.lastname)}
-                                    onClick={this.handleFormSubmit}
-                                />
+                                <Button
+                                    disabled={!(this.state.newEmail && this.state.newPassword && this.state.newFirstname && this.state.newLastname)}
+                                    onClick={this.handleSignUp}
+                                >
+                                    Submit
+                                </Button>
 
-                            </form>
+                            </Form>
 
                         </Col>
 
@@ -192,7 +191,7 @@ class Login extends Component {
                 </Container>
                 
                 
-            </div>
+            </>
                         
         );
         

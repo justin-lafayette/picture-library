@@ -17,13 +17,14 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
   
-  events.associate = function(models){
-    events.belongsTo(models.user, {foreignKey: 'email'});
-  };
   
   events.associate = function(models){
-    events.belongsTo(models.video, {foreignKey : 'video_id'});
+    events.belongsTo(models.videos, {foreignKey : 'video_id'});
   };
-  
+
+  events.associate = function(models){
+    events.belongsTo(models.users,  {foreignKey : 'email'});
+  };
+
   return events;
   }

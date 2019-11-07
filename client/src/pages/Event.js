@@ -1,12 +1,12 @@
 /* This page will show specific events */
-/* TODO: create a landing page for non-authenticated users */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-// import { Input, InputLabel, FormGroup, FormSubmit } from '../components/Form';
-// import { Col, Row, Container } from '../components/Grid';
-import {Row, Col, Container, Image, Button} from 'react-bootstrap';
+import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
 import Api from '../utils/Api';
 // import Api from '../utils/Api';
+
+/* This page used REACT-BOOTSTRAP in-place */
+/* Page is rendered within a JSX fragment */
 
 
 class Event extends Component {
@@ -15,16 +15,24 @@ class Event extends Component {
         email: "",
         event: [],
         eventID: "",
-        title: "",
+        title: "title",
         description: "",
         eventPlaceholder: "",
-        memberOf: "",
-        eventPics: ""
+        memberOf: true,
+        eventPics: "",
+        slideshow: "",
+        auth: true
 
     }
     
+    
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
+
+    // componentDidMount() {
+    //     this.getSubStatus();
+
+    // }
 
     /* Handle input change */
     handleInputChange = event => {
@@ -42,7 +50,7 @@ class Event extends Component {
         Api.subscribe({
             email: this.state.email,
             eventID: this.state.eventID,
-            subscribe: "true"
+            subscribe: true
         })
     }
 
@@ -53,87 +61,137 @@ class Event extends Component {
                 this.setState({event: res.data, email: "", eventID: "", title: "", description: "", eventPlaceholder: "", memberOf: ""})
             })
     }
+
+    // <Button 
+    // /* TODO: show qr code if member of the event */
+    // /* onClick(this.modalToOpen) */
+    // >QR</Button>
     
 
 
     // Render Elements
     render() {
         return(
-            <div>
-        
-                {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
-                <Navbar
-                    openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                />
+            <>
                 
-                {/* TODO: change layout so the page will render completely different if signup if memberOf is true */}
-                <Container>
+                {this.state.memberOf ? (
+                    <div>
+                        <Navbar
+                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                            auth
 
-                    <Col>
-                    
-                        <Row>
-                            <Col 
-                            xs={2}
-                            md={4}
-                            >
+                        >
+                            <Container>
+                                {this.state.title}
+                            </Container>
+                            <Button >Upload Image</Button>
+                        </Navbar>
+                        <div
+                            style={{backgroundColor: "black", height: "92vh"}}
+                        ></div>
+                        <Container>
 
-                                <Image 
-                                /* TODO: {this.state.eventPlaceholder} */
-                                src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                                style={{maxHeight: 200}}
-                                />
+                            <Row>
+                                <Col>
+                                    <p>Description
+                                        {this.state.description}
+                                    </p>
+                                </Col>
+                            </Row>
 
-                            </Col>
+                            <Row>
+                                <Col>
+                                    <div>Slideshow
+                                        {this.state.slideshow}
+                                    </div>
+                                </Col>
+                            </Row>
 
-                            <Col>
+                            <Row>
+                                <Col>
+                                    <CardGroup>
+                                        {/* {this.state.event.map( (event) => {
 
-                                <Row
-                                style={{height:100}}
-                                >
-                                    {this.state.title}
-                                    Title
-                                
-                                </Row>
+                                            // <Card
+                                            // key={event.eventID}
+                                            // >
+                                            //     <Card.Img>
+                                            //         {event.eventPics}
+                                            //     </Card.Img>
+                                            // </Card>
+                                        
+                                        })} */}
+                                    </CardGroup>
+                                </Col>
+                            </Row>
 
-                                <Row
-                                style={{height:100}}
-                                >
-                                    {this.state.memberOf ? (
+                        </Container>
+                    </div>
 
-                                        /* TODO: show qr code if member of the event */
-                                        <Button 
-                                        /* onClick(this.modalToOpen) */
-                                        >QR</Button>
+):(
 
-                                        ) : (
-                                            
-                                        /* TODO: sign-up if not member */
-                                        <Button 
-                                        onClick={this.handleSubscribe}
-                                        >Subscribe</Button>
+    <div>
+        <Navbar
+            openModal={(modalToOpen) => this.openModal(modalToOpen)}
+            />
+        <Container>
 
-                                    )}
-                                </Row>
+            <Col>
+            
+                <Row>
+                    <Col 
+                    xs={2}
+                    md={4}
+                    >
 
-                            </Col>
-                        </Row>
+                        <Image 
+                        /* TODO: {this.state.eventPlaceholder} */
+                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                        style={{maxHeight: 200}}
+                        />
 
-                        <Row>
-                            <Col
-                            style={{height:100}}
-                            >
-                                {this.state.description}
-                                Description
-                                
-                            </Col>
-                        </Row>
-                    
                     </Col>
 
-                </Container>
+                    <Col>
+
+                        <Row
+                        style={{height:100}}
+                        >
+                            {this.state.title}
+                            Title
+                        
+                        </Row>
+
+                        <Row
+                        style={{height:100}}
+                        >           
+                            <Button 
+                            /* TODO: sign-up if not member */
+                            onClick={this.handleSubscribe}
+                            >Subscribe</Button>
+                        </Row>
+
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col
+                    style={{height:100}}
+                    >
+                        {this.state.description}
+                        Description
+                        
+                    </Col>
+                </Row>
+            
+            </Col>
+
+        </Container>
+    </div>
+)}
                 
                 
-            </div>
+            </>
                         
         );
         
@@ -141,3 +199,4 @@ class Event extends Component {
 };
 
 export default Event;
+

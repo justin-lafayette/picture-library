@@ -3,7 +3,7 @@ import React from 'react';
 function Jumbotron({ fluid, children }) {
     return(
         
-        <div className={`jumbotron${fluid ? "-fluid" : ""}, bg-secondary`}>
+        <div className={`jumbotron${fluid ? "-fluid" : ""},`}>
 
             {children}
         
