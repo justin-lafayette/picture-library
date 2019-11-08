@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+
+/* Pages */
 import Home from './pages/Home';
 import EventSearch from './pages/EventSearch';
 import PageNotFound from './pages/PageNotFound';
