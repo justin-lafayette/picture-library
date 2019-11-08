@@ -60,6 +60,23 @@ class Login extends Component {
             .catch( err => console.log(err));
     }
 
+    componentDidMount() {
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              console.log("email", this.state.email);
+            }
+        })
+    }
 
     // Render Elements
     render() {
@@ -80,7 +97,7 @@ class Login extends Component {
 
                                 <Form.Group>
                                     <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
+                                        htmlFor="" 
                                         label="Username"
                                     ></Form.Label>
                                     <Form.Control
@@ -94,7 +111,7 @@ class Login extends Component {
 
                                 <Form.Group>
                                     <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
+                                        htmlFor="" 
                                         label="Password"
                                     ></Form.Label>
                                     <Form.Control 
@@ -122,7 +139,7 @@ class Login extends Component {
 
                                 <Form.Group>
                                     <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
+                                        htmlFor="" 
                                         label="First Name"
                                     ></Form.Label>
                                     <Form.Control
@@ -136,7 +153,7 @@ class Login extends Component {
 
                                 <Form.Group>
                                     <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
+                                        htmlFor="" 
                                         label="Last Name"
                                     ></Form.Label>
                                     <Form.Control
@@ -150,7 +167,7 @@ class Login extends Component {
 
                                 <Form.Group>
                                     <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
+                                        htmlFor="" 
                                         label="Username"
                                     ></Form.Label>
                                     <Form.Control
@@ -164,7 +181,7 @@ class Login extends Component {
 
                                 <Form.Group>
                                     <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
+                                        htmlFor="" 
                                         label="Password"
                                     ></Form.Label>
                                     <Form.Control 

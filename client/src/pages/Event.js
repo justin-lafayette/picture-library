@@ -28,6 +28,23 @@ class Event extends Component {
     
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
+    componentDidMount() {
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              console.log("email", this.state.email);
+            }
+        })
+    }
 
     // componentDidMount() {
     //     this.getSubStatus();

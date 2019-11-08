@@ -42,6 +42,24 @@ class Profile extends Component {
                 this.setState({images: res.data, imagesId: "", picture: ""})
             })
     }
+
+    componentDidMount() {
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              console.log("email", this.state.email);
+            }
+        })
+    }
     
     // Render Elements
     render() {

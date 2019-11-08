@@ -44,9 +44,26 @@ class CreateEvent extends Component {
             [name]: value
         });
         // ToDo needs to be changed to email from auth.
-        this.state.email = 'codybear40@gmail.com';
+        // this.state.email = 'codybear40@gmail.com';
     }
     
+    componentDidMount() {
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              console.log("email", this.state.email);
+            }
+        })
+    }
 
 
     // Render Elements
