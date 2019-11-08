@@ -56,8 +56,6 @@ class Event extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
@@ -149,67 +147,67 @@ class Event extends Component {
                         </Container>
                     </>
 
-                    ):(
+                ):(
 
-                        <>
-        <Navbar
-            isAuth={this.state.isAuth}
-        />
-        <Container>
-
-            <Col>
-            
-                <Row>
-                    <Col 
-                    xs={2}
-                    md={4}
-                    >
-
-                        <Image 
-                        /* TODO: {this.state.eventPlaceholder} */
-                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                        style={{maxHeight: 200}}
+                    <>
+                        <Navbar
+                            isAuth={this.state.isAuth}
                         />
+                        <Container>
 
-                    </Col>
+                            <Col>
+                            
+                                <Row>
+                                    <Col 
+                                    xs={2}
+                                    md={4}
+                                    >
 
-                    <Col>
+                                        <Image 
+                                        /* TODO: {this.state.eventPlaceholder} */
+                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                                        style={{maxHeight: 200}}
+                                        />
 
-                        <Row
-                        style={{height:100}}
-                        >
-                            {this.state.title}
-                            Title
-                        
-                        </Row>
+                                    </Col>
 
-                        <Row
-                        style={{height:100}}
-                        >           
-                            <Button 
-                            /* TODO: sign-up if not member */
-                            onClick={this.handleSubscribe}
-                            >Subscribe</Button>
-                        </Row>
+                                    <Col>
 
-                    </Col>
-                </Row>
+                                        <Row
+                                        style={{height:100}}
+                                        >
+                                            {this.state.title}
+                                            Title
+                                        
+                                        </Row>
 
-                <Row>
-                    <Col
-                    style={{height:100}}
-                    >
-                        {this.state.description}
-                        Description
-                        
-                    </Col>
-                </Row>
-            
-            </Col>
+                                        <Row
+                                        style={{height:100}}
+                                        >           
+                                            <Button 
+                                            /* TODO: sign-up if not member */
+                                            onClick={this.handleSubscribe}
+                                            >Subscribe</Button>
+                                        </Row>
 
-        </Container>
-    </>
-)}
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col
+                                    style={{height:100}}
+                                    >
+                                        {this.state.description}
+                                        Description
+                                        
+                                    </Col>
+                                </Row>
+                            
+                            </Col>
+
+                        </Container>
+                    </>
+                )}
                 
                 
             </>
