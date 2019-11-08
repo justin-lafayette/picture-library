@@ -23,31 +23,33 @@ class Home extends Component {
     }
     
     // Functions
-    /* TODO: Console log does not appear in browser or console */
+    // componentDidMount() {
+    //     if( this.props.email !== this.state.email ) {
+    //         this.setState({
+    //             email: this.props.email,
+    //             isAuth: this.props.isAuth
+    //         })
+            
+    //     }
+    // }
     componentDidMount() {
-        console.log("component did mount");
-        console.log("email", this.state.email);
-        console.log("isAuth", this.state.isAuth);
-        console.log(this.props)
-    //     Api.isAuth()
-    //       .then( res => {
-    //           console.log("res.body", res.body)
-    //         if( res.data.user ) {
-    //             console.log("Set State true")
-    //             this.setState({
-    //                 email: this.data.user.email,
-    //                 isAuth: true
-    //             });
-    //         } else {
-    //             console.log("Set State false")
-    //             this.setState({
-    //                 email: null,
-    //                 isAuth: false
-    //             })
-    //             // this.props.history.push('/')
-    //         }
-    //     });
-    }
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              // this.props.history.push('/')
+            }
+            console.log("email", this.state.email);
+        })
+      }
 
     /* TODO: Function to show event search if sign-in is valid */
 

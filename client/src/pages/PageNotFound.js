@@ -22,25 +22,21 @@ class PageNotFound extends Component {
     // Functions
     /* TODO: Console log does not appear in browser or console */
     componentDidMount() {
-        console.log("component did mount")
-        Api.isAuth('/auth/isauth')
+        Api.isAuth()
           .then( res => {
-              console.log("res.body", res.body)
             if( res.data.user ) {
-                console.log("Set State true")
-                this.setState({
-                    email: this.data.user.email,
-                    auth: true
-                });
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
             } else {
-                console.log("Set State false")
-                this.setState({
-                    email: null,
-                    auth: false
-                })
-                this.props.history.push('/')
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              console.log("email", this.state.email);
             }
-        });
+        })
     }
 
     /* TODO: Function to show event search if sign-in is valid */
@@ -85,7 +81,7 @@ class PageNotFound extends Component {
     handleSigninShow= () => this.setState({signinShow: true});
     handleSignupShow= () => this.setState({signupShow: true});
     
-
+    
 
     // Render Elements
     render() {

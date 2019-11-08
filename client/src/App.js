@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import Event from './pages/Event';
 import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
-import axios from 'axios';
+// import axios from 'axios';
 
 class App extends Component {
   state= {
@@ -18,34 +18,34 @@ class App extends Component {
   }
 
   /* TODO: password is also being passed back with the req. this needs to be removed. */
-  componentDidMount() {
-    console.log("app cDM");
-    axios.get('/auth/isauth')
-      .then( res => {
-        console.log("email", this.state.email);
-        console.log("isAuth", this.state.isAuth);
-        if( res.data.user ) {
-          console.log("res.data.user: true");
-          this.setState({
-            email: res.data.user.email,
-            auth: true
-          });
-          console.log("email", this.state.email);
-        console.log("isAuth", this.state.isAuth);
-        } else {
-          console.log("res.data.user: false");
-          this.setState({
-            email: null,
-            auth: false
-          })
-          console.log("email", this.state.email);
-        console.log("isAuth", this.state.isAuth);
-          // this.props.history.push('/')
-        }
-        console.log("email", this.state.email);
-        console.log("isAuth", this.state.isAuth);
-      })
-  }
+  // componentDidMount() {
+  //   console.log("app cDM");
+  //   axios.get('/auth/isauth')
+  //     .then( res => {
+  //       console.log("email", this.state.email);
+  //       console.log("isAuth", this.state.isAuth);
+  //       if( res.data.user ) {
+  //         console.log("res.data.user: true");
+  //         this.setState({
+  //           email: res.data.user.email,
+  //           isAuth: true
+  //         });
+  //         console.log("email", this.state.email);
+  //       console.log("isAuth", this.state.isAuth);
+  //       } else {
+  //         console.log("res.data.user: false");
+  //         this.setState({
+  //           email: null,
+  //           isAuth: false
+  //         })
+  //         console.log("email", this.state.email);
+  //       console.log("isAuth", this.state.isAuth);
+  //         // this.props.history.push('/')
+  //       }
+  //       console.log("email", this.state.email);
+  //       console.log("isAuth", this.state.isAuth);
+  //     })
+  // }
 
   render() {
     return (
@@ -54,15 +54,21 @@ class App extends Component {
         <>
           <Switch>
           
-            {/* <Route exact path="/" component={Home} /> */}
-            <Route path="/" 
+            <Route exact path="/" component={Home} />
+            <Route exact path="/eventsearch" component={EventSearch} />
+            <Route exact path="/404" component={PageNotFound} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/event" component={Event} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/createevent" component={CreateEvent} />
+            {/* <Route path="/" 
               render={(props) => <Home {...props} 
                 email={this.state.email} 
                 isAuth={this.state.isAuth}
               />}
             />
 
-            <Route path="/eventsearch" 
+            <Route exact path="/eventsearch" 
               render={(props) => <EventSearch {...props} 
                 email={this.state.email} 
                 isAuth={this.state.isAuth}
@@ -97,7 +103,7 @@ class App extends Component {
                 email={this.state.email} 
                 isAuth={this.state.isAuth}
               />} 
-            />
+            /> */}
             
           </Switch>
         </>

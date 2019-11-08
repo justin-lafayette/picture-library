@@ -60,6 +60,23 @@ class Login extends Component {
             .catch( err => console.log(err));
     }
 
+    componentDidMount() {
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: null,
+                isAuth: false
+              })
+              console.log("email", this.state.email);
+            }
+        })
+    }
 
     // Render Elements
     render() {
