@@ -1,19 +1,11 @@
-var React = require('react');
-var QRCode = require('qrcode.react');
- 
-React.render(
-  <QRCode value="http://facebook.github.io/react/" />,
-  mountNode
+import React from 'react';
+import ReactDOM from 'react-dom';
+import QRCode from 'react-qr-code';
+
+ReactDOM.render(
+  <QRCode value="Event" />,
+  document.getElementById('Container')
 );
-
-
-// import ReactDOM from 'react-dom';
-// import QRCode from 'react-qr-code';
-
-// ReactDOM.render(
-//   <QRCode value="Event" />,
-//   document.getElementById('Container')
-// );
 
 // function htmlEncode (value){
 //     return $('<div/>').text(value).html();
