@@ -1,7 +1,7 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
+import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
 // import Api from '../utils/Api';
 
@@ -29,6 +29,7 @@ class Event extends Component {
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
     componentDidMount() {
+        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -38,11 +39,12 @@ class Event extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/login');
             }
+            console.log("email", this.state.email);
         })
     }
 
@@ -92,20 +94,22 @@ class Event extends Component {
             <>
                 
                 {this.state.memberOf ? (
-                    <div>
+                    <>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                            auth
-
+                            isAuth={this.state.isAuth}
                         >
                             <Container>
                                 {this.state.title}
                             </Container>
                             <Button >Upload Image</Button>
                         </Navbar>
-                        <div
+
+                        <Jumbotron
                             style={{backgroundColor: "black", height: "92vh"}}
-                        ></div>
+                        >
+
+                        </Jumbotron>
+
                         <Container>
 
                             <Row>
@@ -143,14 +147,14 @@ class Event extends Component {
                             </Row>
 
                         </Container>
-                    </div>
+                    </>
 
-):(
+                    ):(
 
-    <div>
+                        <>
         <Navbar
-            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-            />
+            isAuth={this.state.isAuth}
+        />
         <Container>
 
             <Col>
@@ -204,7 +208,7 @@ class Event extends Component {
             </Col>
 
         </Container>
-    </div>
+    </>
 )}
                 
                 

@@ -22,6 +22,7 @@ class PageNotFound extends Component {
     // Functions
     /* TODO: Console log does not appear in browser or console */
     componentDidMount() {
+        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -31,11 +32,12 @@ class PageNotFound extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/');
             }
+            console.log("email", this.state.email);
         })
     }
 
@@ -49,7 +51,7 @@ class PageNotFound extends Component {
                 password: this.state.password
             })
                 .then( res => {
-                    this.props.history("/")
+                    this.props.history.push('/');
                 })
                 .catch( err => console.log(err));
         }
@@ -62,7 +64,7 @@ class PageNotFound extends Component {
                 password: this.state.password
             })
                 .then( res => {
-                    this.setState({modalIsOpen: false, signUpModal: false})
+                    
                 })
                 .catch( err => console.log(err));
         }

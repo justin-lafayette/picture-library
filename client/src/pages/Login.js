@@ -61,6 +61,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -68,13 +69,15 @@ class Login extends Component {
                 email: res.data.user.email,
                 isAuth: true
               });
+              this.props.history.push('/');
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/login');
             }
+            console.log("email", this.state.email);
         })
     }
 
@@ -85,7 +88,7 @@ class Login extends Component {
         
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
-                    
+                    isAuth={this.state.isAuth}
                 />
                 
                 <Container>

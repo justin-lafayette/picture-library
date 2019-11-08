@@ -44,20 +44,24 @@ class Profile extends Component {
     }
 
     componentDidMount() {
+        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
               this.setState({
+                firstName: res.data.user.firstName,
+                lastName: res.data.user.firstName,
                 email: res.data.user.email,
                 isAuth: true
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/login');
             }
+            console.log("email", this.state.email);
         })
     }
     
@@ -67,7 +71,7 @@ class Profile extends Component {
             <>
         
                 <Navbar
-                    
+                    isAuth={this.state.isAuth}
                 />
 
                 <Container>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
-// import { withRouter } from 'react-router-dom';
+// import { /* withRouter, */ Redirect } from 'react-router-dom';
 import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
 
 
@@ -33,6 +33,7 @@ class Home extends Component {
     //     }
     // }
     componentDidMount() {
+        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -42,10 +43,10 @@ class Home extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              // this.props.history.push('/')
+              this.props.history.push('/');
             }
             console.log("email", this.state.email);
         })

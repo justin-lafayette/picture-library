@@ -38,6 +38,7 @@ class EventSearch extends Component {
     }
 
     componentDidMount() {
+        console.log("Component did mount");
         this.loadEvents();
 
         Api.isAuth()
@@ -49,11 +50,12 @@ class EventSearch extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/login');
             }
+            console.log("email", this.state.email);
         })
     }
 
@@ -72,7 +74,7 @@ class EventSearch extends Component {
             <>
         
                 <Navbar
-                
+                    isAuth={this.state.isAuth}
                 />
 
                 <Container>

@@ -52,9 +52,9 @@ class App extends Component {
   render() {
     return (
       /* Removing router causes page to not render */
-      <Router>
+      // <Router>
         <>
-          <Switch>
+          {/* <Switch> */}
           
             <Route exact path="/" component={Home} />
             <Route exact path="/eventsearch" component={EventSearch} />
@@ -109,9 +109,9 @@ class App extends Component {
               />} 
             /> */}
             
-          </Switch>
+          {/* </Switch> */}
         </>
-      </Router>
+      // </Router>
     );
   } 
 }
