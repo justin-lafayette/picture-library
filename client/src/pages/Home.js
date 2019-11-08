@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { withRouter } from 'react-router-dom';
-import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert } from 'react-bootstrap';
+import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner } from 'react-bootstrap';
 
 
 class Home extends Component {
@@ -20,7 +20,8 @@ class Home extends Component {
             signupClose: true,
             signupShow: false,
             badSignin: false,
-            badSignup: false
+            badSignup: false,
+            loading: false
         }
     }
     
@@ -56,6 +57,7 @@ class Home extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        this.setState({loading: true});
         if( this.state.signinShow ) {
             Api.signIn({
                 email: this.state.email,
@@ -75,7 +77,8 @@ class Home extends Component {
                                 this.setState({
                                     password: "",
                                     isAuth: false,
-                                    badSignin: true
+                                    badSignin: true,
+                                    loading: false
                                 });
                             }
                         })
@@ -104,7 +107,8 @@ class Home extends Component {
                                 this.setState({
                                     password: "",
                                     isAuth: false,
-                                    badSignup: true
+                                    badSignup: true,
+                                    loading: false
                                 });
                             }
                         })
@@ -216,12 +220,27 @@ class Home extends Component {
                                             />
                                         </Form.Group>
 
-                                        <Button
+                                        {this.state.loading ? (
+                                            <Button variant="primary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="grow"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                Loading...
+                                            </Button>
+
+                                        ):(
+
+                                            <Button
                                             disabled={!(this.state.email && this.state.password)}
                                             onClick={this.handleFormSubmit}
-                                        >
-                                            Submit
-                                        </Button>
+                                            >
+                                                Submit
+                                            </Button>
+                                        )}
 
                                     </Form>
 
@@ -242,6 +261,7 @@ class Home extends Component {
                                 </Modal.Header>
 
                                 <Modal.Body>
+
                                     <Form>
                                         {this.state.badSignup ? (
                                             <Alert variant={"danger"}>
@@ -291,14 +311,31 @@ class Home extends Component {
                                             />
                                         </Form.Group>
 
-                                        <Button
-                                            disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
-                                            onClick={this.handleFormSubmit}
-                                        >
-                                            Submit
-                                        </Button>
+                                        {this.state.loading ? (
+                                            <Button variant="primary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="grow"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                Loading...
+                                            </Button>
+
+                                        ):(
+
+                                            <Button
+                                                disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
+                                                onClick={this.handleFormSubmit}
+                                            >
+                                                Submit
+                                            </Button>
+
+                                        )}
 
                                     </Form>
+
                                 </Modal.Body>
                             </Modal>
 
