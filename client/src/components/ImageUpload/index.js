@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import Dropzone from "react-dropzone"
-// import {Button} from 'react-bootstrap'
+//import 
+import {Button} from 'react-bootstrap'
+import Api from "../../utils/Api";
 // import ReactCrop from 'react-image-crop'
 // import 'react-image-crop/dist/ReactCrop.css';
 
@@ -11,7 +13,7 @@ class ImageUpload extends Component {
   constructor(props){
     super(props)
     this.state = {
-      imgSrc: null
+      file: null
       // crop: {
       //   aspect: 1/1
       // }
@@ -43,15 +45,18 @@ class ImageUpload extends Component {
       const isVerified = this.verifyFile(files)
       if (isVerified){
         // imageBase64Data
-        const currentFile = files[0]
-        const myFileReader = new FileReader()
-        myFileReader.addEventListener("load", () => {
-          console.log (myFileReader.result)
-          this.setState({
-            imgSrc: myFileReader.result
-          })
-        }, false)
-        myFileReader.readAsDataURL (currentFile)
+        const currentFile = files[0];
+        this.setState({file: currentFile});
+        // const myFileReader = new FileReader()
+        // myFileReader.addEventListener("load", () => {
+        //   console.log ("result",myFileReader.result)
+        //   this.setState({
+        //     imgSrc: myFileReader.result
+        //   });
+        //   // calling uploadPic
+
+        // }, false)
+        // myFileReader.readAsDataURL (currentFile);
       }
     }
   }
@@ -60,16 +65,30 @@ class ImageUpload extends Component {
     this.setState({crop})
     console.log(this.state)
   }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+
+    //console.log("imgSrc", this.state.imgSrc)
+    console.log("FILE!");
+    console.log(this.state.file);
+    const formData = new FormData();
+    formData.append('myImage',this.state.file);
+
+    Api.uploadPic(formData)
+      .then()
+      .catch( err => console.log(err));
+  }
   render() {
     const {imgSrc} = this.state
     return (
-      <div>
+      <>
         <h1>Image Upload</h1>
-        {imgSrc !== null ?
+        {/* {imgSrc !== null ?
         <div> 
           {imgSrc}
         <img src ={imgSrc} alt = ' ' /> 
-        </div>: ''}
+        </div>: ''} */}
 
         {/* // <div>
         // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
@@ -95,11 +114,13 @@ class ImageUpload extends Component {
             )}
           </Dropzone>
         
-          {/* <button type="submit" className="btn btn-primary mb-2">
+          <Button
+            onClick={this.handleFormSubmit}
+          >
             Upload
-          </button> */}
+          </Button>
         
-      </div>
+      </>
     )
   }
 }

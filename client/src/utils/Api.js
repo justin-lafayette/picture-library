@@ -36,7 +36,12 @@ export default {
 
     // Upload picture
     uploadPic: function(data) {
-        return axios.post("/api/uploadpics", data)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return axios.post("/uploadpic", data, config)
     },
 
     // Load Events
