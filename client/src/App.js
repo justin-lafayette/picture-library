@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import Event from './pages/Event';
 import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
+import Upload from './pages/Upload'
+
 // import axios from 'axios';
 
 class App extends Component {
@@ -61,6 +63,8 @@ class App extends Component {
             <Route exact path="/event" component={Event} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/createevent" component={CreateEvent} />
+            <Route exact path="/upload" component={Upload} />
+
             {/* <Route path="/" 
               render={(props) => <Home {...props} 
                 email={this.state.email} 
