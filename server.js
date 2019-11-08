@@ -70,7 +70,7 @@ console.log('after AWS.config.update');
 var s3 = new AWS.S3();
 console.log('s3 instance created');
 
-var filePath = "./client/src/assets/images/birthday_2.jpg";
+var filePath = "./client/src/assets/images/birthday_3.jpg";
 console.log('filepath');
 //configuring parameters
 var params = {
