@@ -3,6 +3,51 @@ import logo from './logo.svg';
 import './Sphere.css';
 
 function Sphere() {
+  
+  function rnd(rng) {
+    return (Math.random() * rng)
+    }
+
+    function irnd(rng) {
+    return rnd(rng) | 0
+    }
+
+    function randomCanvasTexture(sz) {
+    var canv = document.createElement('canvas');
+    canv.width = canv.height = sz;
+    var ctx = canv.getContext('2d')
+    for (var i = 0; i < 100; i++) {
+        ctx.fillStyle = `rgb(${irnd(256)},${irnd(256)},${irnd(256)})`
+        ctx.fillRect(irnd(sz), irnd(sz), 32, 32)
+    }
+    var tex = new THREE.Texture(canv);
+    tex.needsUpdate = true;
+    return tex;
+    }
+
+    var material = new THREE.MeshLambertMaterial({
+    color: 0x808080,
+    map: randomCanvasTexture(256)
+    });
+    var mesh = new THREE.Mesh(sphereGeom, material);
+
+    var mesh1 = mesh.clone()
+    mesh1.material = mesh.material.clone()
+    mesh1.material.transparent = true;
+    mesh1.material.opacity = 0.5;
+    mesh1.material.map = randomCanvasTexture(256)
+    scene.add(mesh);
+    scene.add(mesh1);
+
+    renderer.setClearColor(0xdddddd, 1);
+
+    (function animate() {
+    mesh1.material.opacity = (Math.sin(performance.now() * 0.001) + 1) * 0.5
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+    })();
+
   return (
     <div className="Sphere">
       <header className="Sphere-header">
@@ -46,49 +91,7 @@ function Sphere() {
 
         var sphereGeom = new THREE.SphereGeometry(5, 16, 16); */}
 
-        function rnd(rng) {
-        return (Math.random() * rng)
-        }
-
-        function irnd(rng) {
-        return rnd(rng) | 0
-        }
-
-        function randomCanvasTexture(sz) {
-        var canv = document.createElement('canvas');
-        canv.width = canv.height = sz;
-        var ctx = canv.getContext('2d')
-        for (var i = 0; i < 100; i++) {
-            ctx.fillStyle = `rgb(${irnd(256)},${irnd(256)},${irnd(256)})`
-            ctx.fillRect(irnd(sz), irnd(sz), 32, 32)
-        }
-        var tex = new THREE.Texture(canv);
-        tex.needsUpdate = true;
-        return tex;
-        }
-
-        var material = new THREE.MeshLambertMaterial({
-        color: 0x808080,
-        map: randomCanvasTexture(256)
-        });
-        var mesh = new THREE.Mesh(sphereGeom, material);
-
-        var mesh1 = mesh.clone()
-        mesh1.material = mesh.material.clone()
-        mesh1.material.transparent = true;
-        mesh1.material.opacity = 0.5;
-        mesh1.material.map = randomCanvasTexture(256)
-        scene.add(mesh);
-        scene.add(mesh1);
-
-        renderer.setClearColor(0xdddddd, 1);
-
-        (function animate() {
-        mesh1.material.opacity = (Math.sin(performance.now() * 0.001) + 1) * 0.5
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-        })();
+        
 
         <script src="https://threejs.org/build/three.min.js"></script>
         <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>

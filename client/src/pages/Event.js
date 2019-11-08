@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
 import Api from '../utils/Api';
-// import Api from '../utils/Api';
+import Slideshow from '../components/SlideShow';
 
 /* This page used REACT-BOOTSTRAP in-place */
 /* Page is rendered within a JSX fragment */
@@ -21,7 +21,23 @@ class Event extends Component {
         memberOf: true,
         eventPics: "",
         slideshow: "",
-        auth: true
+        auth: true,
+        zoomOutProperties: {
+            duration: 5000,
+            transitionDuration: 500,
+            infinite: true,
+            indicators: true,
+            scale: 0.4,
+            arrows: true
+        },
+        images: [
+            // 'images/slide_2.jpg',
+            // 'images/slide_3.jpg',
+            // 'images/slide_4.jpg',
+            // 'images/slide_5.jpg',
+            // 'images/slide_6.jpg',
+            // 'images/slide_7.jpg'
+        ]
 
     }
     
@@ -66,6 +82,24 @@ class Event extends Component {
     // /* TODO: show qr code if member of the event */
     // /* onClick(this.modalToOpen) */
     // >QR</Button>
+    //===================== THIS LOOP =====================//
+    // imageLoop = ()=> {
+    //     const images = [];
+    //     for (let i = 0; i < this.props.level; i++) {
+    //     images.push(<span className='images' key={i}></span>);
+    //     return images;
+    //     }
+    
+    // //==================== OR THIS ONE ====================//
+        
+    //     return this.props.level.map((item, index) => (
+    //     <span className="indent" key={index}>
+    //         {index}
+    //     </span>
+    //     ));
+    
+    // }
+    // //======================================================//
     
 
 
@@ -101,9 +135,10 @@ class Event extends Component {
 
                             <Row>
                                 <Col>
-                                    <div>Slideshow
-                                        {this.state.slideshow}
-                                    </div>
+                                    <Slideshow 
+                                        zoomOutProperties={this.state.zoomOutProperties}
+                                        images={this.state.images}
+                                    />
                                 </Col>
                             </Row>
 
