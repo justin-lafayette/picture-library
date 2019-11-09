@@ -1,30 +1,33 @@
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
+import {findAll} from '../../../controller/picturesController';
  
-// const images = [
-//   'images/slide_2.jpg',
-//   'images/slide_3.jpg',
-//   'images/slide_4.jpg',
-//   'images/slide_5.jpg',
-//   'images/slide_6.jpg',
-//   'images/slide_7.jpg'
-// ];
+const images = [
+  'images/img_6319.jpg',
+  'images/img_6329.jpg',
+  'images/img_6351.jpg',
+  'images/img_6369.jpg',
+  'images/img_6406.jpg',
+  'images/img_6421.jpg',
+  'images/img_6427.jpg',
+  'images/img_6430.jpg'
+];
 
 //===================== THIS LOOP =====================//
 
-var images = [];
-for (var i = 0; i < this.props.level; i++) {
-  images.push(<span className='images' key={i}></span>);
-}
-return images;
+// var images = [];
+// for (var i = 0; i < this.props.level; i++) {
+//   images.push(<span className='images' key={i}></span>);
+// }
+// return images;
  
 //==================== OR THIS ONE ====================//
 
-return this.props.level.map((item, index) => (
-  <span className="indent" key={index}>
-      {index}
-  </span>
-));
+// return this.props.level.map((item, index) => (
+//   <span className="indent" key={index}>
+//       {index}
+//   </span>
+// ));
 //======================================================//
 
 const zoomOutProperties = {

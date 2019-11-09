@@ -35,7 +35,7 @@ router.use("/events", eventRoutes);
 
 //if no other routes are hit, send the react app
 router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 app.use(router);

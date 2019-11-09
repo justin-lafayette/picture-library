@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
 import Api from '../utils/Api';
+import Slideshow from '../components/Slideshow/slideshow';
 // import Api from '../utils/Api';
 
 /* This page used REACT-BOOTSTRAP in-place */
@@ -64,7 +65,7 @@ class Event extends Component {
 
     // <Button 
     // /* TODO: show qr code if member of the event */
-    // /* onClick(this.modalToOpen) */
+    // /* onClick(this.events) */
     // >QR</Button>
     
 
@@ -77,7 +78,7 @@ class Event extends Component {
                 {this.state.memberOf ? (
                     <div>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                            openModal={(events) => this.openModal(events)}
                             auth
 
                         >
@@ -87,7 +88,7 @@ class Event extends Component {
                             <Button >Upload Image</Button>
                         </Navbar>
                         <div
-                            style={{backgroundColor: "black", height: "92vh"}}
+                            style={{backgroundColor: "red", height: "40vh"}}
                         ></div>
                         <Container>
 
@@ -112,15 +113,15 @@ class Event extends Component {
                                     <CardGroup>
                                         {/* {this.state.event.map( (event) => {
 
-                                            // <Card
-                                            // key={event.eventID}
-                                            // >
-                                            //     <Card.Img>
-                                            //         {event.eventPics}
-                                            //     </Card.Img>
-                                            // </Card>
-                                        
-                                        })} */}
+                                            <Card
+                                            key={event.eventID}
+                                            >
+                                                <Card.Img>
+                                                    {event.eventPics}
+                                                </Card.Img>
+                                            </Card>
+                                         }
+                                        })*/}
                                     </CardGroup>
                                 </Col>
                             </Row>
@@ -132,7 +133,7 @@ class Event extends Component {
 
     <div>
         <Navbar
-            openModal={(modalToOpen) => this.openModal(modalToOpen)}
+            openModal={(event) => this.openModal(event)}
             />
         <Container>
 
@@ -140,14 +141,15 @@ class Event extends Component {
             
                 <Row>
                     <Col 
-                    xs={2}
+                    xl={2}
                     md={4}
                     >
 
                         <Image 
                         /* TODO: {this.state.eventPlaceholder} */
-                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                        style={{maxHeight: 200}}
+                        // src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                        src={"../slideshow"}
+                        style={{MaxHeight: 200}}
                         />
 
                     </Col>
