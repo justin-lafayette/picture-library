@@ -33,11 +33,11 @@ module.exports = {
       });
   },
    findById: function(req, res) {
-     console.log('in eventsController.js - req event id ', req.params);
+     console.log('in eventsController.js - req event id ', req.query.email);
     db.events
       .findOne({
           where: {
-              event_id : req.params.eventId
+              event_id : req.query.eventId
           }
       }).then(function(event){
         console.log('in eventsController - found the event ');

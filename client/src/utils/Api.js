@@ -58,7 +58,7 @@ export default {
     // Load specific event
     loadSingleEvent: function( data ) {
         console.log('in Api.js - loadSingleEvent ', data);
-        return axios.get("/events/:eventId", data )
+        return axios.get(`/events/?event_id=${data}`);
     },
 
     // Load images uploaded by one person
