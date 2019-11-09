@@ -55,6 +55,7 @@ export default {
 
     // Load specific event
     loadSingleEvent: function( data ) {
+        console.log("API Call: Load Single Event")
         return axios.get("/events/:eventId", data )
     },
 

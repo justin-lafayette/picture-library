@@ -30,6 +30,9 @@ class Event extends Component {
     /* TODO: Function to show event search if sign-in is valid */
     componentDidMount() {
         console.log("Component did mount");
+        // ID from the selected event
+        console.log(this.props.location);
+
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -46,6 +49,13 @@ class Event extends Component {
             }
             console.log("email", this.state.email);
         })
+
+        // this is not kicking off
+        Api.loadSingleEvent(this.props.location)
+            .then( res => {
+                console.log(res)
+            })
+            .catch(err => console.log( err ))
     }
 
     // componentDidMount() {

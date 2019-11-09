@@ -64,6 +64,19 @@ class EventSearch extends Component {
             .catch( err => console.log( err ) )
     }
 
+    sendToEvent = (e) => {
+        e.preventDefault();
+        let targetId = e.target.id;
+        console.log(e.target.id)
+        console.log(targetId)
+        this.setState({event_id: targetId}, () => {
+            
+            console.log(this.state.event_id)
+            this.props.history.push("/event/:id", [this.state.event_id])
+        
+        })   
+    }
+
 
     // Render Elements
     render() {
@@ -154,7 +167,8 @@ class EventSearch extends Component {
                                                         </Col>
                                                         <Col xs={2} className="text-center">
                                                             <Button
-                                                            /* TODO: href={{events.eventLink}} */
+                                                                id={events.event_id}
+                                                                onClick ={this.sendToEvent} 
                                                             >
                                                                 See More
                                                             </Button>
