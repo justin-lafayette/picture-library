@@ -10,6 +10,7 @@ export function SignInModal(props) {
             {props.children}
 
         </div>
+        
 
     );
 }
