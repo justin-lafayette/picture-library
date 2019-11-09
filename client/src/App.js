@@ -11,6 +11,7 @@ import Event from './pages/Event';
 import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
 import Upload from './pages/Upload'
+import Scanner from './pages/Scan';
 
 // import axios from 'axios';
 
@@ -66,6 +67,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/createevent" component={CreateEvent} />
             <Route exact path="/upload" component={Upload} />
+            <Route exact path="/scan" component={Scanner} />
 
             {/* <Route path="/" 
               render={(props) => <Home {...props} 
