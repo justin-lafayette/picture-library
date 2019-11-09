@@ -6,6 +6,7 @@ ReactDOM.render(
   <QRCode value="Event" />,
   document.getElementById('Container')
 );
+
 // function htmlEncode (value){
 //     return $('<div/>').text(value).html();
 //   }
