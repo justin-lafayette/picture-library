@@ -3,6 +3,7 @@ import Dropzone from "react-dropzone"
 // import {Button} from 'react-bootstrap'
 // import ReactCrop from 'react-image-crop'
 // import 'react-image-crop/dist/ReactCrop.css';
+import "./style.css"
 
 const imageMaxSize = 100000000;
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
@@ -76,6 +77,7 @@ class ImageUpload extends Component {
         // </div>:''}  */}
         
           <Dropzone
+            className = "dropzone"
             onDrop={this.handleOnDrop}
             multiple={false}
             accept={acceptedFileTypes}
