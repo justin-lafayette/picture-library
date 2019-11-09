@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+
+/* Pages */
 import Home from './pages/Home';
 import EventSearch from './pages/EventSearch';
 import PageNotFound from './pages/PageNotFound';
@@ -52,9 +54,9 @@ class App extends Component {
   render() {
     return (
       /* Removing router causes page to not render */
-      <Router>
+      // <Router>
         <>
-          <Switch>
+          {/* <Switch> */}
           
             <Route exact path="/" component={Home} />
             <Route exact path="/eventsearch" component={EventSearch} />
@@ -109,9 +111,9 @@ class App extends Component {
               />} 
             /> */}
             
-          </Switch>
+          {/* </Switch> */}
         </>
-      </Router>
+      // </Router>
     );
   } 
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
-// import { withRouter } from 'react-router-dom';
-import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
+import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner } from 'react-bootstrap';
 
 
 class Home extends Component {
@@ -18,7 +18,10 @@ class Home extends Component {
             signinClose: true,
             signinShow: false,
             signupClose: true,
-            signupShow: false
+            signupShow: false,
+            badSignin: false,
+            badSignup: false,
+            loading: false
         }
     }
     
@@ -34,35 +37,51 @@ class Home extends Component {
     // }
     componentDidMount() {
         Api.isAuth()
-          .then( res => {
-            if( res.data.user ) {
-              this.setState({
-                email: res.data.user.email,
-                isAuth: true
-              });
-            } else {
-              this.setState({
-                email: null,
-                isAuth: false
-              })
-              // this.props.history.push('/')
-            }
-            console.log("email", this.state.email);
-        })
-      }
+            .then( res => {
+                if( res.data.user ) {
+                this.setState({
+                    email: res.data.user.email,
+                    isAuth: true
+                });
+                } else {
+                this.setState({
+                    email: "",
+                    isAuth: false
+                })
+                this.props.history.push('/');
+                }
+            })
+    }
 
     /* TODO: Function to show event search if sign-in is valid */
 
     handleFormSubmit = event => {
         event.preventDefault();
+        this.setState({loading: true});
         if( this.state.signinShow ) {
             Api.signIn({
                 email: this.state.email,
                 password: this.state.password
             })
-                .then( res => {
-                    this.setState({signinShow: false})
-                    /* rerender home page */
+                .then( () => {
+                    Api.isAuth()
+                        .then( res => {
+                            if( res.data.user ) {
+                                this.setState({
+                                    email: res.data.user.email,
+                                    isAuth: true,
+                                    badSignin: false
+                                });
+                                this.props.history.push('/');
+                            } else {
+                                this.setState({
+                                    password: "",
+                                    isAuth: false,
+                                    badSignin: true,
+                                    loading: false
+                                });
+                            }
+                        })
                 })
                 .catch( err => console.log(err));
         }
@@ -74,8 +93,25 @@ class Home extends Component {
                 email: this.state.email,
                 password: this.state.password
             })
-                .then( res => {
-                    this.setState({modalIsOpen: false, signUpModal: false})
+                .then( () => {
+                    Api.isAuth()
+                        .then( res => {
+                            if( res.data.user ) {
+                                this.setState({
+                                    email: res.data.user.email,
+                                    isAuth: true,
+                                    badSignup: false
+                                });
+                                this.props.history.push('/');
+                            } else {
+                                this.setState({
+                                    password: "",
+                                    isAuth: false,
+                                    badSignup: true,
+                                    loading: false
+                                });
+                            }
+                        })
                 })
                 .catch( err => console.log(err));
         }
@@ -155,11 +191,16 @@ class Home extends Component {
                                 <Modal.Body>
                                     <Form>
 
+                                        {this.state.badSignin ? (
+
+                                            
+                                            <Alert variant={"danger"}>
+                                                Wrong Username or Password
+                                            </Alert>
+                                            ): (<></>)}
+
                                         <Form.Group>
-                                            <Form.Label
-                                                htmlFor="" 
-                                                label="Username"
-                                            ></Form.Label>
+                                            <Form.Label>Email</Form.Label>
                                             <Form.Control
                                                 value={this.state.email}
                                                 onChange={this.handleInputChange}
@@ -170,10 +211,7 @@ class Home extends Component {
                                         </Form.Group>
 
                                         <Form.Group>
-                                            <Form.Label
-                                                htmlFor="" 
-                                                label="Password"
-                                            ></Form.Label>
+                                            <Form.Label>Password</Form.Label>
                                             <Form.Control 
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange}
@@ -182,12 +220,27 @@ class Home extends Component {
                                             />
                                         </Form.Group>
 
-                                        <Button
+                                        {this.state.loading ? (
+                                            <Button variant="primary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="grow"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                Loading...
+                                            </Button>
+
+                                        ):(
+
+                                            <Button
                                             disabled={!(this.state.email && this.state.password)}
                                             onClick={this.handleFormSubmit}
-                                        >
-                                            Submit
-                                        </Button>
+                                            >
+                                                Submit
+                                            </Button>
+                                        )}
 
                                     </Form>
 
@@ -208,13 +261,15 @@ class Home extends Component {
                                 </Modal.Header>
 
                                 <Modal.Body>
-                                    <Form>
 
+                                    <Form>
+                                        {this.state.badSignup ? (
+                                            <Alert variant={"danger"}>
+                                                User already exists!
+                                            </Alert>
+                                        ):(<></>)}
                                         <Form.Group>
-                                            <Form.Label
-                                                htmlFor="" 
-                                                label="First Name"
-                                            ></Form.Label>
+                                            <Form.Label>First Name</Form.Label>
                                             <Form.Control
                                                 value={this.state.firstname}
                                                 onChange={this.handleInputChange}
@@ -225,10 +280,7 @@ class Home extends Component {
                                         </Form.Group>
 
                                         <Form.Group>
-                                            <Form.Label
-                                                htmlFor="" 
-                                                label="Last Name"
-                                            ></Form.Label>
+                                            <Form.Label>Last Name</Form.Label>
                                             <Form.Control
                                                 value={this.state.lastname}
                                                 onChange={this.handleInputChange}
@@ -239,10 +291,7 @@ class Home extends Component {
                                         </Form.Group>
 
                                         <Form.Group>
-                                            <Form.Label
-                                                htmlFor="" 
-                                                label="Username"
-                                            ></Form.Label>
+                                            <Form.Label>Email</Form.Label>
                                             <Form.Control
                                                 value={this.state.email}
                                                 onChange={this.handleInputChange}
@@ -253,10 +302,7 @@ class Home extends Component {
                                         </Form.Group>
 
                                         <Form.Group>
-                                            <Form.Label
-                                                htmlFor="" 
-                                                label="Password"
-                                            ></Form.Label>
+                                            <Form.Label>Password</Form.Label>
                                             <Form.Control 
                                                 value={this.state.password}
                                                 onChange={this.handleInputChange}
@@ -265,14 +311,31 @@ class Home extends Component {
                                             />
                                         </Form.Group>
 
-                                        <Button
-                                            disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
-                                            onClick={this.handleFormSubmit}
-                                        >
-                                            Submit
-                                        </Button>
+                                        {this.state.loading ? (
+                                            <Button variant="primary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="grow"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                Loading...
+                                            </Button>
+
+                                        ):(
+
+                                            <Button
+                                                disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
+                                                onClick={this.handleFormSubmit}
+                                            >
+                                                Submit
+                                            </Button>
+
+                                        )}
 
                                     </Form>
+
                                 </Modal.Body>
                             </Modal>
 
@@ -298,4 +361,4 @@ class Home extends Component {
     }
 };
 
-export default Home ;
+export default withRouter( Home );

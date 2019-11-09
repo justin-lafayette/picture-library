@@ -1,7 +1,7 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
+import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
 // import Api from '../utils/Api';
 
@@ -29,6 +29,7 @@ class Event extends Component {
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
     componentDidMount() {
+        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -38,11 +39,12 @@ class Event extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/login');
             }
+            console.log("email", this.state.email);
         })
     }
 
@@ -54,8 +56,6 @@ class Event extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
@@ -92,20 +92,22 @@ class Event extends Component {
             <>
                 
                 {this.state.memberOf ? (
-                    <div>
+                    <>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                            auth
-
+                            isAuth={this.state.isAuth}
                         >
                             <Container>
                                 {this.state.title}
                             </Container>
                             <Button >Upload Image</Button>
                         </Navbar>
-                        <div
+
+                        <Jumbotron
                             style={{backgroundColor: "black", height: "92vh"}}
-                        ></div>
+                        >
+
+                        </Jumbotron>
+
                         <Container>
 
                             <Row>
@@ -143,69 +145,69 @@ class Event extends Component {
                             </Row>
 
                         </Container>
-                    </div>
+                    </>
 
-):(
+                ):(
 
-    <div>
-        <Navbar
-            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-            />
-        <Container>
-
-            <Col>
-            
-                <Row>
-                    <Col 
-                    xs={2}
-                    md={4}
-                    >
-
-                        <Image 
-                        /* TODO: {this.state.eventPlaceholder} */
-                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                        style={{maxHeight: 200}}
+                    <>
+                        <Navbar
+                            isAuth={this.state.isAuth}
                         />
+                        <Container>
 
-                    </Col>
+                            <Col>
+                            
+                                <Row>
+                                    <Col 
+                                    xs={2}
+                                    md={4}
+                                    >
 
-                    <Col>
+                                        <Image 
+                                        /* TODO: {this.state.eventPlaceholder} */
+                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                                        style={{maxHeight: 200}}
+                                        />
 
-                        <Row
-                        style={{height:100}}
-                        >
-                            {this.state.title}
-                            Title
-                        
-                        </Row>
+                                    </Col>
 
-                        <Row
-                        style={{height:100}}
-                        >           
-                            <Button 
-                            /* TODO: sign-up if not member */
-                            onClick={this.handleSubscribe}
-                            >Subscribe</Button>
-                        </Row>
+                                    <Col>
 
-                    </Col>
-                </Row>
+                                        <Row
+                                        style={{height:100}}
+                                        >
+                                            {this.state.title}
+                                            Title
+                                        
+                                        </Row>
 
-                <Row>
-                    <Col
-                    style={{height:100}}
-                    >
-                        {this.state.description}
-                        Description
-                        
-                    </Col>
-                </Row>
-            
-            </Col>
+                                        <Row
+                                        style={{height:100}}
+                                        >           
+                                            <Button 
+                                            /* TODO: sign-up if not member */
+                                            onClick={this.handleSubscribe}
+                                            >Subscribe</Button>
+                                        </Row>
 
-        </Container>
-    </div>
-)}
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col
+                                    style={{height:100}}
+                                    >
+                                        {this.state.description}
+                                        Description
+                                        
+                                    </Col>
+                                </Row>
+                            
+                            </Col>
+
+                        </Container>
+                    </>
+                )}
                 
                 
             </>

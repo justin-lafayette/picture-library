@@ -4,16 +4,14 @@ export default {
 
     // Sign up
     signUp: function(data) {
-        return axios.post("/api/signup", data );
+        return axios.post("/api/signup", data )
+            .catch( err => console.log(err.response));
     },
 
     signIn: function(data) {
         console.log('in Api.js signIn data', data);
-        return axios.post("/api/signin/", data ).then(function (res) {
-            console.log(res);
-            console.log("HEY IT WOOOORKED!!!");
-        })
-        .catch( err => console.log(err.response));
+        return axios.post("/api/signin/", data )
+            .catch( err => console.log(err.response));
     },
 
     // Get all pictures for event
