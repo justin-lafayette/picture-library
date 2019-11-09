@@ -24,10 +24,11 @@ module.exports = function(sequelize, DataTypes) {
     users.hasMany(models.pictures)
   };
 
-  // users.associate = function(models){
-  //   console.log(models)
-  //   users.belongsToMany(models.events, {through: models.users})
-  // };
-
+  users.associate = function(models){
+    users.belongsToMany(models.events,  {
+      through: 'EventUsers',
+      foreignKey : 'event_id'
+    });
+  };
   return users;
 }

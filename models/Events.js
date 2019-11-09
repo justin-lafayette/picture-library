@@ -23,7 +23,10 @@ module.exports = function(sequelize, DataTypes) {
   };
 
   events.associate = function(models){
-    events.belongsTo(models.users,  {foreignKey : 'email'});
+    events.belongsToMany(models.users,  {
+      through: 'EventUsers',
+      foreignKey : 'email'
+    });
   };
 
   return events;
