@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
   users.associate = function(models){
     users.belongsToMany(models.events,  {
       through: 'EventUsers',
-      foreignKey : 'event_id'
+      foreignKey : 'email'
     });
   };
   return users;
