@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import Dropzone from "react-dropzone";
-import "./style.css";
-
-import {Button} from 'react-bootstrap'
-import ReactCrop from 'react-image-crop'
-import 'react-image-crop/dist/ReactCrop.css';
+import React, { Component } from "react"
+import Dropzone from "react-dropzone"
+// import {Button} from 'react-bootstrap'
+// import ReactCrop from 'react-image-crop'
+// import 'react-image-crop/dist/ReactCrop.css';
 
 const imageMaxSize = 100000000;
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
@@ -40,7 +38,7 @@ class ImageUpload extends Component {
       console.log(rejectedFiles)
       this.verifyFile(rejectedFiles)
     }
-
+     
     if (files && files.length > 0) {
       const isVerified = this.verifyFile(files)
       if (isVerified){
@@ -68,15 +66,15 @@ class ImageUpload extends Component {
       <div>
         <h1>Image Upload</h1>
         {imgSrc !== null ?
-        <div>
+        <div> 
           {imgSrc}
-        <img src ={imgSrc} alt = ' ' />
+        <img src ={imgSrc} alt = ' ' /> 
         </div>: ''}
 
         {/* // <div>
         // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
         // </div>:''}  */}
-
+        
           <Dropzone
             onDrop={this.handleOnDrop}
             multiple={false}
@@ -88,24 +86,22 @@ class ImageUpload extends Component {
              <section>
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-
+                  
                     Drag 'n' drop image here, or click to select files
-
+                  
                 </div>
                 </section>
-
+              
             )}
           </Dropzone>
-
+        
           {/* <button type="submit" className="btn btn-primary mb-2">
             Upload
           </button> */}
-
+        
       </div>
     )
   }
 }
-
-
 
 export default ImageUpload;
