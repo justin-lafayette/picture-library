@@ -46,7 +46,7 @@ function Sphere() {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
-    })();
+    })(); 
 
   return (
     <div className="Sphere">
