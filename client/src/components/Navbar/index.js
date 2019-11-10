@@ -7,7 +7,6 @@ function Navbar(props) {
     if (props.isAuth) {
 
         return (
-
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
                 <div className="navbar-brand" href="/">

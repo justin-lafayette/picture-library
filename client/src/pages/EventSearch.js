@@ -25,10 +25,9 @@ class EventSearch extends Component {
         });
     }
     
-    loadEvents = ()=> {
-        Api.getEvents(this.state.email)
+    loadAllEvents = ()=> {
+        Api.loadAllEvents()
             .then(res => {
-                console.log('in loadEvents email ', this.state.email);
                 this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
             })
             .catch( err => console.log( err ) )
@@ -55,8 +54,9 @@ class EventSearch extends Component {
               this.props.history.push('/login');
             }
              console.log("calling loadEvents email", this.state.email);
-            this.loadEvents();
-        })
+            })
+            
+        this.loadAllEvents();
     }
 
     goToEvent = (e) => {

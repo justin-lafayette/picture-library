@@ -99,7 +99,7 @@ class CreateEvent extends Component {
 
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
-                    auth={this.state.isAuth}
+                    isAuth={this.state.isAuth}
                 />
 
                 <Container>

@@ -6,23 +6,20 @@ import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinne
 
 
 class Home extends Component {
-    constructor(props) {
-        super(props)
-        console.log(props)
-        this.state = {
-            email: this.props.email || "" ,
-            isAuth: this.props.isAuth,
-            password: "",
-            firstname: "",
-            lastname: "",
-            signinClose: true,
-            signinShow: false,
-            signupClose: true,
-            signupShow: false,
-            badSignin: false,
-            badSignup: false,
-            loading: false
-        }
+    
+    state = {
+        email: this.props.email || "",
+        isAuth: this.props.isAuth,
+        password: "",
+        firstname: "",
+        lastname: "",
+        signinClose: true,
+        signinShow: false,
+        signupClose: true,
+        signupShow: false,
+        badSignin: false,
+        badSignup: false,
+        loading: false
     }
     
     // Functions
@@ -48,7 +45,7 @@ class Home extends Component {
                     email: "",
                     isAuth: false
                 })
-                this.props.history.push('/');
+                // this.props.history.push('/');    
                 }
             })
     }
