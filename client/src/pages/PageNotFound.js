@@ -22,25 +22,23 @@ class PageNotFound extends Component {
     // Functions
     /* TODO: Console log does not appear in browser or console */
     componentDidMount() {
-        console.log("component did mount")
-        Api.isAuth('/auth/isauth')
+        console.log("Component did mount");
+        Api.isAuth()
           .then( res => {
-              console.log("res.body", res.body)
             if( res.data.user ) {
-                console.log("Set State true")
-                this.setState({
-                    email: this.data.user.email,
-                    auth: true
-                });
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
             } else {
-                console.log("Set State false")
-                this.setState({
-                    email: null,
-                    auth: false
-                })
-                this.props.history.push('/')
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/');
             }
-        });
+            console.log("email", this.state.email);
+        })
     }
 
     /* TODO: Function to show event search if sign-in is valid */
@@ -53,7 +51,7 @@ class PageNotFound extends Component {
                 password: this.state.password
             })
                 .then( res => {
-                    this.props.history("/")
+                    this.props.history.push('/');
                 })
                 .catch( err => console.log(err));
         }
@@ -66,7 +64,7 @@ class PageNotFound extends Component {
                 password: this.state.password
             })
                 .then( res => {
-                    this.setState({modalIsOpen: false, signUpModal: false})
+                    
                 })
                 .catch( err => console.log(err));
         }
@@ -85,7 +83,7 @@ class PageNotFound extends Component {
     handleSigninShow= () => this.setState({signinShow: true});
     handleSignupShow= () => this.setState({signupShow: true});
     
-
+    
 
     // Render Elements
     render() {
@@ -148,7 +146,7 @@ class PageNotFound extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Username"
                                             ></Form.Label>
                                             <Form.Control
@@ -162,7 +160,7 @@ class PageNotFound extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Password"
                                             ></Form.Label>
                                             <Form.Control 
@@ -203,7 +201,7 @@ class PageNotFound extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="First Name"
                                             ></Form.Label>
                                             <Form.Control
@@ -217,7 +215,7 @@ class PageNotFound extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Last Name"
                                             ></Form.Label>
                                             <Form.Control
@@ -231,7 +229,7 @@ class PageNotFound extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Username"
                                             ></Form.Label>
                                             <Form.Control
@@ -245,7 +243,7 @@ class PageNotFound extends Component {
 
                                         <Form.Group>
                                             <Form.Label
-                                                htmlFor="" /* TODO: ID needed for input */
+                                                htmlFor="" 
                                                 label="Password"
                                             ></Form.Label>
                                             <Form.Control 

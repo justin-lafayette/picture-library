@@ -11,8 +11,8 @@ class EventSearch extends Component {
         email: "",
         events: [],
         title: "",
-        description: "",
-        id: ""
+        event_description: "",
+        event_id: ""
 
     }
     
@@ -20,31 +20,51 @@ class EventSearch extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        /* TODO: remove consol log */
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
     }
     
     loadEvents = ()=> {
-        Api.getEvents()
+        Api.getEvents(this.state.email)
             .then(res => {
-                console.log('in EventsSearch.js - res ',res);
-                this.setState({ events: res.data, title:"", description:"", id:"", eventLink:"" })
+                console.log('in loadEvents email ', this.state.email);
+                this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
             })
             .catch( err => console.log( err ) )
     }
 
+    
     componentDidMount() {
-        this.loadEvents();
+        console.log("Component did mount");
+
+        Api.isAuth()
+          .then( res => {
+            // console.log('in Api.isAuth');
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+              console.log('email in componentDidMount', this.state.email);
+            } else {
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/login');
+            }
+             console.log("calling loadEvents email", this.state.email);
+            this.loadEvents();
+        })
     }
 
-    goToEvent = () => {
-        Api.loadSingleEvent()
+    goToEvent = (e) => {
+        e.preventDefault();
+        console.log('e.target.id', e.target.id);
+        Api.loadSingleEvent(e.target.id)
             .then( res => {
-
+                console.log(res);
             })
             .catch( err => console.log( err ) )
     }
@@ -56,7 +76,7 @@ class EventSearch extends Component {
             <>
         
                 <Navbar
-                
+                    isAuth={this.state.isAuth}
                 />
 
                 <Container>
@@ -83,7 +103,7 @@ class EventSearch extends Component {
                                         <Dropdown.Menu>
                                             {this.state.events.map(events => (
                                                 <Dropdown.Item
-                                                key={events.id}
+                                                key={events.event_id}
                                                 /* TODO: onClick() */
                                                 >
                                                     {events.title}
@@ -113,8 +133,9 @@ class EventSearch extends Component {
                             >
                                 {this.state.events.map(events => (
 
-                                    <Row key={events._id}>
-                                        <Card>
+                                    <Row key={events.event_id}>
+                                        <Card style={{width:"100rem"}}>
+                                            
                                             <Card.Body>
 
                                                 <Col
@@ -131,13 +152,21 @@ class EventSearch extends Component {
                                                     <Row>
                                                         <Card.Title>{events.title}</Card.Title>
                                                     </Row>
+                                                    <hr />
                                                     <Row>
-                                                        <Card.Text>{events.description}</Card.Text>
-                                                        <Button
-                                                        /* TODO: href={{events.eventLink}} */
-                                                        >
-                                                            See More
-                                                        </Button>
+                                                        <Col xs={10}>
+                                                            <Card.Text>{events.event_description}</Card.Text>
+                                                        </Col>
+                                                        <Col xs={2} className="text-center">
+                                                            <Button
+                                                             id = {events.event_id}
+                                                             onClick = {this.goToEvent} 
+                                                             
+                                                            /* TODO: href={{events.eventLink}} */
+                                                            >
+                                                                See More
+                                                            </Button>
+                                                        </Col>
                                                     </Row>
                                                 </Col>
 

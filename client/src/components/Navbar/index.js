@@ -2,7 +2,7 @@ import React from 'react';
 
 function Navbar(props) {
 
-    if (props.auth) {
+    if (props.isAuth) {
 
         return (
 
