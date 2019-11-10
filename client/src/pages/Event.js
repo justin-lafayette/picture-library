@@ -14,7 +14,7 @@ class Event extends Component {
     state = {
         email: "",
         event: [],
-        eventID: "",
+        event_id: "",
         title: "title",
         description: "",
         eventPlaceholder: "",
@@ -30,6 +30,8 @@ class Event extends Component {
     /* TODO: Function to show event search if sign-in is valid */
     componentDidMount() {
         console.log("Component did mount");
+        console.log(this.state.event_id)
+        
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -46,12 +48,16 @@ class Event extends Component {
             }
             console.log("email", this.state.email);
         })
+
+        Api.loadSingleEvent(this.state.event_id)
+            .then( res => {
+                this.props.history.push(`/event/${this.state.event_id}`);
+                console.log(res);
+            })
+            .catch( err => console.log( err ) )
+
+        console.log(res.data)
     }
-
-    // componentDidMount() {
-    //     this.getSubStatus();
-
-    // }
 
     /* Handle input change */
     handleInputChange = event => {
@@ -88,6 +94,7 @@ class Event extends Component {
 
     // Render Elements
     render() {
+        console.log(this.state.event_id)
         return(
             <>
                 
@@ -103,8 +110,9 @@ class Event extends Component {
                         </Navbar>
 
                         <Jumbotron
-                            style={{backgroundColor: "black", height: "92vh"}}
+                            // style={{backgroundColor: "black", height: "92vh"}}
                         >
+                            {this.state.event_id}
 
                         </Jumbotron>
 

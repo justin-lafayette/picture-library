@@ -12,7 +12,7 @@ var upload = multer({ storage: storage });
 console.log("s3 instance created");
 
 // Matches with "/uploadpic"
-router.route('/uploadpic')
+router.route('/uploadpic') 
 .post(upload.single("image"), function(req, res) {
   const file = req.file;
   console.log("File!")
@@ -27,7 +27,7 @@ router.route('/uploadpic')
 
   //Where you want to store your file
   var params = {
-    Bucket: "project3.pic.library/jackfolder",
+    Bucket: "project3.pic.library",///jackfolder",
     Key: file.originalname,
     Body: file.buffer,
     ContentType: file.mimetype,
