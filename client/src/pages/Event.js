@@ -51,11 +51,11 @@ class Event extends Component {
         })
 
         // this is not kicking off
-        Api.loadSingleEvent(this.props.location)
-            .then( res => {
-                console.log(res)
-            })
-            .catch(err => console.log( err ))
+        // Api.loadSingleEvent(this.props.location)
+        //     .then( res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log( err ))
     }
 
     // componentDidMount() {

@@ -20,8 +20,10 @@ export default {
     },
 
     // Get all events (list)
-    getEvents: function() {
-        return axios.get("/events");
+    getEvents: function(data) {
+        console.log('in api.getEvents user email ', data);
+        //return axios.get("/events", data);
+        return axios.get(`/events?email=${data}`);
     },
 
     getEventsByUserEmail: function(data){
@@ -55,8 +57,13 @@ export default {
 
     // Load specific event
     loadSingleEvent: function( data ) {
+<<<<<<< HEAD
         console.log("API Call: Load Single Event")
         return axios.get("/events/:eventId", data )
+=======
+        console.log('in Api.js - loadSingleEvent ', data);
+        return axios.get(`/events/?event_id=${data}`);
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
     },
 
     // Load images uploaded by one person
