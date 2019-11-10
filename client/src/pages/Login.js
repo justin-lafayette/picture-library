@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
-import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner, Alert } from 'react-bootstrap';
 import Scanner from './Scan';
 
 class Login extends Component {
@@ -17,14 +17,11 @@ class Login extends Component {
         newFirstname: "",
         newLastname: "",
         loading: false,
-        showScanner: false
+        badSignin: false,
+        badSignup: false,
 
     }
 
-    showScanner = () => {
-    this.setState({showScanner: !this.state.showScanner})
-    }
-    
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
 
@@ -140,6 +137,12 @@ class Login extends Component {
 
                                             <Form>
 
+                                            {this.state.badSignin ? (
+                                                <Alert variant={"danger"}>
+                                                    Wrong Username or Password
+                                                </Alert>
+                                            ): (<></>)}
+
                                                 <Form.Group>
                                                     <Form.Label>Email</Form.Label>
                                                     <Form.Control
@@ -197,6 +200,12 @@ class Login extends Component {
                                         <Card.Title>Sign Up</Card.Title>
 
                                         <Form>
+
+                                            {this.state.badSignup ? (
+                                                <Alert variant={"danger"}>
+                                                    User already exists!
+                                                </Alert>
+                                            ):(<></>)}
 
                                             <Form.Group>
                                                 <Form.Label>First Name</Form.Label>
@@ -276,13 +285,6 @@ class Login extends Component {
                     </Container>
                 
                 </Jumbotron>
-
-                {this.state.showScanner? <Scanner/>: ''}
-                        <Button
-                            // disabled={!(this.state.QrReader)}
-                            onClick={this.showScanner}>
-                            QRscan
-                        </Button>
                 
             </>
                         

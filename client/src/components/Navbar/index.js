@@ -2,10 +2,11 @@ import React from 'react';
 
 function Navbar(props) {
 
+    console.log("navbar props.isAth: ", props.isAuth)
+
     if (props.isAuth) {
 
         return (
-
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
                 <div className="navbar-brand" href="/">
