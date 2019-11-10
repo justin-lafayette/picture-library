@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { withRouter } from 'react-router-dom';
 import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner } from 'react-bootstrap';
+import Scanner from './Scan';
 
 
 class Home extends Component {
@@ -21,9 +22,16 @@ class Home extends Component {
             signupShow: false,
             badSignin: false,
             badSignup: false,
-            loading: false
+            loading: false,
+            showScanner: false
+    
         }
     }
+
+    showScanner = () => {
+        this.setState({showScanner: !this.state.showScanner})
+    }
+
     
     // Functions
     // componentDidMount() {
@@ -141,7 +149,14 @@ class Home extends Component {
         
                     <Navbar
                         isAuth={this.state.isAuth}
-                    />
+                    >
+                         <Button
+                            // disabled={!(this.state.QrReader)}
+                            onClick={this.showScanner}>
+                            QRscan
+                        </Button>
+                        
+                    </Navbar>
 
                     <Container>
                         
@@ -150,6 +165,8 @@ class Home extends Component {
                         </Jumbotron>
 
                     </Container>
+
+                    {this.state.showScanner? <Scanner/>: <></>}
                     
                 </>
 
@@ -352,6 +369,8 @@ class Home extends Component {
 
                     </Container>
                     
+                    
+                       
                 </>
                             
             );
