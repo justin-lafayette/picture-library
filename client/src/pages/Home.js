@@ -7,42 +7,27 @@ import Scanner from './Scan';
 
 
 class Home extends Component {
-    constructor(props) {
-        super(props)
-        console.log(props)
-        this.state = {
-            email: this.props.email || "" ,
-            isAuth: this.props.isAuth,
-            password: "",
-            firstname: "",
-            lastname: "",
-            signinClose: true,
-            signinShow: false,
-            signupClose: true,
-            signupShow: false,
-            badSignin: false,
-            badSignup: false,
-            loading: false,
-            showScanner: false
     
-        }
+    state = {
+        email: this.props.email || "",
+        isAuth: this.props.isAuth,
+        password: "",
+        firstname: "",
+        lastname: "",
+        signinClose: true,
+        signinShow: false,
+        signupClose: true,
+        signupShow: false,
+        badSignin: false,
+        badSignup: false,
+        loading: false,
+        showScanner: false
     }
 
     showScanner = () => {
         this.setState({showScanner: !this.state.showScanner})
     }
 
-    
-    // Functions
-    // componentDidMount() {
-    //     if( this.props.email !== this.state.email ) {
-    //         this.setState({
-    //             email: this.props.email,
-    //             isAuth: this.props.isAuth
-    //         })
-            
-    //     }
-    // }
     componentDidMount() {
         Api.isAuth()
             .then( res => {
@@ -56,7 +41,7 @@ class Home extends Component {
                     email: "",
                     isAuth: false
                 })
-                this.props.history.push('/');
+                // this.props.history.push('/');    
                 }
             })
     }
