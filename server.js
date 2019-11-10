@@ -34,6 +34,14 @@ app.use(passport.session());
 router.use("/api", apiRoutes);
 router.use("/events", eventRoutes);
 
+<<<<<<< HEAD
+//if no other routes are hit, send the react app
+router.use(function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+=======
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
 app.use(router);
 
 

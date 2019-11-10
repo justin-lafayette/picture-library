@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+// import './App.css';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+=======
 import './App.css';
 import { Route } from 'react-router-dom';
 
 /* Pages */
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
 import Home from './pages/Home';
 import EventSearch from './pages/EventSearch';
 import PageNotFound from './pages/PageNotFound';
