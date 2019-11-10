@@ -2,18 +2,20 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner } from 'react-bootstrap';
 
 class Login extends Component {
 
     state = {
         auth: false,
+        email: "",
         rtnEmail: "",
         rtnPassword: "",
         newEmail: "",
         newPassword: "",
         newFirstname: "",
-        newLastname: ""
+        newLastname: "",
+        loading: false
 
     }
     
@@ -23,8 +25,6 @@ class Login extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
@@ -32,34 +32,84 @@ class Login extends Component {
     
     handleSignIn = event => {
         event.preventDefault();
-
-        console.log("sign-in form:")
-        console.log(this.state.rtnEmail);
-        console.log(this.state.rtnPassword);
+        this.setState({loading: true});
         Api.signIn({
             email: this.state.rtnEmail,
             password: this.state.rtnPassword
-        });
+        })
+            .then( () => {
+                Api.isAuth()
+                    .then( res => {
+                        if( res.data.user ) {
+                            this.setState({
+                                rtnEmail: res.data.user.email,
+                                isAuth: true,
+                                badSignin: false
+                            });
+                            this.props.history.push('/');
+                        } else {
+                            this.setState({
+                                rtnPassword: "",
+                                isAuth: false,
+                                badSignin: true,
+                                loading: false
+                            });
+                        }
+                    })
+            })
+        .catch( err => console.log(err));
     }
 
     handleSignUp = event => {
         event.preventDefault();
-        
-        console.log("sign-up form:")
-        console.log(this.state.newFirstname);
-        console.log(this.state.newLastname);
-        console.log(this.state.newEmail);
-        console.log(this.state.newPassword);
+        this.setState({loading: true});
         Api.signUp({
             firstname: this.state.newFirstname,
             lastname: this.state.newLastname,
             email: this.state.newEmail,
             password: this.state.newPassword
         })
-            .then()
+            .then( () => {
+                Api.isAuth()
+                    .then( res => {
+                        if( res.data.user ) {
+                            this.setState({
+                                email: res.data.user.email,
+                                isAuth: true,
+                                badSignup: false
+                            });
+                            this.props.history.push('/');
+                        } else {
+                            this.setState({
+                                password: "",
+                                isAuth: false,
+                                badSignup: true,
+                                loading: false
+                            });
+                        }
+                    })
+            })
             .catch( err => console.log(err));
     }
 
+    componentDidMount() {
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+              this.props.history.push('/');
+            } else {
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/login');
+            }
+        })
+    }
 
     // Render Elements
     render() {
@@ -68,128 +118,158 @@ class Login extends Component {
         
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
-                    
+                    isAuth={this.state.isAuth}
                 />
+
+                <Jumbotron>
+
+                    <Container>
+
+                        <Row>
+                            <Col
+                            >
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Title>Sign In</Card.Title>
+
+                                            <Form>
+
+                                                <Form.Group>
+                                                    <Form.Label>Email</Form.Label>
+                                                    <Form.Control
+                                                        value={this.state.rtnEmail}
+                                                        onChange={this.handleInputChange}
+                                                        type="email"
+                                                        name="rtnEmail" 
+                                                        placeholder="Email"
+                                                    />
+                                                </Form.Group>
+
+                                                <Form.Group>
+                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Control 
+                                                        value={this.state.rtnPassword}
+                                                        onChange={this.handleInputChange}
+                                                        name="rtnPassword" 
+                                                        placeholder="Password"
+                                                    />
+                                                </Form.Group>
+
+                                                {this.state.loading ? (
+                                                    <Button variant="primary" disabled>
+                                                        <Spinner
+                                                            as="span"
+                                                            animation="grow"
+                                                            size="sm"
+                                                            role="status"
+                                                            aria-hidden="true"
+                                                        />
+                                                        Loading...
+                                                    </Button>
+
+                                                ):(
+
+                                                    <Button
+                                                    disabled={!(this.state.rtnEmail && this.state.rtnPassword)}
+                                                    onClick={this.handleSignIn}
+                                                    >
+                                                        Submit
+                                                    </Button>
+                                                )}
+
+                                            </Form>
+
+                                    </Card.Body>
+                                </Card>
+                            
+                            </Col>
+
+                            <Col
+                            >
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Title>Sign Up</Card.Title>
+
+                                        <Form>
+
+                                            <Form.Group>
+                                                <Form.Label>First Name</Form.Label>
+                                                <Form.Control
+                                                    value={this.state.newFirstname}
+                                                    onChange={this.handleInputChange}
+                                                    name="newFirstname"
+                                                    type="text"
+                                                    placeholder="First Name"
+                                                />
+                                            </Form.Group>
+
+                                            <Form.Group>
+                                                <Form.Label>Last Name</Form.Label>
+                                                <Form.Control
+                                                    value={this.state.newLastname}
+                                                    onChange={this.handleInputChange}
+                                                    name="newLastname"
+                                                    type="text"
+                                                    placeholder="Last Name"
+                                                />
+                                            </Form.Group>
+
+                                            <Form.Group>
+                                                    <Form.Label>Email</Form.Label>
+                                                <Form.Control
+                                                    value={this.state.newEmail}
+                                                    onChange={this.handleInputChange}
+                                                    name="newEmail"
+                                                    type="email"
+                                                    placeholder="Email"
+                                                />
+                                            </Form.Group>
+
+                                            <Form.Group>
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control 
+                                                    value={this.state.newPassword}
+                                                    onChange={this.handleInputChange}
+                                                    name="newPassword"
+                                                    placeholder="Password"
+                                                />
+                                            </Form.Group>
+
+                                            {this.state.loading ? (
+                                                <Button variant="primary" disabled>
+                                                    <Spinner
+                                                        as="span"
+                                                        animation="grow"
+                                                        size="sm"
+                                                        role="status"
+                                                        aria-hidden="true"
+                                                    />
+                                                    Loading...
+                                                </Button>
+
+                                            ):(
+
+                                                <Button
+                                                    disabled={!(this.state.newEmail && this.state.newPassword && this.state.newFirstname && this.state.newLastname)}
+                                                    onClick={this.handleSignUp}
+                                                >
+                                                    Submit
+                                                </Button>
+
+                                            )}
+
+                                        </Form>
+
+                                    </Card.Body>
+                                </Card>
+
+                            </Col>
+
+                        </Row>
+
+                    </Container>
                 
-                <Container>
-
-                    <Row>
-                        <Col
-                        >
-                            <Form>
-
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Username"
-                                    ></Form.Label>
-                                    <Form.Control
-                                        value={this.state.rtnEmail}
-                                        onChange={this.handleInputChange}
-                                        type="email"
-                                        name="rtnEmail" 
-                                        placeholder="Email"
-                                    />
-                                </Form.Group>
-
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Password"
-                                    ></Form.Label>
-                                    <Form.Control 
-                                        value={this.state.rtnPassword}
-                                        onChange={this.handleInputChange}
-                                        name="rtnPassword" 
-                                        placeholder="Password"
-                                    />
-                                </Form.Group>
-
-                                <Button
-                                    disabled={!(this.state.rtnEmail && this.state.rtnPassword)}
-                                    onClick={this.handleSignIn}
-                                >
-                                    Submit
-                                </Button>
-
-                            </Form>
-                        
-                        </Col>
-
-                        <Col
-                        >
-                            <Form>
-
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="First Name"
-                                    ></Form.Label>
-                                    <Form.Control
-                                        value={this.state.newFirstname}
-                                        onChange={this.handleInputChange}
-                                        name="newFirstname"
-                                        type="text"
-                                        placeholder="First Name"
-                                    />
-                                </Form.Group>
-
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Last Name"
-                                    ></Form.Label>
-                                    <Form.Control
-                                        value={this.state.newLastname}
-                                        onChange={this.handleInputChange}
-                                        name="newLastname"
-                                        type="text"
-                                        placeholder="Last Name"
-                                    />
-                                </Form.Group>
-
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Username"
-                                    ></Form.Label>
-                                    <Form.Control
-                                        value={this.state.newEmail}
-                                        onChange={this.handleInputChange}
-                                        name="newEmail"
-                                        type="email"
-                                        placeholder="Email"
-                                    />
-                                </Form.Group>
-
-                                <Form.Group>
-                                    <Form.Label
-                                        htmlFor="" /* TODO: ID needed for input */
-                                        label="Password"
-                                    ></Form.Label>
-                                    <Form.Control 
-                                        value={this.state.newPassword}
-                                        onChange={this.handleInputChange}
-                                        name="newPassword"
-                                        placeholder="Password"
-                                    />
-                                </Form.Group>
-
-                                <Button
-                                    disabled={!(this.state.newEmail && this.state.newPassword && this.state.newFirstname && this.state.newLastname)}
-                                    onClick={this.handleSignUp}
-                                >
-                                    Submit
-                                </Button>
-
-                            </Form>
-
-                        </Col>
-
-                    </Row>
-
-                </Container>
-                
+                </Jumbotron>
                 
             </>
                         

@@ -9,6 +9,7 @@ const session = require("express-session");
 const router = express.Router();
 const apiRoutes = require("./routes/api");
 const eventRoutes = require("./routes/events");
+const authRoutes = require("./routes/authRoutes");
 
 var db = require("./models");
 
@@ -33,23 +34,32 @@ app.use(passport.session());
 router.use("/api", apiRoutes);
 router.use("/events", eventRoutes);
 
+<<<<<<< HEAD
 //if no other routes are hit, send the react app
 router.use(function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+=======
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
 app.use(router);
+
 
 //require("./routes/api", "./routes/authRoutes.js")(router, passport);
 
 //app.use("/api", router); //commenting out as the route is defined above.
-app.use("/auth", router);
+router.use(authRoutes);
 
 //for post routes
 app.use(body_parser.json());
 
 //add local passport strategy
 require("./utils/passport")(passport, db.user);
+
+//if no other routes are hit, send the react app
+router.use(function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 db.sequelize
   .sync()

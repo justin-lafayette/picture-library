@@ -1,7 +1,7 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import {Row, Col, Container, Image, Button, /* Card, */ CardGroup} from 'react-bootstrap';
+import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
 import Slideshow from '../components/Slideshow/slideshow';
 // import Api from '../utils/Api';
@@ -29,6 +29,25 @@ class Event extends Component {
     
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
+    componentDidMount() {
+        console.log("Component did mount");
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/login');
+            }
+            console.log("email", this.state.email);
+        })
+    }
 
     // componentDidMount() {
     //     this.getSubStatus();
@@ -38,8 +57,6 @@ class Event extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
@@ -76,20 +93,34 @@ class Event extends Component {
             <>
                 
                 {this.state.memberOf ? (
-                    <div>
+                    <>
                         <Navbar
+<<<<<<< HEAD
                             openModal={(events) => this.openModal(events)}
                             auth
 
+=======
+                            isAuth={this.state.isAuth}
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
                         >
                             <Container>
                                 {this.state.title}
                             </Container>
                             <Button >Upload Image</Button>
                         </Navbar>
+<<<<<<< HEAD
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}
                         ></div>
+=======
+
+                        <Jumbotron
+                            style={{backgroundColor: "black", height: "92vh"}}
+                        >
+
+                        </Jumbotron>
+
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
                         <Container>
 
                             <Row>
@@ -127,6 +158,7 @@ class Event extends Component {
                             </Row>
 
                         </Container>
+<<<<<<< HEAD
                     </div>
 
 ):(
@@ -151,46 +183,71 @@ class Event extends Component {
                         src={"../slideshow"}
                         style={{MaxHeight: 200}}
                         />
+=======
+                    </>
+>>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
 
-                    </Col>
+                ):(
 
-                    <Col>
+                    <>
+                        <Navbar
+                            isAuth={this.state.isAuth}
+                        />
+                        <Container>
 
-                        <Row
-                        style={{height:100}}
-                        >
-                            {this.state.title}
-                            Title
-                        
-                        </Row>
+                            <Col>
+                            
+                                <Row>
+                                    <Col 
+                                    xs={2}
+                                    md={4}
+                                    >
 
-                        <Row
-                        style={{height:100}}
-                        >           
-                            <Button 
-                            /* TODO: sign-up if not member */
-                            onClick={this.handleSubscribe}
-                            >Subscribe</Button>
-                        </Row>
+                                        <Image 
+                                        /* TODO: {this.state.eventPlaceholder} */
+                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                                        style={{maxHeight: 200}}
+                                        />
 
-                    </Col>
-                </Row>
+                                    </Col>
 
-                <Row>
-                    <Col
-                    style={{height:100}}
-                    >
-                        {this.state.description}
-                        Description
-                        
-                    </Col>
-                </Row>
-            
-            </Col>
+                                    <Col>
 
-        </Container>
-    </div>
-)}
+                                        <Row
+                                        style={{height:100}}
+                                        >
+                                            {this.state.title}
+                                            Title
+                                        
+                                        </Row>
+
+                                        <Row
+                                        style={{height:100}}
+                                        >           
+                                            <Button 
+                                            /* TODO: sign-up if not member */
+                                            onClick={this.handleSubscribe}
+                                            >Subscribe</Button>
+                                        </Row>
+
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col
+                                    style={{height:100}}
+                                    >
+                                        {this.state.description}
+                                        Description
+                                        
+                                    </Col>
+                                </Row>
+                            
+                            </Col>
+
+                        </Container>
+                    </>
+                )}
                 
                 
             </>

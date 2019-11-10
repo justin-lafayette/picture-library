@@ -2,7 +2,22 @@ const db = require("../models");
 
 module.exports = {
   findAll: function(req, res) {
-    db.events.findAll({
+    console.log('in eventsController - findAll', req.query.email);
+    db.events.findAll(
+      {
+      include: [{
+        model:db.users,
+        // attributes:[
+        //   db.users.email
+        // ],
+        through: {
+          model : db.EventUsers
+        }
+      }],    
+    where:{
+      email : req.query.email
+    } 
+      
     }).then(function(events){
         res.json(events);
     });
@@ -18,11 +33,11 @@ module.exports = {
       });
   },
    findById: function(req, res) {
-     console.log('in eventsController.js - req event id ', req.params.event_id);
+     console.log('in eventsController.js - req event id ', req.query.email);
     db.events
       .findOne({
           where: {
-              event_id : req.params.event_id
+              event_id : req.query.eventId
           }
       }).then(function(event){
         console.log('in eventsController - found the event ');
