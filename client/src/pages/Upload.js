@@ -6,6 +6,9 @@ class Upload extends Component {
     render (){
       return(
         <div className = 'Upload'>
+           <div
+                            style={{backgroundColor: "teal", height: "50vh"}}
+                        ></div>
                   <ImageUpload/>
               </div>
       )

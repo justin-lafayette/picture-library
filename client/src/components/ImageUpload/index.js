@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Dropzone from "react-dropzone"
-// import {Button} from 'react-bootstrap'
+import {Jumbotron} from 'react-bootstrap'
+// import { FiUpload } from 'react-icons/fa';
 // import ReactCrop from 'react-image-crop'
 // import 'react-image-crop/dist/ReactCrop.css';
 import "./style.css"
@@ -8,7 +9,7 @@ import "./style.css"
 const imageMaxSize = 100000000;
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
 const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item)=>{return item.trim()})
-class ImageUpload extends Component {
+class ImageUpload extends  Component {
   constructor(props){
     super(props)
     this.state = {
@@ -62,9 +63,16 @@ class ImageUpload extends Component {
     console.log(this.state)
   }
   render() {
+    const dropzoneStyle = {
+      width  : "100%",
+      height : "20%",
+      border : "1px solid black"
+  };
     const {imgSrc} = this.state
     return (
       <div>
+      <Jumbotron className="text-center">
+      
         <h1>Image Upload</h1>
         {imgSrc !== null ?
         <div> 
@@ -77,25 +85,28 @@ class ImageUpload extends Component {
         // </div>:''}  */}
         
           <Dropzone
-            className = "dropzone"
+            className = " "
             onDrop={this.handleOnDrop}
             multiple={false}
             accept={acceptedFileTypes}
             maxSize={imageMaxSize}
             minSize={0}
+            style= {dropzoneStyle}
+            
           >
             {({ getRootProps, getInputProps }) => (
-             <section>
+            
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   
                     Drag 'n' drop image here, or click to select files
                   
                 </div>
-                </section>
               
-            )}
+              
+             )}
           </Dropzone>
+          </Jumbotron>
         
           {/* <button type="submit" className="btn btn-primary mb-2">
             Upload

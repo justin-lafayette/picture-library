@@ -143,12 +143,14 @@ class Home extends Component {
                         isAuth={this.state.isAuth}
                     />
 
-                    <Container>
+                    <Container >
                         
-                        <Jumbotron>
+                        <Jumbotron >
+                            <alert variant = "success">
                             <p>App description to go here.</p>
+                            </alert>
                         </Jumbotron>
-
+                        
                     </Container>
                     
                 </>
@@ -164,13 +166,13 @@ class Home extends Component {
                     >
                         <ButtonToolbar>
 
-                            <Button
+                            <Button variant = "secondary" 
                                 onClick={() => this.handleSigninShow()}
                             >
                                 Sign-In
                             </Button>
-
-                            <Button
+                             
+                            <Button variant = "secondary"
                                 onClick={() => this.handleSignupShow()}
                             >
                                 Sign-Up
@@ -343,7 +345,9 @@ class Home extends Component {
                     </Navbar>
                     
                     
-
+                    <div
+                            style={{backgroundColor: "gray", height: "92vh"}}
+                        ></div>
                     <Container>
 
                         <Jumbotron>
@@ -351,7 +355,6 @@ class Home extends Component {
                         </Jumbotron>
 
                     </Container>
-                    
                 </>
                             
             );
