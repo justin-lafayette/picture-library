@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner } from 'react-bootstrap';
+import Scanner from './Scan';
 
 class Login extends Component {
 
@@ -15,8 +16,13 @@ class Login extends Component {
         newPassword: "",
         newFirstname: "",
         newLastname: "",
-        loading: false
+        loading: false,
+        showScanner: false
 
+    }
+
+    showScanner = () => {
+    this.setState({showScanner: !this.state.showScanner})
     }
     
     // Functions
@@ -270,6 +276,13 @@ class Login extends Component {
                     </Container>
                 
                 </Jumbotron>
+
+                {this.state.showScanner? <Scanner/>: ''}
+                        <Button
+                            // disabled={!(this.state.QrReader)}
+                            onClick={this.showScanner}>
+                            QRscan
+                        </Button>
                 
             </>
                         
