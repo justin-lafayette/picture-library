@@ -2,6 +2,8 @@ import React from 'react';
 
 function Navbar(props) {
 
+    console.log("navbar props.isAth: ", props.isAuth)
+
     if (props.isAuth) {
 
         return (

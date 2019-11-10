@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
+import DatePicker from 'react-date-picker';
+// import BtstrpDatePicker from '../components/BtstrpDatePicker';
+// import DatePicker from 'react-bootstrap-date-picker';
+// import createReactClass from 'create-react-class';
 // import QRCode from 'react-qr-svg';
 
 
@@ -11,12 +15,14 @@ class CreateEvent extends Component {
 
     state = {
 
-        auth: true,
+        isAuth: true,
         email: "",
         eventTitle: "",
         eventDate: "",
         eventDescription: "",
-        qrCodeValue: ""
+        qrCodeValue: "",
+        date: new Date()
+
     }
 
     // Functions
@@ -27,7 +33,7 @@ class CreateEvent extends Component {
         // console.log('in app.js b4 Api.createevent');
         Api.createEvent({
             title: this.state.eventTitle,
-            event_date: this.state.eventDate,
+            event_date: this.state.date,
             event_description: this.state.eventDescription,
             email: this.state.email
         })
@@ -46,11 +52,12 @@ class CreateEvent extends Component {
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
-            [name]: value
+            [name]: value,
         });
-        // ToDo needs to be changed to email from auth.
-        // this.state.email = 'codybear40@gmail.com';
+        
     }
+
+    onChange = date => this.setState({ date });
 
     
     componentDidMount() {
@@ -63,13 +70,26 @@ class CreateEvent extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
-              console.log("email", this.state.email);
+              this.props.history.push('/login');
             }
+            console.log("isAuth", this.state.isAuth);
+            console.log("email", this.state.email);
         })
+
+        // setDate = () => {
+            // let newDate = new Date().toISOString();
+            // this.setState({date: newDate});
+        // }
     }
+
+    // componentDidUpdate() {
+    //     let hiddenInputElement = document.getElementById("example-datepicker");
+    //     console.log(hiddenInputElement.value);
+    //     console.log(hiddenInputElement.getAttribute('date-formattedvalue'));
+    // }
 
 
     // Render Elements
@@ -79,7 +99,7 @@ class CreateEvent extends Component {
 
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
                 <Navbar
-                    auth={this.state.auth}
+                    auth={this.state.isAuth}
                 />
 
                 <Container>
@@ -105,7 +125,7 @@ class CreateEvent extends Component {
                                     />
                                 </Form.Group>
 
-                                <Form.Group controlId="event-date">
+                                {/* <Form.Group controlId="event-date">
                                     <Form.Label
                                         label="Event Date"
                                     >
@@ -115,6 +135,16 @@ class CreateEvent extends Component {
                                         value={this.state.eventDate}
                                         onChange={this.handleInputChange}
                                         name="eventDate"
+                                    />
+                                </Form.Group> */}
+
+                                <Form.Group>
+                                    <Form.Label>
+                                        Date
+                                    </Form.Label>
+                                    <DatePicker 
+                                        value={this.state.date}
+                                        onChange={this.onChange}
                                     />
                                 </Form.Group>
 
