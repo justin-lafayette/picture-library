@@ -3,56 +3,55 @@ const router = require("express").Router();
 const uploadPics = require('../../utils/uploadPic');
 const AWS = require("aws-sdk");
 const multer = require('multer');
-const multerS3 = require('multer-s3');
 
-var s3 = new AWS.S3({      
-//give api key here
-});
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
 
 console.log("s3 instance created");
-//configuring parameters
-// var params = {
-//   Bucket: "project3.pic.library",
-//   //Body: fs.createReadStream(filePath),
-//   //Key: "folder/" + Date.now() + "_" + path.basename(filePath)
-//   Body: fs.createReadStream(filePath),
-//   Key: "folder/" + Date.now() + "_" + "File1"
-// };
-// const upload = multer({
-//     storage: multerS3({
-//         s3: s3,
-//         bucket: 'project3.pic.library',
-//         key: function (req, file, cb) {
-//             console.log("HEY WE MADE IT TO MULTER");
-//             console.log(file);
-//             cb(null, Date.now()); //use Date.now() for unique file keys
-//         }
-//     })
-// });
-var upload = multer({
-    storage: multerS3({
-      s3: s3,
-      bucket: 'project3.pic.library',
-      metadata: function (req, file, cb) {
-        console.log("FILE.FIELDNAME");
-        console.log(file)
-        cb(null, {fieldName: file.fieldname});
-      },
-      key: function (req, file, cb) {
-        console.log("in key function")
-        cb(null, Date.now().toString())
-      }
-    })
-  });
 
 // Matches with "/uploadpic"
 router.route('/uploadpic')
-.post(upload.array('folder',1), (req, res) => {
-    console.log("got to multer-s3 callback");
-    console.log(req);
-    console.log("====================================");
-    console.log(res);
-    res.send(req.file);
+.post(upload.single("image"), function(req, res) {
+  const file = req.file;
+  console.log("File!")
+  console.log(file)
+  const s3FileURL = "https://s3-us-east-2.amaxonaws.com/project3.pic.library"
+
+  let s3bucket = new AWS.S3({
+    accessKeyId: "AKIAW2PG6CWYDDGBGMZ5",
+    secretAccessKey: "g+OkT7zXfIEVXVy61oSYUcFRbdb9hVSXwvWFsHI9",
+    region: "us-east-2"
+  });
+
+  //Where you want to store your file
+  var params = {
+    Bucket: "project3.pic.library/jackfolder",
+    Key: file.originalname,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: "public-read"
+  };
+
+  s3bucket.upload(params, function(err, data) {
+    if (err) {
+      console.log("UPLOAD ERROR")
+      console.log(err);
+      res.status(501).json(err);
+    } else {
+      res.send({ data });
+      var newFileUploaded = {
+        description: req.body.description,
+        fileLink: s3FileURL + file.originalname,
+        s3_key: params.Key
+      };
+      // var document = new DOCUMENT(newFileUploaded);
+      // document.save(function(error, newFile) {
+      //   if (error) {
+      //     throw error;
+      //   }
+      // });
+    }
+  });
 });
 
 module.exports = router;

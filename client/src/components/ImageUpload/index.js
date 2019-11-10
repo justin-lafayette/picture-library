@@ -40,23 +40,13 @@ class ImageUpload extends Component {
       console.log(rejectedFiles)
       this.verifyFile(rejectedFiles)
     }
-     
+
     if (files && files.length > 0) {
       const isVerified = this.verifyFile(files)
       if (isVerified){
         // imageBase64Data
         const currentFile = files[0];
         this.setState({file: currentFile});
-        // const myFileReader = new FileReader()
-        // myFileReader.addEventListener("load", () => {
-        //   console.log ("result",myFileReader.result)
-        //   this.setState({
-        //     imgSrc: myFileReader.result
-        //   });
-        //   // calling uploadPic
-
-        // }, false)
-        // myFileReader.readAsDataURL (currentFile);
       }
     }
   }
@@ -73,7 +63,7 @@ class ImageUpload extends Component {
     console.log("FILE!");
     console.log(this.state.file);
     const formData = new FormData();
-    formData.append('myImage',this.state.file);
+    formData.append('image',this.state.file, "this.state.filename");
 
     Api.uploadPic(formData)
       .then()
@@ -89,11 +79,9 @@ class ImageUpload extends Component {
           {imgSrc}
         <img src ={imgSrc} alt = ' ' /> 
         </div>: ''} */}
-
         {/* // <div>
         // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
         // </div>:''}  */}
-        
           <Dropzone
             onDrop={this.handleOnDrop}
             multiple={false}
@@ -105,21 +93,18 @@ class ImageUpload extends Component {
              <section>
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  
                     Drag 'n' drop image here, or click to select files
-                  
                 </div>
                 </section>
-              
             )}
           </Dropzone>
-        
+
           <Button
             onClick={this.handleFormSubmit}
           >
             Upload
           </Button>
-        
+
       </>
     )
   }
