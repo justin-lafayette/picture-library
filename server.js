@@ -11,10 +11,6 @@ const apiRoutes = require("./routes/api");
 const eventRoutes = require("./routes/events");
 const uploadRoute = require("./routes/upload/uploadRoutes");
 
-//file upload
-
-console.log('required AWS');
-
 const fs = require("fs");
 const authRoutes = require("./routes/authRoutes");
 

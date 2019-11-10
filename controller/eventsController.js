@@ -4,26 +4,31 @@ module.exports = {
   findAll: function(req, res) {
     console.log('in eventsController - findAll', req.query.email);
     db.events.findAll(
-      {
-      include: [{
-        model:db.users,
-        // attributes:[
-        //   db.users.email
-        // ],
-        through: {
-          model : db.EventUsers
-        }
-      }],    
-    where:{
-      email : req.query.email
-    } 
+      // {
+      // include: {
+      //   model:db.users,
+      //   // attributes:[
+      //   //   db.users.email
+      //   // ],
+      //   through: {
+      //     model : db.EventUsers
+      //   }
+      // }
+      //,    
+    // where:{
+    //   email : req.query.email
+    // } 
       
-    }).then(function(events){
+    // }
+    ).then(function(events){
         res.json(events);
+    })
+    .catch((err) => {
+      console.log('Error in findAll ', err);
     });
   },
   findByUserEmail: function(req,res){
-      console.log('in findByUserEmail');
+      console.log('in findByUserEmail email ', req.params.email);
       db.events.findAll({
         where: {
           email:req.params.email
@@ -33,11 +38,11 @@ module.exports = {
       });
   },
    findById: function(req, res) {
-     console.log('in eventsController.js - req event id ', req.query.email);
+     console.log('in eventsController.js - req event id ', req.params);
     db.events
       .findOne({
           where: {
-              event_id : req.query.eventId
+              event_id : req.params.eventId
           }
       }).then(function(event){
         console.log('in eventsController - found the event ');

@@ -23,11 +23,12 @@ export default {
     getEvents: function(data) {
         console.log('in api.getEvents user email ', data);
         //return axios.get("/events", data);
-        return axios.get(`/events?email=${data}`);
+        return axios.get(`/event/?email=${data}`);
     },
 
     getEventsByUserEmail: function(data){
-        return axios.post("/events/:email", data)
+        console.log('ran getEventsByUserEmail', data);
+        return axios.get(`/events/user/${data}`)
     },
     // Create event
     createEvent: function(data) {
@@ -41,13 +42,13 @@ export default {
                 'content-type': 'multipart/form-data'
             }
         }
-        return axios.post("/uploadpic", data, config)
+        return axios.post("/uploadpic", data, config);
     },
 
     // Load Events
-    // loadEvents: function() {
-    //     return axios.get("/api/allevents")
-    // },
+    loadAllEvents: function() {
+        return axios.get("/events/allevents")
+    },
 
     // Get event subscription status
     getSubStatus: function(/* Logged in user info here */) {
@@ -63,7 +64,7 @@ export default {
     // Load specific event
     loadSingleEvent: function( data ) {
         console.log('in Api.js - loadSingleEvent ', data);
-        return axios.get(`/events/?event_id=${data}`);
+        return axios.get(`/events/${data}`);
     },
 
     // Load images uploaded by one person

@@ -3,6 +3,8 @@ const router = require("express").Router();
 const uploadPics = require('../../utils/uploadPic');
 const AWS = require("aws-sdk");
 const multer = require('multer');
+require('dotenv').config();
+
 
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
@@ -18,8 +20,8 @@ router.route('/uploadpic')
   const s3FileURL = "https://s3-us-east-2.amaxonaws.com/project3.pic.library"
 
   let s3bucket = new AWS.S3({
-    accessKeyId: "AKIAW2PG6CWYDDGBGMZ5",
-    secretAccessKey: "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",
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET,
     region: "us-east-2"
   });
 

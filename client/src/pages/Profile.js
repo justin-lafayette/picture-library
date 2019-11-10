@@ -28,8 +28,10 @@ class Profile extends Component {
     // Functions
     
     loadEvents = ()=> {
-        Api.getEvents()
+        console.log('in Profile.js - loadEvents email ', this.state.email);
+        Api.getEventsByUserEmail(this.state.email)
             .then(res => {
+                console.log(res.data)
                 this.setState({ events: res.data, title:"", event_escription:"", event_id:"" })
             })
             .catch( err => console.log( err ) )
@@ -45,7 +47,6 @@ class Profile extends Component {
 
     componentDidMount() {
         console.log("Component did mount");
-        this.loadEvents();
         // this.loadMyPictures();
         
 
@@ -63,6 +64,8 @@ class Profile extends Component {
               console.log("email: ", this.state.email);
               console.log("first name: ", this.state.firstName);
               console.log("last name: ", this.state.lastName);
+              this.loadEvents();
+        
             } else {
               this.setState({
                 email: "",

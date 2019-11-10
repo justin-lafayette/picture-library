@@ -6,14 +6,17 @@ const router = require("express").Router();
 router.route("/")
 .get(eventsController.findAll);
 
-router.route('/:eventId')
+router.route('/event/:eventId')
 .get(eventsController.findById);
 
-router.route('/:userEmail')
+router.route('/user/:email')
 .get(eventsController.findByUserEmail);
 
 router.route('/newevent')
 .post(eventsController.create);
+
+router.route('/allEvents')
+.get(eventsController.findAll);
 
 router.route('/pics')
 .get(pictureControlller.findAll);

@@ -25,10 +25,19 @@ class EventSearch extends Component {
         });
     }
     
-    loadEvents = ()=> {
-        Api.getEvents(this.state.email)
+    // loadEvents = ()=> {
+    //     Api.getEvents(this.state.email)
+    //         .then(res => {
+    //             console.log('in loadEvents email ', this.state.email);
+    //             this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
+    //         })
+    //         .catch( err => console.log( err ) )
+    // }
+
+    loadAllEvents = ()=> {
+        Api.loadAllEvents()
             .then(res => {
-                console.log('in loadEvents email ', this.state.email);
+                console.log(res)
                 this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
             })
             .catch( err => console.log( err ) )
@@ -37,7 +46,8 @@ class EventSearch extends Component {
     
     componentDidMount() {
         console.log("Component did mount");
-
+        this.loadAllEvents();
+            
         Api.isAuth()
           .then( res => {
             // console.log('in Api.isAuth');
@@ -55,7 +65,7 @@ class EventSearch extends Component {
               this.props.history.push('/login');
             }
              console.log("calling loadEvents email", this.state.email);
-            this.loadEvents();
+            
         })
     }
 
