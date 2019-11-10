@@ -146,9 +146,9 @@ class Home extends Component {
                     <Container >
                         
                         <Jumbotron >
-                            <alert variant = "success">
-                            <p>App description to go here.</p>
-                            </alert>
+                            <Alert variant="success">
+                                <p>App description to go here.</p>
+                            </Alert>
                         </Jumbotron>
                         
                     </Container>
@@ -345,13 +345,14 @@ class Home extends Component {
                     </Navbar>
                     
                     
-                    <div
-                            style={{backgroundColor: "gray", height: "92vh"}}
-                        ></div>
+                        {/* <div
+                            style={{backgroundColor: "", height: "92vh"}}
+                        ></div> */}
                     <Container>
 
                         <Jumbotron>
                             <p>{this.state.email}</p>
+                            <p>This is only a test</p>
                         </Jumbotron>
 
                     </Container>

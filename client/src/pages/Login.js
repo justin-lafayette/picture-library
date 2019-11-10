@@ -120,9 +120,7 @@ class Login extends Component {
                 <Navbar
                     isAuth={this.state.isAuth}
                 />
-                 <div
-                            style={{backgroundColor: "gray", height: "92vh"}}
-                        ></div>
+                
                 <Jumbotron>
 
                     <Container>

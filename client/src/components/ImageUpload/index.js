@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import Dropzone from "react-dropzone"
-import {Jumbotron} from 'react-bootstrap'
-// import { FiUpload } from 'react-icons/fa';
+import {Jumbotron} from 'react-bootstrap';
+
+import { FaFileUpload } from 'react-icons/fa';
 // import ReactCrop from 'react-image-crop'
 // import 'react-image-crop/dist/ReactCrop.css';
-import "./style.css"
+import './style.css';
 
 const imageMaxSize = 100000000;
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
@@ -13,12 +14,13 @@ class ImageUpload extends  Component {
   constructor(props){
     super(props)
     this.state = {
-      imgSrc: null
+      imgSrc: null,
       // crop: {
       //   aspect: 1/1
       // }
     }
   }
+
   verifyFile = (files) =>{
     if (files && files.length > 0) {
       const currentFile = files[0];
@@ -63,56 +65,61 @@ class ImageUpload extends  Component {
     console.log(this.state)
   }
   render() {
-    const dropzoneStyle = {
-      width  : "100%",
-      height : "20%",
-      border : "1px solid black"
-  };
+  //   const dropzoneStyle = {
+  //     width  : "500px",
+  //     height : "500px",
+  //     border : "5px solid black"
+  // };
     const {imgSrc} = this.state
     return (
-      <div>
-      <Jumbotron className="text-center">
-      
-        <h1>Image Upload</h1>
-        {imgSrc !== null ?
-        <div> 
-          {imgSrc}
-        <img src ={imgSrc} alt = ' ' /> 
-        </div>: ''}
+      <>
+         
+        
+        <div className="ImageUpload">
+        <Jumbotron className="text-center">
+        
+          <h1>Image Upload</h1>
+          {imgSrc !== null ?
+          <div> 
+            {/* {imgSrc} */}
+          <img className={"dropzone-custom"} src ={imgSrc} alt = ' ' /> 
+          </div>: ''}
 
-        {/* // <div>
-        // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
-        // </div>:''}  */}
-        
-          <Dropzone
-            className = " "
-            onDrop={this.handleOnDrop}
-            multiple={false}
-            accept={acceptedFileTypes}
-            maxSize={imageMaxSize}
-            minSize={0}
-            style= {dropzoneStyle}
-            
-          >
-            {({ getRootProps, getInputProps }) => (
-            
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  
-                    Drag 'n' drop image here, or click to select files
-                  
-                </div>
+          {/* // <div>
+          // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
+          // </div>:''}  */}
+          
+            <Dropzone
+              className=""
+              onDrop={this.handleOnDrop}
+              multiple={false}
+              accept={acceptedFileTypes}
+              maxSize={imageMaxSize}
+              minSize={0}
+              // style= {dropzoneStyle}
               
-              
-             )}
-          </Dropzone>
-          </Jumbotron>
-        
-          {/* <button type="submit" className="btn btn-primary mb-2">
-            Upload
-          </button> */}
-        
-      </div>
+            >
+              {({ getRootProps, getInputProps }) => (
+              // className="dropzone-custom"
+                  <div   {...getRootProps()} >
+                    <input {...getInputProps()} />
+                    
+                      Drag 'n' drop image here, or click to select files <FaFileUpload/>
+                    
+                  </div>
+                
+                
+                
+              )}
+            </Dropzone>
+            </Jumbotron>
+          
+            {/* <button type="submit" className="btn btn-primary mb-2">
+              Upload
+            </button> */}
+          
+        </div>
+      </>
     )
   }
 }

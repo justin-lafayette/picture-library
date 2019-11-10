@@ -1,4 +1,4 @@
-.dropzone {
+.dropzone-custom {
 position: relative;
 width: 200px;
 height: 200px;
@@ -6,6 +6,8 @@ border-width: 2px;
 border-color: rgb(102, 102, 102);
 border-style: dashed;
 border-radius: 5px;
+justify-items: center;
+
 }
 
 /* .dropzone {
@@ -15,6 +17,21 @@ border-radius: 5px;
   }
  */
 
- body {
+ /* body {
    background-color: gray;
- }
+ } */
+
+.ImgaeUpload{
+  background-color: #2a2a2a;
+}
+
+
+.jumbotron-custom {
+  height: 100px !important;
+  width: 100px !important;
+  border: 5px dashed red !important;
+}
+
+#root {
+  background-color: rgb(187, 167, 167);
+}

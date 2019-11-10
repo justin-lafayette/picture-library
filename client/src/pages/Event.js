@@ -29,7 +29,6 @@ class Event extends Component {
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
     componentDidMount() {
-        console.log("Component did mount");
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -39,12 +38,11 @@ class Event extends Component {
               });
             } else {
               this.setState({
-                email: "",
+                email: null,
                 isAuth: false
               })
-              this.props.history.push('/login');
+              console.log("email", this.state.email);
             }
-            console.log("email", this.state.email);
         })
     }
 
@@ -56,6 +54,8 @@ class Event extends Component {
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(name);
+        console.log(value);
         this.setState({
             [name]: value
         });
@@ -92,22 +92,20 @@ class Event extends Component {
             <>
                 
                 {this.state.memberOf ? (
-                    <>
+                    <div>
                         <Navbar
-                            isAuth={this.state.isAuth}
+                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
+                            auth
+
                         >
                             <Container>
-                                {this.state.title}
+                                {this.state.open}
                             </Container>
-                            <Button >Upload Image</Button>
+                            <Button>Upload Image</Button>
                         </Navbar>
-
-                        <Jumbotron
+                        <div
                             style={{backgroundColor: "black", height: "92vh"}}
-                        >
-
-                        </Jumbotron>
-
+                        ></div>
                         <Container>
 
                             <Row>
@@ -145,69 +143,69 @@ class Event extends Component {
                             </Row>
 
                         </Container>
-                    </>
+                    </div>
 
-                ):(
+):(
 
-                    <>
-                        <Navbar
-                            isAuth={this.state.isAuth}
+    <div>
+        <Navbar
+            openModal={(modalToOpen) => this.openModal(modalToOpen)}
+            />
+        <Container>
+
+            <Col>
+            
+                <Row>
+                    <Col 
+                    xs={2}
+                    md={4}
+                    >
+
+                        <Image 
+                        /* TODO: {this.state.eventPlaceholder} */
+                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                        style={{maxHeight: 200}}
                         />
-                        <Container>
 
-                            <Col>
-                            
-                                <Row>
-                                    <Col 
-                                    xs={2}
-                                    md={4}
-                                    >
+                    </Col>
 
-                                        <Image 
-                                        /* TODO: {this.state.eventPlaceholder} */
-                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                                        style={{maxHeight: 200}}
-                                        />
+                    <Col>
 
-                                    </Col>
+                        <Row
+                        style={{height:100}}
+                        >
+                            {this.state.title}
+                            Title
+                        
+                        </Row>
 
-                                    <Col>
+                        <Row
+                        style={{height:100}}
+                        >           
+                            <Button 
+                            /* TODO: sign-up if not member */
+                            onClick={this.handleSubscribe}
+                            >Subscribe</Button>
+                        </Row>
 
-                                        <Row
-                                        style={{height:100}}
-                                        >
-                                            {this.state.title}
-                                            Title
-                                        
-                                        </Row>
+                    </Col>
+                </Row>
 
-                                        <Row
-                                        style={{height:100}}
-                                        >           
-                                            <Button 
-                                            /* TODO: sign-up if not member */
-                                            onClick={this.handleSubscribe}
-                                            >Subscribe</Button>
-                                        </Row>
+                <Row>
+                    <Col
+                    style={{height:100}}
+                    >
+                        {this.state.description}
+                        Description
+                        
+                    </Col>
+                </Row>
+            
+            </Col>
 
-                                    </Col>
-                                </Row>
-
-                                <Row>
-                                    <Col
-                                    style={{height:100}}
-                                    >
-                                        {this.state.description}
-                                        Description
-                                        
-                                    </Col>
-                                </Row>
-                            
-                            </Col>
-
-                        </Container>
-                    </>
-                )}
+        </Container>
+    </div>
+)}
                 
                 
             </>
