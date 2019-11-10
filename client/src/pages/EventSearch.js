@@ -26,25 +26,27 @@ class EventSearch extends Component {
     }
     
     loadEvents = ()=> {
-        Api.getEvents()
+        Api.getEvents(this.state.email)
             .then(res => {
-                console.log('in EventsSearch.js - res ',res);
+                console.log('in loadEvents email ', this.state.email);
                 this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
             })
             .catch( err => console.log( err ) )
     }
 
+    
     componentDidMount() {
         console.log("Component did mount");
-        this.loadEvents();
 
         Api.isAuth()
           .then( res => {
+            // console.log('in Api.isAuth');
             if( res.data.user ) {
               this.setState({
                 email: res.data.user.email,
                 isAuth: true
               });
+              console.log('email in componentDidMount', this.state.email);
             } else {
               this.setState({
                 email: "",
@@ -52,14 +54,17 @@ class EventSearch extends Component {
               })
               this.props.history.push('/login');
             }
-            console.log("email", this.state.email);
+             console.log("calling loadEvents email", this.state.email);
+            this.loadEvents();
         })
     }
 
-    goToEvent = () => {
-        Api.loadSingleEvent()
+    goToEvent = (e) => {
+        e.preventDefault();
+        console.log('e.target.id', e.target.id);
+        Api.loadSingleEvent(e.target.id)
             .then( res => {
-
+                console.log(res);
             })
             .catch( err => console.log( err ) )
     }
@@ -154,6 +159,9 @@ class EventSearch extends Component {
                                                         </Col>
                                                         <Col xs={2} className="text-center">
                                                             <Button
+                                                             id = {events.event_id}
+                                                             onClick = {this.goToEvent} 
+                                                             
                                                             /* TODO: href={{events.eventLink}} */
                                                             >
                                                                 See More

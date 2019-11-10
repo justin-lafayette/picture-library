@@ -19,8 +19,9 @@ module.exports = function(sequelize, DataTypes) {
   );
   
   pictures.associate = function(models){
-    pictures.belongsTo(models.users, {foreignKey: 'email'});
+    pictures.belongsTo(models.events, {foreignKey: 'email'});
   };
   
+
   return pictures;
 }
