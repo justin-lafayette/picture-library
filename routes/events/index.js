@@ -6,7 +6,7 @@ const router = require("express").Router();
 router.route("/")
 .get(eventsController.findAll);
 
-router.route('/:id')
+router.route('/:eventId')
 .get(eventsController.findById);
 
 router.route('/:userEmail')
