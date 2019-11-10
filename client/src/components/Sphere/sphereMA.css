@@ -1,0 +1,72 @@
+body {
+	background:#4d4d4d;
+	margin: 0;
+}
+.cont{
+	transform-style: preserve-3d;
+	animation:move 5s linear infinite;
+	-webkit-animation:move 5s linear infinite;
+	-moz-animation:move 5s linear infinite;
+	-o-animation:move 5s linear infinite;
+	-ms-animation:move 5s linear infinite;
+}
+.ci{
+	position: absolute;
+	top:50px;
+	left:100px;
+	width:250px;
+	height:250px;
+	border:1px solid white;
+	border-radius:50%;
+	background:linear-gradient(0.25turn, #4d004d , #ebf8e1, #4d004d);
+	background-size:cover;
+	box-shadow: 0 0 100px silver;
+	opacity:0.7;
+}	
+.cont div:nth-child(1) {
+	transform:rotateX(45deg) rotateY(20deg);
+}
+.cont div:nth-child(2) {
+	transform:rotateX(45deg) rotateY(40deg);
+}
+.cont div:nth-child(3) {
+	transform:rotateX(45deg) rotateY(60deg);
+}
+.cont div:nth-child(4) {
+	transform:rotateX(45deg) rotateY(80deg);
+}
+.cont div:nth-child(5) {
+	transform:rotateX(45deg) rotateY(100deg);
+}
+.cont div:nth-child(6) {
+	transform:rotateX(45deg) rotateY(120deg);
+}
+.cont div:nth-child(7) {
+	transform:rotateX(45deg) rotateY(140deg);
+}
+.cont div:nth-child(8) {
+	transform:rotateX(45deg) rotateY(160deg);
+}
+.cont div:nth-child(9) {
+	transform:rotateX(45deg) rotateY(180deg);
+}
+ @keyframes move {
+	0%{transform: rotateY(0deg)}
+	100%{transform: rotateY(360deg)} 
+} 
+@-webkit-keyframes move {
+	0%{transform: rotateY(0deg)}
+	100%{transform: rotateY(360deg)}
+}
+@-moz-keyframes move {
+	0%{transform: rotateY(0deg)}
+	100%{transform: rotateY(360deg)}
+} 
+@-ms-keyframes move {
+	0%{transform: rotateY(0deg)}
+	100%{transform: rotateY(360deg)}
+}
+@-o-keyframes move {
+	0%{transform: rotateY(0deg)}
+	100%{transform: rotateY(360deg)}
+}
