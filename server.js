@@ -36,7 +36,6 @@ router.use("/events", eventRoutes);
 
 app.use(router);
 
-
 //require("./routes/api", "./routes/authRoutes.js")(router, passport);
 
 //app.use("/api", router); //commenting out as the route is defined above.
