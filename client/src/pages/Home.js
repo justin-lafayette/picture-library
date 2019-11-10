@@ -358,7 +358,6 @@ class Home extends Component {
                     <Container>
 
                         <Jumbotron>
-<<<<<<< HEAD
                             <p>Welcome to PixPective!  Where memories are shared.</p>
                             <p> </p>
                             <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
@@ -371,9 +370,6 @@ class Home extends Component {
                             <p>Is it secure?  Yes!  The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator.  You must register for and be admitted to the event as a qualified user.   You will always be the only one (other than the Administrator) that can remove your photos.</p>
                             <p> </p>
                             <p>So...Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p>
-=======
-                            <p>{this.state.email}</p>
->>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
                         </Jumbotron>
 
                     </Container>

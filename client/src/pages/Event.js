@@ -95,24 +95,16 @@ class Event extends Component {
                 {this.state.memberOf ? (
                     <>
                         <Navbar
-<<<<<<< HEAD
-                            openModal={(events) => this.openModal(events)}
-                            auth
-
-=======
                             isAuth={this.state.isAuth}
->>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
                         >
                             <Container>
                                 {this.state.title}
                             </Container>
                             <Button >Upload Image</Button>
                         </Navbar>
-<<<<<<< HEAD
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}
                         ></div>
-=======
 
                         <Jumbotron
                             style={{backgroundColor: "black", height: "92vh"}}
@@ -120,7 +112,6 @@ class Event extends Component {
 
                         </Jumbotron>
 
->>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
                         <Container>
 
                             <Row>
@@ -158,34 +149,7 @@ class Event extends Component {
                             </Row>
 
                         </Container>
-<<<<<<< HEAD
-                    </div>
-
-):(
-
-    <div>
-        <Navbar
-            openModal={(event) => this.openModal(event)}
-            />
-        <Container>
-
-            <Col>
-            
-                <Row>
-                    <Col 
-                    xl={2}
-                    md={4}
-                    >
-
-                        <Image 
-                        /* TODO: {this.state.eventPlaceholder} */
-                        // src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                        src={"../slideshow"}
-                        style={{MaxHeight: 200}}
-                        />
-=======
                     </>
->>>>>>> 37a080b4004ac7044fb675d71012fd51b9346a0b
 
                 ):(
 
@@ -204,9 +168,10 @@ class Event extends Component {
                                     >
 
                                         <Image 
-                                        /* TODO: {this.state.eventPlaceholder} */
-                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                                        style={{maxHeight: 200}}
+                                            /* TODO: {this.state.eventPlaceholder} */
+                                            // src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                                            src={"../slideshow"}
+                                            style={{MaxHeight: 200}}
                                         />
 
                                     </Col>

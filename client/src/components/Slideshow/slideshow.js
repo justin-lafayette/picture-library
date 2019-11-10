@@ -1,6 +1,6 @@
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
-import {findAll} from '../../../controller/picturesController';
+// import {findAll} from '../../../controller/picturesController';
  
 const images = [
   'images/img_6319.jpg',
