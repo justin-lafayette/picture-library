@@ -4,16 +4,14 @@ export default {
 
     // Sign up
     signUp: function(data) {
-        return axios.post("/api/signup", data );
+        return axios.post("/api/signup", data )
+            .catch( err => console.log(err.response));
     },
 
     signIn: function(data) {
         console.log('in Api.js signIn data', data);
-        return axios.post("/api/signin/", data ).then(function (res) {
-            console.log(res);
-            console.log("HEY IT WOOOORKED!!!");
-        })
-        .catch( err => console.log(err.response));
+        return axios.post("/api/signin/", data )
+            .catch( err => console.log(err.response));
     },
 
     // Get all pictures for event
@@ -22,8 +20,10 @@ export default {
     },
 
     // Get all events (list)
-    getEvents: function() {
-        return axios.get("/events");
+    getEvents: function(data) {
+        console.log('in api.getEvents user email ', data);
+        //return axios.get("/events", data);
+        return axios.get(`/events?email=${data}`);
     },
 
     getEventsByUserEmail: function(data){
@@ -62,7 +62,8 @@ export default {
 
     // Load specific event
     loadSingleEvent: function( data ) {
-        return axios.get("/events/:eventId", data )
+        console.log('in Api.js - loadSingleEvent ', data);
+        return axios.get(`/events/?event_id=${data}`);
     },
 
     // Load images uploaded by one person

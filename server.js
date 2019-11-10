@@ -16,6 +16,7 @@ const uploadRoute = require("./routes/upload/uploadRoutes");
 console.log('required AWS');
 
 const fs = require("fs");
+const authRoutes = require("./routes/authRoutes");
 
 var db = require("./models");
 
@@ -41,17 +42,13 @@ router.use("/api", apiRoutes);
 router.use("/events", eventRoutes);
 router.use(uploadRoute);
 
-//if no other routes are hit, send the react app
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
-
 app.use(router);
+
 
 //require("./routes/api", "./routes/authRoutes.js")(router, passport);
 
 //app.use("/api", router); //commenting out as the route is defined above.
-app.use("/auth", router);
+router.use(authRoutes);
 
 //for post routes
 app.use(body_parser.json());
@@ -64,6 +61,11 @@ require("./utils/passport")(passport, db.user);
 
 console.log('S3 done');
 // end of S3 bucket code
+//if no other routes are hit, send the react app
+router.use(function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 db.sequelize
   .sync()
   .then(function() {
