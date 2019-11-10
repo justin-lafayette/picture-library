@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner, Alert } from 'react-bootstrap';
+import Scanner from './Scan';
 
 class Login extends Component {
 
@@ -17,10 +18,10 @@ class Login extends Component {
         newLastname: "",
         loading: false,
         badSignin: false,
-        badSignup: false
+        badSignup: false,
 
     }
-    
+
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
 
