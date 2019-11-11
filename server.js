@@ -9,6 +9,9 @@ const session = require("express-session");
 const router = express.Router();
 const apiRoutes = require("./routes/api");
 const eventRoutes = require("./routes/events");
+const uploadRoute = require("./routes/upload/uploadRoutes");
+
+const fs = require("fs");
 const authRoutes = require("./routes/authRoutes");
 
 var db = require("./models");
@@ -33,6 +36,7 @@ app.use(passport.session());
 
 router.use("/api", apiRoutes);
 router.use("/events", eventRoutes);
+router.use(uploadRoute);
 
 app.use(router);
 
@@ -47,6 +51,11 @@ app.use(body_parser.json());
 //add local passport strategy
 require("./utils/passport")(passport, db.user);
 
+// For S3 bucket code -- need to be moved to its own compenent and route
+//configuring the AWS environment
+
+console.log('S3 done');
+// end of S3 bucket code
 //if no other routes are hit, send the react app
 router.use(function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

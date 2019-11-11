@@ -5,9 +5,6 @@ import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
-// import BtstrpDatePicker from '../components/BtstrpDatePicker';
-// import DatePicker from 'react-bootstrap-date-picker';
-// import createReactClass from 'create-react-class';
 import ReactToPrint from 'react-to-print';
 // import QRCode from 'react-qr-svg';
 

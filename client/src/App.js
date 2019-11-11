@@ -63,12 +63,7 @@ class App extends Component {
             <Route exact path="/eventsearch" component={EventSearch} />
             <Route exact path="/404" component={PageNotFound} />
             <Route exact path="/profile" component={Profile} />
-
             <Route exact path="/event/:id" component={Event} />
-            {/* <Route path="/event/:id">
-              <Event />
-            </Route>  */}
-
             <Route exact path="/login" component={Login} />
             <Route exact path="/createevent" component={CreateEvent} />
             <Route exact path="/upload" component={Upload} />
