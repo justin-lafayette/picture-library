@@ -6,8 +6,8 @@ class Upload extends Component {
     render (){
       return(
         <div className = 'Upload'>
-                  <ImageUpload/>
-              </div>
+          <ImageUpload/>
+        </div>
       )
     }
   }
