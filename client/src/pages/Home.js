@@ -159,36 +159,29 @@ class Home extends Component {
                             <p> </p> */}
                             <p>Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p>
                         </Jumbotron>
-
                     </Container>
-
                     {this.state.showScanner? <Scanner/>: <></>}
                     
                 </>
-
             )
         } else {
             
             return(
                 <>
-
                     <Navbar
                         isAuth={this.state.isAuth}
                     >
                         <ButtonToolbar>
-
                             <Button
                                 onClick={() => this.handleSigninShow()}
                             >
                                 Sign-In
                             </Button>
-
                             <Button
                                 onClick={() => this.handleSignupShow()}
                             >
                                 Sign-Up
                             </Button>
-
                             <Modal
                                 size="md"
                                 show={this.state.signinShow}
@@ -200,18 +193,14 @@ class Home extends Component {
                                         Sign-In
                                     </Modal.Title>
                                 </Modal.Header>
-
                                 <Modal.Body>
                                     <Form>
-
                                         {this.state.badSignin ? (
-
                                             
                                             <Alert variant={"danger"}>
                                                 Wrong Username or Password
                                             </Alert>
                                             ): (<></>)}
-
                                         <Form.Group>
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
@@ -222,7 +211,6 @@ class Home extends Component {
                                                 placeholder="Email"
                                             />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
@@ -232,7 +220,6 @@ class Home extends Component {
                                                 placeholder="Password"
                                             />
                                         </Form.Group>
-
                                         {this.state.loading ? (
                                             <Button variant="primary" disabled>
                                                 <Spinner
@@ -244,9 +231,7 @@ class Home extends Component {
                                                 />
                                                 Loading...
                                             </Button>
-
                                         ):(
-
                                             <Button
                                             disabled={!(this.state.email && this.state.password)}
                                             onClick={this.handleFormSubmit}
@@ -254,9 +239,7 @@ class Home extends Component {
                                                 Submit
                                             </Button>
                                         )}
-
                                     </Form>
-
                                 </Modal.Body>
                             </Modal>
                             
@@ -272,9 +255,7 @@ class Home extends Component {
                                         Sign-Up
                                     </Modal.Title>
                                 </Modal.Header>
-
                                 <Modal.Body>
-
                                     <Form>
                                         {this.state.badSignup ? (
                                             <Alert variant={"danger"}>
@@ -291,7 +272,6 @@ class Home extends Component {
                                                 placeholder="First Name"
                                             />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Form.Label>Last Name</Form.Label>
                                             <Form.Control
@@ -302,7 +282,6 @@ class Home extends Component {
                                                 placeholder="Last Name"
                                             />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
@@ -313,7 +292,6 @@ class Home extends Component {
                                                 placeholder="Email"
                                             />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
@@ -323,7 +301,6 @@ class Home extends Component {
                                                 placeholder="Password"
                                             />
                                         </Form.Group>
-
                                         {this.state.loading ? (
                                             <Button variant="primary" disabled>
                                                 <Spinner
@@ -335,30 +312,22 @@ class Home extends Component {
                                                 />
                                                 Loading...
                                             </Button>
-
                                         ):(
-
                                             <Button
                                                 disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
                                                 onClick={this.handleFormSubmit}
                                             >
                                                 Submit
                                             </Button>
-
                                         )}
-
                                     </Form>
-
                                 </Modal.Body>
                             </Modal>
-
                         </ButtonToolbar>
                     </Navbar>
                     
                     
-
                     <Container>
-
                         <Jumbotron>
                             <p>Welcome to PixPective!  Where memories are shared.</p>
                             <p> </p>

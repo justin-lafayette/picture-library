@@ -31,11 +31,12 @@ class Profile extends Component {
 
     // Functions
     
-    getEvents = ()=> {
-        Api.getEvents(this.state.email)
+    loadEvents = ()=> {
+        console.log('in Profile.js - loadEvents email ', this.state.email);
+        Api.getEventsByUserEmail(this.state.email)
             .then(res => {
-                console.log('in loadEvents email ', this.state.email);
-                this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
+                console.log(res.data)
+                this.setState({ events: res.data, title:"", event_escription:"", event_id:"" })
             })
             .catch(err => console.log(err))
     }
@@ -50,32 +51,33 @@ class Profile extends Component {
 
     componentDidMount() {
         console.log("Component did mount");
-        this.getEvents();
         // this.loadMyPictures();
 
 
         Api.isAuth()
-            .then(res => {
-                console.log("auth res: ", res)
-                if (res.data.user) {
-                    this.setState({
-                        firstName: res.data.user.firstname,
-                        lastName: res.data.user.lastname,
-                        email: res.data.user.email,
-                        isAuth: true
-                    });
-                    console.log("if")
-                    console.log("email: ", this.state.email);
-                    console.log("first name: ", this.state.firstName);
-                    console.log("last name: ", this.state.lastName);
-                } else {
-                    this.setState({
-                        email: "",
-                        isAuth: false
-                    })
-                    this.props.history.push('/login');
-                }
-            })
+          .then( res => {
+              console.log("auth res: ", res)
+            if( res.data.user ) {
+              this.setState({
+                firstName: res.data.user.firstname,
+                lastName: res.data.user.lastname,
+                email: res.data.user.email,
+                isAuth: true
+              });
+              console.log("if")
+              console.log("email: ", this.state.email);
+              console.log("first name: ", this.state.firstName);
+              console.log("last name: ", this.state.lastName);
+              this.loadEvents();
+        
+            } else {
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/login');
+            }
+        })
         console.log("email: ", this.state.email);
         console.log("first name: ", this.state.firstName);
         console.log("last name: ", this.state.lastName);
