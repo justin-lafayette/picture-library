@@ -95,9 +95,7 @@ class Event extends Component {
                 {this.state.memberOf ? (
                     <>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                            auth
-
+                            isAuth={this.state.isAuth}
                         >
                             <Container>
                                 {this.state.open}
@@ -155,8 +153,9 @@ class Event extends Component {
 
                     <>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                            />
+                            isAuth={this.state.isAuth}
+                        />
+            
                         <Container>
 
                             <Col>
