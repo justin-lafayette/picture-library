@@ -4,10 +4,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
-//import DatePicker from 'react-date-picker';
-// import BtstrpDatePicker from '../components/BtstrpDatePicker';
-// import DatePicker from 'react-bootstrap-date-picker';
-// import createReactClass from 'create-react-class';
+import DatePicker from 'react-date-picker';
 import ReactToPrint from 'react-to-print';
 // import QRCode from 'react-qr-svg';
 
@@ -114,10 +111,10 @@ class CreateEvent extends Component {
                                 <Form.Label>
                                     Date
                                 </Form.Label>
-                                {/* <DatePicker 
+                                <DatePicker 
                                     value={this.state.date}
                                     onChange={this.onChange}
-                                /> */}
+                                />
                             </Form.Group>
 
                             <Form.Group controlId="event-description">
