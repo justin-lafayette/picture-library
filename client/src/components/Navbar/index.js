@@ -1,4 +1,5 @@
 import React from 'react';
+import "./style.css";
 
 function Navbar(props) {
 
@@ -7,7 +8,8 @@ function Navbar(props) {
     if (props.isAuth) {
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+
+            <nav className="navbar navbar-expand-lg navbar-custom">
 
                 <div className="navbar-brand" href="/">
                     {/* TODO: remove hard codded require for img */}
@@ -63,7 +65,7 @@ function Navbar(props) {
     } else {
         return (
 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-custom">
 
                 <div className="navbar-brand" href="/">
                     {/* TODO: remove hard codded require for img */}

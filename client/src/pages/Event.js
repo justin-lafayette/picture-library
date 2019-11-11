@@ -47,8 +47,8 @@ class Event extends Component {
                 isAuth: false
               })
               this.props.history.push('/login');
+              console.log("email", this.state.email);
             }
-            console.log("email", this.state.email);
         })
 
         // this is not kicking off
@@ -59,14 +59,11 @@ class Event extends Component {
         //     .catch(err => console.log( err ))
     }
 
-    // componentDidMount() {
-    //     this.getSubStatus();
-
-    // }
-
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(name);
+        console.log(value);
         this.setState({
             [name]: value
         });
@@ -90,13 +87,6 @@ class Event extends Component {
             })
     }
 
-    // <Button 
-    // /* TODO: show qr code if member of the event */
-    // /* onClick(this.events) */
-    // >QR</Button>
-    
-
-
     // Render Elements
     render() {
         return(
@@ -108,9 +98,9 @@ class Event extends Component {
                             isAuth={this.state.isAuth}
                         >
                             <Container>
-                                {this.state.title}
+                                {this.state.open}
                             </Container>
-                            <Button >Upload Image</Button>
+                            <Button>Upload Image</Button>
                         </Navbar>
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}
@@ -119,9 +109,7 @@ class Event extends Component {
                         <Jumbotron
                             style={{backgroundColor: "black", height: "92vh"}}
                         >
-
                         </Jumbotron>
-
                         <Container>
 
                             <Row>
@@ -167,6 +155,7 @@ class Event extends Component {
                         <Navbar
                             isAuth={this.state.isAuth}
                         />
+            
                         <Container>
 
                             <Col>
@@ -178,13 +167,12 @@ class Event extends Component {
                                     >
 
                                         <Image 
-                                            /* TODO: {this.state.eventPlaceholder} */
-                                            // src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                                            src={"../slideshow"}
-                                            style={{MaxHeight: 200}}
+                                        /* TODO: {this.state.eventPlaceholder} */
+                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                                        style={{maxHeight: 200}}
                                         />
 
-                                    </Col>
+                                    </Col>    
 
                                     <Col>
 
@@ -221,15 +209,11 @@ class Event extends Component {
                             </Col>
 
                         </Container>
-                    </>
+                
+                    </>                
                 )}
-                
-                
-            </>
-                        
-        );
-        
-    }
+           </>
+      )}
 };
 
 export default Event;
