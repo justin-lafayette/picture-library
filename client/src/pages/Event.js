@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
+import Slideshow from '../components/Slideshow/slideshow';
 // import Api from '../utils/Api';
 
 /* This page used REACT-BOOTSTRAP in-place */
@@ -33,6 +34,9 @@ class Event extends Component {
         console.log(this.props.match.params.id);
         this.state.event_id = this.props.match.params.id;
         
+        // ID from the selected event
+        console.log(this.props.location);
+
         Api.isAuth()
           .then( res => {
             if( res.data.user ) {
@@ -46,8 +50,8 @@ class Event extends Component {
                 isAuth: false
               })
               this.props.history.push('/login');
+              console.log("email", this.state.email);
             }
-            console.log("email", this.state.email);
         })
 
         Api.loadSingleEvent(this.props.match.params.id)
@@ -57,11 +61,19 @@ class Event extends Component {
             })
             .catch( err => console.log( err ) )
 
+        // this is not kicking off
+        // Api.loadSingleEvent(this.props.location)
+        //     .then( res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log( err ))
     }
 
     /* Handle input change */
     handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(name);
+        console.log(value);
         this.setState({
             [name]: value
         });
@@ -85,13 +97,6 @@ class Event extends Component {
             })
     }
 
-    // <Button 
-    // /* TODO: show qr code if member of the event */
-    // /* onClick(this.modalToOpen) */
-    // >QR</Button>
-    
-
-
     // Render Elements
     render() {
         console.log(this.state.event_id)
@@ -104,10 +109,13 @@ class Event extends Component {
                             isAuth={this.state.isAuth}
                         >
                             <Container>
-                                {this.state.title}
+                                {this.state.open}
                             </Container>
-                            <Button >Upload Image</Button>
+                            <Button>Upload Image</Button>
                         </Navbar>
+                        <div
+                            style={{backgroundColor: "red", height: "40vh"}}
+                        ></div>
 
                         <Jumbotron
                             // style={{backgroundColor: "black", height: "92vh"}}
@@ -115,7 +123,6 @@ class Event extends Component {
                             {this.state.event_id}
 
                         </Jumbotron>
-
                         <Container>
 
                             <Row>
@@ -139,15 +146,15 @@ class Event extends Component {
                                     <CardGroup>
                                         {/* {this.state.event.map( (event) => {
 
-                                            // <Card
-                                            // key={event.eventID}
-                                            // >
-                                            //     <Card.Img>
-                                            //         {event.eventPics}
-                                            //     </Card.Img>
-                                            // </Card>
-                                        
-                                        })} */}
+                                            <Card
+                                            key={event.eventID}
+                                            >
+                                                <Card.Img>
+                                                    {event.eventPics}
+                                                </Card.Img>
+                                            </Card>
+                                         }
+                                        })*/}
                                     </CardGroup>
                                 </Col>
                             </Row>
@@ -161,6 +168,7 @@ class Event extends Component {
                         <Navbar
                             isAuth={this.state.isAuth}
                         />
+            
                         <Container>
 
                             <Col>
@@ -177,7 +185,7 @@ class Event extends Component {
                                         style={{maxHeight: 200}}
                                         />
 
-                                    </Col>
+                                    </Col>    
 
                                     <Col>
 
@@ -214,15 +222,11 @@ class Event extends Component {
                             </Col>
 
                         </Container>
-                    </>
+                
+                    </>                
                 )}
-                
-                
-            </>
-                        
-        );
-        
-    }
+           </>
+      )}
 };
 
 export default Event;

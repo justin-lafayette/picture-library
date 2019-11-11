@@ -46,7 +46,7 @@ class EventSearch extends Component {
     
     componentDidMount() {
         console.log("Component did mount");
-        this.loadAllEvents();
+        //this.loadAllEvents();
             
         Api.isAuth()
           .then( res => {
@@ -64,9 +64,9 @@ class EventSearch extends Component {
               })
               this.props.history.push('/login');
             }
-             console.log("calling loadEvents email", this.state.email);
+            })
             
-        })
+        this.loadAllEvents();
     }
 
     // goToEvent = (e) => {
@@ -92,6 +92,19 @@ class EventSearch extends Component {
         
         })   
     }
+
+    // sendToEvent = (e) => {
+    //     e.preventDefault();
+    //     let targetId = e.target.id;
+    //     console.log(e.target.id)
+    //     console.log(targetId)
+    //     this.setState({event_id: targetId}, () => {
+            
+    //         console.log(this.state.event_id)
+    //         this.props.history.push("/event/:id", [this.state.event_id])
+        
+    //     })   
+    // }
 
 
     // Render Elements

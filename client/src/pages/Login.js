@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
-import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner, Alert } from 'react-bootstrap';
+import Scanner from './Scan';
 
 class Login extends Component {
 
@@ -15,10 +16,12 @@ class Login extends Component {
         newPassword: "",
         newFirstname: "",
         newLastname: "",
-        loading: false
+        loading: false,
+        badSignin: false,
+        badSignup: false,
 
     }
-    
+
     // Functions
     /* TODO: Function to show event search if sign-in is valid */
 
@@ -120,7 +123,7 @@ class Login extends Component {
                 <Navbar
                     isAuth={this.state.isAuth}
                 />
-
+                
                 <Jumbotron>
 
                     <Container>
@@ -133,6 +136,12 @@ class Login extends Component {
                                         <Card.Title>Sign In</Card.Title>
 
                                             <Form>
+
+                                            {this.state.badSignin ? (
+                                                <Alert variant={"danger"}>
+                                                    Wrong Username or Password
+                                                </Alert>
+                                            ): (<></>)}
 
                                                 <Form.Group>
                                                     <Form.Label>Email</Form.Label>
@@ -191,6 +200,12 @@ class Login extends Component {
                                         <Card.Title>Sign Up</Card.Title>
 
                                         <Form>
+
+                                            {this.state.badSignup ? (
+                                                <Alert variant={"danger"}>
+                                                    User already exists!
+                                                </Alert>
+                                            ):(<></>)}
 
                                             <Form.Group>
                                                 <Form.Label>First Name</Form.Label>
