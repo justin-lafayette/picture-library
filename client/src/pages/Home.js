@@ -32,16 +32,15 @@ class Home extends Component {
         Api.isAuth()
             .then( res => {
                 if( res.data.user ) {
-                this.setState({
-                    email: res.data.user.email,
-                    isAuth: true
-                });
+                    this.setState({
+                        email: res.data.user.email,
+                        isAuth: true
+                    });
                 } else {
-                this.setState({
-                    email: "",
-                    isAuth: false
-                })
-                // this.props.history.push('/');    
+                    this.setState({
+                        email: "",
+                        isAuth: false
+                    })  
                 }
             })
     }
@@ -160,6 +159,7 @@ class Home extends Component {
                             <p>So...Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p>
                         </Jumbotron>
                     </Container>
+
                     {this.state.showScanner? <Scanner/>: <></>}
                     
                 </>
@@ -192,19 +192,25 @@ class Home extends Component {
                                 aria-labelledby="signin-modal"
                             >
                                 <Modal.Header closeButton>
+
                                     <Modal.Title id="signin-modal">
                                         Sign-In
                                     </Modal.Title>
+
                                 </Modal.Header>
                                 <Modal.Body>
+
                                     <Form>
                                         {this.state.badSignin ? (
                                             
                                             <Alert variant={"danger"}>
                                                 Wrong Username or Password
                                             </Alert>
+
                                             ): (<></>)}
+
                                         <Form.Group>
+
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
                                                 value={this.state.email}
@@ -214,6 +220,7 @@ class Home extends Component {
                                                 placeholder="Email"
                                             />
                                         </Form.Group>
+
                                         <Form.Group>
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
@@ -223,7 +230,9 @@ class Home extends Component {
                                                 placeholder="Password"
                                             />
                                         </Form.Group>
+
                                         {this.state.loading ? (
+
                                             <Button variant="primary" disabled>
                                                 <Spinner
                                                     as="span"
@@ -234,15 +243,20 @@ class Home extends Component {
                                                 />
                                                 Loading...
                                             </Button>
+
                                         ):(
+
                                             <Button
                                             disabled={!(this.state.email && this.state.password)}
                                             onClick={this.handleFormSubmit}
                                             >
                                                 Submit
                                             </Button>
+
                                         )}
+
                                     </Form>
+
                                 </Modal.Body>
                             </Modal>
                             
