@@ -43,9 +43,10 @@ class Event extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
+              this.props.history.push('/login');
               console.log("email", this.state.email);
             }
         })
@@ -57,11 +58,6 @@ class Event extends Component {
         //     })
         //     .catch(err => console.log( err ))
     }
-
-    // componentDidMount() {
-    //     this.getSubStatus();
-
-    // }
 
     /* Handle input change */
     handleInputChange = event => {
@@ -90,13 +86,6 @@ class Event extends Component {
                 this.setState({event: res.data, email: "", eventID: "", title: "", description: "", eventPlaceholder: "", memberOf: ""})
             })
     }
-
-    // <Button 
-    // /* TODO: show qr code if member of the event */
-    // /* onClick(this.events) */
-    // >QR</Button>
-    
-
 
     // Render Elements
     render() {
@@ -221,15 +210,11 @@ class Event extends Component {
                             </Col>
 
                         </Container>
-
                 
-                
-            </>
-                        
-        )}
-        </>
-        
-        )}
+                    </>                
+                )}
+           </>
+      )}
 };
 
 export default Event;
