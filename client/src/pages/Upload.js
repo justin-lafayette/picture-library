@@ -1,13 +1,46 @@
 import React, {Component} from 'react'
-import ImageUpload from '../components/ImageUpload'
+import ImageUpload from '../components/ImageUpload';
+import Navbar from '../components/Navbar';
+import Api from '../utils/Api';
 
 
 class Upload extends Component {
+
+  state = {
+    email: this.props.email || "" ,
+    isAuth: this.props.isAuth,
+    event_id: ""
+  }
+
+  componentDidMount() {
+    Api.isAuth()
+        .then( res => {
+            if( res.data.user ) {
+            this.setState({
+                email: res.data.user.email,
+                isAuth: true
+            });
+            } else {
+            this.setState({
+                email: "",
+                isAuth: false
+            })
+            this.props.history.push('/login');
+            }
+        })
+  }
+
     render (){
       return(
-        <div className = 'Upload'>
-          <ImageUpload/>
-        </div>
+        <>
+          <Navbar
+            isAuth={this.state.isAuth}
+          />
+          
+          <div className = 'Upload'>
+            <ImageUpload/>
+          </div>
+        </>
       )
     }
   }

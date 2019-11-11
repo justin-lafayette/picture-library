@@ -159,19 +159,15 @@ class Home extends Component {
                             <p> </p>
                             <p>So...Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p>
                         </Jumbotron>
-
                     </Container>
-
                     {this.state.showScanner? <Scanner/>: <></>}
                     
                 </>
-
             )
         } else {
             
             return(
                 <>
-
                     <Navbar
                         isAuth={this.state.isAuth}
                     >
@@ -188,7 +184,7 @@ class Home extends Component {
                             >
                                 Sign-Up
                             </Button>
-
+                            
                             <Modal
                                 size="md"
                                 show={this.state.signinShow}
@@ -200,18 +196,14 @@ class Home extends Component {
                                         Sign-In
                                     </Modal.Title>
                                 </Modal.Header>
-
                                 <Modal.Body>
                                     <Form>
-
                                         {this.state.badSignin ? (
-
                                             
                                             <Alert variant={"danger"}>
                                                 Wrong Username or Password
                                             </Alert>
                                             ): (<></>)}
-
                                         <Form.Group>
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
@@ -222,7 +214,6 @@ class Home extends Component {
                                                 placeholder="Email"
                                             />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
@@ -232,7 +223,6 @@ class Home extends Component {
                                                 placeholder="Password"
                                             />
                                         </Form.Group>
-
                                         {this.state.loading ? (
                                             <Button variant="primary" disabled>
                                                 <Spinner
@@ -244,9 +234,7 @@ class Home extends Component {
                                                 />
                                                 Loading...
                                             </Button>
-
                                         ):(
-
                                             <Button
                                             disabled={!(this.state.email && this.state.password)}
                                             onClick={this.handleFormSubmit}
@@ -254,9 +242,7 @@ class Home extends Component {
                                                 Submit
                                             </Button>
                                         )}
-
                                     </Form>
-
                                 </Modal.Body>
                             </Modal>
                             
@@ -268,9 +254,11 @@ class Home extends Component {
                                 aria-labelledby="signup-modal"
                             >
                                 <Modal.Header closeButton>
+
                                     <Modal.Title id="signup-modal">
                                         Sign-Up
                                     </Modal.Title>
+
                                 </Modal.Header>
 
                                 <Modal.Body>
@@ -282,6 +270,7 @@ class Home extends Component {
                                             </Alert>
                                         ):(<></>)}
                                         <Form.Group>
+
                                             <Form.Label>First Name</Form.Label>
                                             <Form.Control
                                                 value={this.state.firstname}
@@ -325,6 +314,7 @@ class Home extends Component {
                                         </Form.Group>
 
                                         {this.state.loading ? (
+
                                             <Button variant="primary" disabled>
                                                 <Spinner
                                                     as="span"
@@ -351,14 +341,11 @@ class Home extends Component {
 
                                 </Modal.Body>
                             </Modal>
-
                         </ButtonToolbar>
                     </Navbar>
                     
                     
-
                     <Container>
-
                         <Jumbotron>
                             <p>Welcome to PixPective!  Where memories are shared.</p>
                             <p> </p>
