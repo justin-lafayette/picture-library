@@ -40,9 +40,9 @@ export default {
     },
 
     // Load Events
-    // loadEvents: function() {
-    //     return axios.get("/api/allevents")
-    // },
+    loadEvents: function() {
+        return axios.get("/api/allevents")
+    },
 
     // Get event subscription status
     getSubStatus: function(/* Logged in user info here */) {
