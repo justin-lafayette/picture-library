@@ -331,6 +331,7 @@ class Home extends Component {
                         
                             <p>Welcome to PixPective!</p> 
                             <p>Where memories are shared.</p>
+                            <p>Just scan, join and </p>
                             {/* <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
                             <p> </p>
                             <p>How does it work?  Glad you asked!  PixPective allows you to join an event via a QR Code or via the “Join an Event” button on the app.
