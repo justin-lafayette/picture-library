@@ -43,9 +43,10 @@ class Event extends Component {
               });
             } else {
               this.setState({
-                email: null,
+                email: "",
                 isAuth: false
               })
+              this.props.history.push('/login');
               console.log("email", this.state.email);
             }
         })
@@ -57,11 +58,6 @@ class Event extends Component {
         //     })
         //     .catch(err => console.log( err ))
     }
-
-    // componentDidMount() {
-    //     this.getSubStatus();
-
-    // }
 
     /* Handle input change */
     handleInputChange = event => {
@@ -91,13 +87,6 @@ class Event extends Component {
             })
     }
 
-    // <Button 
-    // /* TODO: show qr code if member of the event */
-    // /* onClick(this.events) */
-    // >QR</Button>
-    
-
-
     // Render Elements
     render() {
         return(
@@ -106,9 +95,7 @@ class Event extends Component {
                 {this.state.memberOf ? (
                     <>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                            auth
-
+                            isAuth={this.state.isAuth}
                         >
                             <Container>
                                 {this.state.open}
@@ -166,8 +153,9 @@ class Event extends Component {
 
                     <>
                         <Navbar
-                            openModal={(modalToOpen) => this.openModal(modalToOpen)}
-                            />
+                            isAuth={this.state.isAuth}
+                        />
+            
                         <Container>
 
                             <Col>
@@ -221,15 +209,11 @@ class Event extends Component {
                             </Col>
 
                         </Container>
-
                 
-                
-            </>
-                        
-        )}
-        </>
-        
-        )}
+                    </>                
+                )}
+           </>
+      )}
 };
 
 export default Event;
