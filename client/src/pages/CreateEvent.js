@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
-import ReactToPrint from 'react-to-print';
+// import ReactToPrint from 'react-to-print';
 // import QRCode from 'react-qr-svg';
 
 
@@ -141,7 +141,7 @@ class CreateEvent extends Component {
 
                         </Form>
 
-                        {this.state.qrCodeValue ? <div><img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue}></img></div> : (<></>)}
+                        {this.state.qrCodeValue ? <div><img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue} alt="qr"></img></div> : (<></>)}
 
                     </Jumbotron>
 

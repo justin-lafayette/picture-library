@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
-import Slideshow from '../components/Slideshow/slideshow';
+// import Slideshow from '../components/Slideshow/slideshow';
 // import Api from '../utils/Api';
 
 /* This page used REACT-BOOTSTRAP in-place */
@@ -32,7 +32,9 @@ class Event extends Component {
     componentDidMount() {
         console.log("Component did mount");
         console.log(this.props.match.params.id);
-        this.state.event_id = this.props.match.params.id;
+        // Do not set state directly in this manner
+        // this.state.event_id = this.props.match.params.id;
+
         
         // ID from the selected event
         console.log(this.props.location);

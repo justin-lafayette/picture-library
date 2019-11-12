@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Dropzone from "react-dropzone"
 //import 
-import {Button} from 'react-bootstrap'
+// import {Button} from 'react-bootstrap'
 import Api from "../../utils/Api";
 import {Jumbotron} from 'react-bootstrap';
 

@@ -126,7 +126,8 @@ class Home extends Component {
 
     // Render Elements
     render() {
-        if( this.state.isAuth ) {
+        if( this.state.logged_in ) {
+            console.log("logged in")
             return (
 
                 <>
@@ -165,12 +166,10 @@ class Home extends Component {
                 </>
             )
         } else {
-            
+            console.log("not signed in")
             return(
                 <>
-                    <Navbar
-                        isAuth={this.state.isAuth}
-                    >
+                    <Navbar>
                         <ButtonToolbar>
 
                             <Button
@@ -364,11 +363,6 @@ class Home extends Component {
                             <p>Welcome to PixPective!  Where memories are shared.</p>
                             <p> </p>
                             <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
-                            <p> </p>
-                            <p>How does it work?  Glad you asked!  PixPective allows you to join an event via a QR Code or via the “Join an Event” button on the app.
-                            Once you have joined an event, you will upload any photos you want from that event into the library.  There it will join any other pictures uploaded from that event.   Once in the library, they will be added to a slideshow of the event that will show multiple viewpoints, including yours.   This gives a much more comprehensive impression of the event in question.
-                            What events qualify for this?  If you attend an event where over one person is taking pictures, the event qualifies.  Concert? Yes.  Baby's first birthday party? Yes.  Baseball or soccer game?  Yes!
-                            Wherever multiple people are experiencing the same trip, concert, event or happening, this app is for you!</p>
                             <p> </p>
                             <p>Is it secure?  Yes!  The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator.  You must register for and be admitted to the event as a qualified user.   You will always be the only one (other than the Administrator) that can remove your photos.</p>
                             <p> </p>

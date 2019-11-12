@@ -4,30 +4,28 @@
 
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Row, Col, Card, Image, ListGroup, Container, Jumbotron, Button } from 'react-bootstrap';
+import { Row, Col, /* Card, Image, */ ListGroup, Container, Jumbotron/* , Button */ } from 'react-bootstrap';
 import Api from '../utils/Api';
 
 
 class Profile extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            auth: true,
-            firstName: "",
-            lastName: "",
-            email: "",
-            modalIsOpen: false,
-            events: [],
-            title: "",
-            event_description: "",
-            event_id: "",
-            images: [],
-            imagesId: "",
-            picture: "",
-            
-    
-        }
+    state = {
+        auth: true,
+        firstName: "",
+        lastName: "",
+        email: "",
+        modalIsOpen: false,
+        events: [],
+        title: "",
+        event_description: "",
+        event_id: "",
+        images: [],
+        imagesId: "",
+        picture: "",
+        
+
     }
+    
 
     // Functions
     

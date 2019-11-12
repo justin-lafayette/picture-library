@@ -3,8 +3,6 @@ import "./style.css";
 
 function Navbar(props) {
 
-    console.log("navbar props.isAth: ", props.isAuth)
-
     if (props.isAuth) {
 
         return (
@@ -105,4 +103,4 @@ function Navbar(props) {
 
 };
 
-export default Navbar;
+export default Navbar ;
