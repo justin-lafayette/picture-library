@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
-import Slideshow from '../components/Slideshow/slideshow';
+// import Slideshow from '../components/Slideshow/slideshow';
 // import Api from '../utils/Api';
 
 /* This page used REACT-BOOTSTRAP in-place */
@@ -37,22 +37,22 @@ class Event extends Component {
         // ID from the selected event
         console.log(this.props.location);
 
-        Api.isAuth()
-          .then( res => {
-            if( res.data.user ) {
-              this.setState({
-                email: res.data.user.email,
-                isAuth: true
-              });
-            } else {
-              this.setState({
-                email: "",
-                isAuth: false
-              })
-              this.props.history.push('/login');
-              console.log("email", this.state.email);
-            }
-        })
+        // Api.isAuth()
+        //   .then( res => {
+        //     if( res.data.user ) {
+        //       this.setState({
+        //         email: res.data.user.email,
+        //         isAuth: true
+        //       });
+        //     } else {
+        //       this.setState({
+        //         email: "",
+        //         isAuth: false
+        //       })
+        //       this.props.history.push('/login');
+        //       console.log("email", this.state.email);
+        //     }
+        // })
 
         Api.loadSingleEvent(this.props.match.params.id)
             .then( res => {
