@@ -66,10 +66,10 @@ class ImageUpload extends  Component {
     event.preventDefault();
 
     //console.log("imgSrc", this.state.imgSrc)
-    console.log("FILE!");
+    console.log("in ImageUpload - FILE!");
     console.log(this.state.file);
     const formData = new FormData();
-    formData.append('image',this.state.file, "this.state.filename");
+    formData.append('image',this.state.file, this.state.filename);
 
     Api.uploadPic(formData)
       .then()
@@ -127,11 +127,11 @@ class ImageUpload extends  Component {
           
               {
               // this is from add-s3 branch. Do we need this button and the click handler?  
-              // <Button
-              //   onClick={this.handleFormSubmit}
-              // >
-              //   Upload
-              // </Button>
+              <Button
+                onClick={this.handleFormSubmit}
+              >
+                Upload
+              </Button>
     
             
             /* <button type="submit" className="btn btn-primary mb-2">
