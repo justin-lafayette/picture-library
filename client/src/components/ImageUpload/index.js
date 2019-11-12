@@ -92,7 +92,7 @@ class ImageUpload extends  Component {
             <Dropzone
               className=" "
               onDrop={this.handleOnDrop}
-              multiple={true}
+              multiple={false}
               accept={acceptedFileTypes}
               maxSize={imageMaxSize}
               minSize={0}
@@ -111,15 +111,13 @@ class ImageUpload extends  Component {
                     
                   </div>
                 
-                
-                
               )}
             </Dropzone>
             </Jumbotron>
           
-            {/* <button type="submit" className="btn btn-primary mb-2">
+            <button type="submit" className="btn btn-primary mb-2">
               Upload
-            </button> */}
+            </button>
           
         </div>
       </>
