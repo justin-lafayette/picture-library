@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
 import Api from '../utils/Api';
 import Slideshow from '../components/Slideshow/slideshow';
+import axios from 'axios';
+
 // import Api from '../utils/Api';
 
 /* This page used REACT-BOOTSTRAP in-place */
@@ -97,6 +99,12 @@ class Event extends Component {
             })
     }
 
+    uploadImage = () =>{
+        console.log('in Event.js - uploadImage');
+        return axios.post("/uploadpic" )
+            .catch( err => console.log(err.response));
+    }
+
     // Render Elements
     render() {
         console.log(this.state.event_id)
@@ -111,7 +119,10 @@ class Event extends Component {
                             <Container>
                                 {this.state.open}
                             </Container>
-                            <Button>Upload Image</Button>
+                            <Button
+                            id = {this.state.event_id}
+                            //onClick = {this.uploadImage} 
+                            >Upload Image</Button>
                         </Navbar>
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}

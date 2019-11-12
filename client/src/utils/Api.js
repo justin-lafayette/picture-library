@@ -43,7 +43,7 @@ export default {
             }
         }
         return axios.post("/uploadpic", data, config);
-    },
+    }, 
 
     // Load Events
     loadAllEvents: function() {
