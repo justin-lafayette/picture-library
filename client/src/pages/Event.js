@@ -1,8 +1,9 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron} from 'react-bootstrap';
+import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal } from 'react-bootstrap';
 import Api from '../utils/Api';
+import ImageUpload from '../components/ImageUpload';
 // import Slideshow from '../components/Slideshow/slideshow';
 // import Api from '../utils/Api';
 
@@ -16,13 +17,14 @@ class Event extends Component {
         email: "",
         event: [],
         event_id: "",
-        title: "title",
+        title: "",
         description: "",
-        eventPlaceholder: "",
-        memberOf: true,
+        memberOf: false,
         eventPics: "",
         slideshow: "",
-        auth: true
+        auth: true,
+        uploadShow: false,
+        
 
     }
     
@@ -32,27 +34,27 @@ class Event extends Component {
     componentDidMount() {
         console.log("Component did mount");
         console.log(this.props.match.params.id);
-        this.state.event_id = this.props.match.params.id;
+        this.setState({event_id: this.props.match.params.id})
         
         // ID from the selected event
-        console.log(this.props.location);
+        console.log("this location: ", this.props.location);
 
-        // Api.isAuth()
-        //   .then( res => {
-        //     if( res.data.user ) {
-        //       this.setState({
-        //         email: res.data.user.email,
-        //         isAuth: true
-        //       });
-        //     } else {
-        //       this.setState({
-        //         email: "",
-        //         isAuth: false
-        //       })
-        //       this.props.history.push('/login');
-        //       console.log("email", this.state.email);
-        //     }
-        // })
+        Api.isAuth()
+          .then( res => {
+            if( res.data.user ) {
+              this.setState({
+                email: res.data.user.email,
+                isAuth: true
+              });
+            } else {
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/login');
+              console.log("email", this.state.email);
+            }
+        })
 
         Api.loadSingleEvent(this.props.match.params.id)
             .then( res => {
@@ -77,23 +79,31 @@ class Event extends Component {
         });
     }
 
+    // needs back-end route
     handleSubscribe = event => {
         event.preventDefault();
+        // this.props.location.reload();
 
         Api.subscribe({
             email: this.state.email,
             eventID: this.state.eventID,
             subscribe: true
         })
+            .then( res => {
+                // this.props.location.reload();
+            })
     }
 
+    // Needs back-end route
     getSubStatus = () => {
 
         Api.SubStatus()
             .then( res => {
-                this.setState({event: res.data, email: "", eventID: "", title: "", description: "", eventPlaceholder: "", memberOf: ""})
+                this.setState({event: res.data, email: "", event_id: "", title: "", description: "",  memberOf: ""})
             })
     }
+
+    handleUploadShow = () => this.setState({uploadShow: true})
 
     // Render Elements
     render() {
@@ -109,7 +119,28 @@ class Event extends Component {
                             <Container>
                                 {this.state.open}
                             </Container>
-                            <Button>Upload Image</Button>
+                            <Button
+                                onClick={() => this.handleUploadShow()}
+                            >
+                                Upload Image
+                            </Button>
+
+                            <Modal
+                                size="xl"
+                                show={this.state.uploadShow}
+                                onHide={() =>  this.setState({uploadShow: false})}
+                                aria-labelledby="upload-modal"
+                                centered
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title id="upload-modal">
+
+                                    </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <ImageUpload />
+                                </Modal.Body>
+                            </Modal>
                         </Navbar>
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}
@@ -178,9 +209,8 @@ class Event extends Component {
                                     >
 
                                         <Image 
-                                        /* TODO: {this.state.eventPlaceholder} */
-                                        src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                                        style={{maxHeight: 200}}
+                                            src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
+                                            style={{maxHeight: 200}}
                                         />
 
                                     </Col>    
@@ -191,16 +221,13 @@ class Event extends Component {
                                         style={{height:100}}
                                         >
                                             {this.state.title}
-                                            Title
-                                        
                                         </Row>
 
                                         <Row
                                         style={{height:100}}
                                         >           
                                             <Button 
-                                            /* TODO: sign-up if not member */
-                                            onClick={this.handleSubscribe}
+                                                onClick={this.handleSubscribe}
                                             >Subscribe</Button>
                                         </Row>
 
@@ -211,9 +238,7 @@ class Event extends Component {
                                     <Col
                                     style={{height:100}}
                                     >
-                                        {this.state.description}
-                                        Description
-                                        
+                                        {this.state.description}                                        
                                     </Col>
                                 </Row>
                             

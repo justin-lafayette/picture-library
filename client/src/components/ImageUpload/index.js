@@ -87,7 +87,7 @@ class ImageUpload extends  Component {
          
         
         <div className="ImageUpload">
-        <Jumbotron className="text-center">
+        <Jumbotron className="text-center" style={{height: "70vh"}}>
         
           <h1>Image Upload</h1>
           {imgSrc !== null ?
@@ -124,19 +124,16 @@ class ImageUpload extends  Component {
               )}
             </Dropzone>
             </Jumbotron>
-          
-              {
-              // this is from add-s3 branch. Do we need this button and the click handler?  
-              // <Button
-              //   onClick={this.handleFormSubmit}
-              // >
-              //   Upload
-              // </Button>
+
+            <Button
+              onClick={this.handleFormSubmit}
+              type="submit"
+            >
+              Upload
+            </Button>
     
             
-            /* <button type="submit" className="btn btn-primary mb-2">
-              Upload
-            </button> */}
+            
           
         </div>
       </>

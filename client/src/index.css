@@ -2,5 +2,14 @@
     border: black solid 1px;
 } */
 #root {
-    background-color: rgb(187, 167, 167);
+    background: url("https://image.freepik.com/free-vector/colorful-abstract-background-with-squares_1035-3033.jpg");
+    background-size: cover;
+    height:100%;
 }
+
+
+
+html, body {
+    height:100%;
+}
+
