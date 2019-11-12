@@ -145,7 +145,7 @@ class Home extends Component {
 
                     <Container>
                         
-                        <Jumbotron>
+                    <Jumbotron>
                             <p>Welcome to PixPective!  Where memories are shared.</p>
                             <p> </p>
                             <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
@@ -172,7 +172,7 @@ class Home extends Component {
                         isAuth={this.state.isAuth}
                     >
                         <ButtonToolbar>
-                            <Button
+                            <Button 
                                 onClick={() => this.handleSigninShow()}
                             >
                                 Sign-In
@@ -329,10 +329,10 @@ class Home extends Component {
                     
                     <Container>
                         <Jumbotron>
-                            <p>Welcome to PixPective!  Where memories are shared.</p>
-                            <p> </p>
-                            <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
-                            <p> </p>
+                            <h1>Welcome to PixPective!  Where memories are shared.</h1>
+                            <p>It is a place to augment your experiences with those that shared the same event. </p>
+                            {/* <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p> */}
+                            {/* <p> </p>
                             <p>How does it work?  Glad you asked!  PixPective allows you to join an event via a QR Code or via the “Join an Event” button on the app.
                             Once you have joined an event, you will upload any photos you want from that event into the library.  There it will join any other pictures uploaded from that event.   Once in the library, they will be added to a slideshow of the event that will show multiple viewpoints, including yours.   This gives a much more comprehensive impression of the event in question.
                             What events qualify for this?  If you attend an event where over one person is taking pictures, the event qualifies.  Concert? Yes.  Baby's first birthday party? Yes.  Baseball or soccer game?  Yes!
@@ -340,7 +340,10 @@ class Home extends Component {
                             <p> </p>
                             <p>Is it secure?  Yes!  The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator.  You must register for and be admitted to the event as a qualified user.   You will always be the only one (other than the Administrator) that can remove your photos.</p>
                             <p> </p>
-                            <p>So...Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p>
+                            <p>So...Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p> */}
+                            <p>
+                             <Button variant="primary">Learn more</Button>
+                             </p>
                         </Jumbotron>
 
                     </Container>

@@ -59,17 +59,17 @@ class ImageUpload extends  Component {
       }
     }
   }
-  handleOnCropChange = (crop)=> {
-    console.log(crop)
-    this.setState({crop})
-    console.log(this.state)
-  }
+  // handleOnCropChange = (crop)=> {
+  //   console.log(crop)
+  //   this.setState({crop})
+  //   console.log(this.state)
+  // }
   render() {
-  //   const dropzoneStyle = {
-  //     width  : "500px",
-  //     height : "500px",
-  //     border : "5px solid black"
-  // };
+    const dropzoneStyle = {
+      width  : "500px",
+      height : "500px",
+      border : "5px solid black"
+  };
     const {imgSrc} = this.state
     return (
       <>
@@ -90,21 +90,24 @@ class ImageUpload extends  Component {
           // </div>:''}  */}
           
             <Dropzone
-              className=""
+              className=" "
               onDrop={this.handleOnDrop}
-              multiple={false}
+              multiple={true}
               accept={acceptedFileTypes}
               maxSize={imageMaxSize}
               minSize={0}
-              // style= {dropzoneStyle}
+              style= {dropzoneStyle}
               
             >
               {({ getRootProps, getInputProps }) => (
               // className="dropzone-custom"
-                  <div   {...getRootProps()} >
+                  <div className="dropzone-custom" {...getRootProps()} >
                     <input {...getInputProps()} />
-                    
+                   
                       Drag 'n' drop image here, or click to select files <FaFileUpload/>
+                      <button type="submit" className="btn btn-primary mb-2">
+              Upload
+            </button>
                     
                   </div>
                 

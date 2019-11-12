@@ -1,5 +1,6 @@
 .navbar-custom {
-    background-color:white;
+    background-color:gray;
+    /* opacity: 0.5; */
 }
 
 /* .nav-item{
@@ -8,6 +9,9 @@
 } */
 
 
-.nav-item{
+/* .nav-item{
     color: black;
+} */
+.d-inline-block align-top{
+background-color: gray;
 }

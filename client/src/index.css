@@ -1,6 +1,53 @@
 /* div {
     border: black solid 1px;
 } */
-#root {
+/* #root {
     background-color: rgb(187, 167, 167);
+} */
+
+#root {
+    background-color:gray;
 }
+
+.jumbotron{
+    color:wheat;
+    background-color: gray !important;
+    margin-block-end: 0px;
+    height:100vh;
+    
+}
+/* qr button */
+/* .navbar button {
+    margin-right: auto;
+
+} */
+
+/* .nav-item{
+    color: black !important;
+} */
+
+a.nav-link{
+    color : wheat;
+}
+/* .d-inline-block align-top{
+    
+        border-radius: 50%;
+      
+} */
+img{
+    border-radius: 50%;
+    /* filter : opacity (0.5) drop-shadow (0 0 0 blue); */
+    
+    background-color: gray;
+    /* -webkit-filter : hue-rotate(180deg);
+    filter : hue-rotate(180deg); */
+
+}
+
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  }
+  /* #changed {
+    -webkit-filter : hue-rotate(180deg);
+    filter : hue-rotate(180deg);
+} */
