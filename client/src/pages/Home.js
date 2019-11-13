@@ -32,16 +32,15 @@ class Home extends Component {
         Api.isAuth()
             .then( res => {
                 if( res.data.user ) {
-                this.setState({
-                    email: res.data.user.email,
-                    isAuth: true
-                });
+                    this.setState({
+                        email: res.data.user.email,
+                        isAuth: true
+                    });
                 } else {
-                this.setState({
-                    email: "",
-                    isAuth: false
-                })
-                // this.props.history.push('/');    
+                    this.setState({
+                        email: "",
+                        isAuth: false
+                    })  
                 }
             })
     }
@@ -168,21 +167,21 @@ class Home extends Component {
                     >
                         <ButtonToolbar>
                             <Col>
-                            <Button
-                                onClick={() => this.handleSigninShow()}
+                                <Button
+                                    onClick={() => this.handleSigninShow()}
                                 >
-                                SignIn
-                            </Button>
+                                    SignIn
+                                </Button>
                             </Col>
 
                             <Col
                                 sm={5.5}
                             >
-                            <Button
-                                onClick={() => this.handleSignupShow()}
+                                <Button
+                                    onClick={() => this.handleSignupShow()}
                                 >
-                                SignUp
-                            </Button>
+                                    SignUp
+                                </Button>
                             </Col>
                             <Modal
                                 size="md"
@@ -191,19 +190,25 @@ class Home extends Component {
                                 aria-labelledby="signin-modal"
                             >
                                 <Modal.Header closeButton>
+
                                     <Modal.Title id="signin-modal">
                                         Sign-In
                                     </Modal.Title>
+
                                 </Modal.Header>
                                 <Modal.Body>
+
                                     <Form>
                                         {this.state.badSignin ? (
                                             
                                             <Alert variant={"danger"}>
                                                 Wrong Username or Password
                                             </Alert>
+
                                             ): (<></>)}
+
                                         <Form.Group>
+
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
                                                 value={this.state.email}
@@ -213,6 +218,7 @@ class Home extends Component {
                                                 placeholder="Email"
                                             />
                                         </Form.Group>
+
                                         <Form.Group>
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
@@ -222,7 +228,9 @@ class Home extends Component {
                                                 placeholder="Password"
                                             />
                                         </Form.Group>
+
                                         {this.state.loading ? (
+
                                             <Button variant="primary" disabled>
                                                 <Spinner
                                                     as="span"
@@ -233,15 +241,20 @@ class Home extends Component {
                                                 />
                                                 Loading...
                                             </Button>
+
                                         ):(
+
                                             <Button
                                             disabled={!(this.state.email && this.state.password)}
                                             onClick={this.handleFormSubmit}
                                             >
                                                 Submit
                                             </Button>
+
                                         )}
+
                                     </Form>
+
                                 </Modal.Body>
                             </Modal>
                             
@@ -253,11 +266,15 @@ class Home extends Component {
                                 aria-labelledby="signup-modal"
                             >
                                 <Modal.Header closeButton>
+
                                     <Modal.Title id="signup-modal">
                                         Sign-Up
                                     </Modal.Title>
+
                                 </Modal.Header>
+
                                 <Modal.Body>
+
                                     <Form>
                                         {this.state.badSignup ? (
                                             <Alert variant={"danger"}>
@@ -265,6 +282,7 @@ class Home extends Component {
                                             </Alert>
                                         ):(<></>)}
                                         <Form.Group>
+
                                             <Form.Label>First Name</Form.Label>
                                             <Form.Control
                                                 value={this.state.firstname}
@@ -274,6 +292,7 @@ class Home extends Component {
                                                 placeholder="First Name"
                                             />
                                         </Form.Group>
+
                                         <Form.Group>
                                             <Form.Label>Last Name</Form.Label>
                                             <Form.Control
@@ -284,6 +303,7 @@ class Home extends Component {
                                                 placeholder="Last Name"
                                             />
                                         </Form.Group>
+
                                         <Form.Group>
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
@@ -294,6 +314,7 @@ class Home extends Component {
                                                 placeholder="Email"
                                             />
                                         </Form.Group>
+
                                         <Form.Group>
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control 
@@ -303,7 +324,9 @@ class Home extends Component {
                                                 placeholder="Password"
                                             />
                                         </Form.Group>
+
                                         {this.state.loading ? (
+
                                             <Button variant="primary" disabled>
                                                 <Spinner
                                                     as="span"
@@ -314,20 +337,24 @@ class Home extends Component {
                                                 />
                                                 Loading...
                                             </Button>
+
                                         ):(
+
                                             <Button
                                                 disabled={!(this.state.email && this.state.password && this.state.firstname && this.state.lastname)}
                                                 onClick={this.handleFormSubmit}
                                             >
                                                 Submit
                                             </Button>
+
                                         )}
+
                                     </Form>
+
                                 </Modal.Body>
                             </Modal>
                         </ButtonToolbar>
                     </Navbar>
-                    
                     
                     <Row>
                         <Col
