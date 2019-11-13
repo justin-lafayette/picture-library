@@ -2,7 +2,7 @@ const db = require("../models");
 
 module.exports = {
   findAll: function(req, res) {
-    console.log('in eventsController - findAll', req.query.email);
+    //console.log('in eventsController - findAll', req.query.email);
     db.events.findAll(
       // {
       // include: {
@@ -29,13 +29,24 @@ module.exports = {
   },
   findByUserEmail: function(req,res){
       console.log('in findByUserEmail email ', req.params.email);
-      db.events.findAll({
+      db.users.findAll({
         where: {
-          email:req.params.email
-        }
-      }).then(function(event){
-        res.json(event);
-      });
+          email: req.params.email
+        },
+        include: [{
+          model: db.events,
+          as: 'events',
+          required: false,
+          attributes:['title'],
+          through: {
+            model: db.eventUsers
+          }
+        }]
+      }).then(function(events){
+        console.log('All those events',events);
+        console.log('and I ran, I ran so far away, i just ran, and I ran, I ran so far away, i just ran, ')
+          res.json(events);
+        });
   },
    findById: function(req, res) {
      console.log('in eventsController.js - req event id ', req.params);
@@ -54,11 +65,30 @@ module.exports = {
       });
   },
   create: function(req, res) {
-    console.log('in create event');
+    //console.log('in create event', req.body.email);
     db.events.create(req.body)
       .then(function(event){
-        console.log('in then of create event');
-        res.json(event);
+        //console.log("Aparna's event",event);
+        const{title, event_date, event_description, email} = req.body
+        //console.log('in then of create event', event);
+        //console.log("req.email",req.body);
+        const body = {
+          event_id: event.event_id,
+          email,
+          title,
+          event_date,
+          event_description
+        }
+        //console.log("Title",title, "DATE:",event_date, "Description:",event_description)
+        db.EventUsers.create(body)
+        .then(function(eventUsers){
+          console.log('event user created');
+          res.json(eventUsers);
+        })
+        .catch((err) => {
+          console.log('Error in eventCntroller.create error ', err);
+        })
+
       });
   }
   //,

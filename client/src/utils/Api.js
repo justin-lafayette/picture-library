@@ -27,7 +27,6 @@ export default {
     },
 
     getEventsByUserEmail: function(data){
-        console.log('ran getEventsByUserEmail', data);
         return axios.get(`/events/user/${data}`)
     },
     // Create event

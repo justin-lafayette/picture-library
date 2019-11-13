@@ -35,8 +35,8 @@ class Profile extends Component {
         console.log('in Profile.js - loadEvents email ', this.state.email);
         Api.getEventsByUserEmail(this.state.email)
             .then(res => {
-                console.log(res.data)
-                this.setState({ events: res.data, title:"", event_escription:"", event_id:"" })
+                console.log(res.data[0]);
+                this.setState({ events: res.data[0].events, title:"", event_escription:"", event_id:"" })
             })
             .catch(err => console.log(err))
     }
@@ -85,6 +85,9 @@ class Profile extends Component {
 
     // Render Elements
     render() {
+      const showEvents = this.state.events.map(event => (
+      <div>{event.title}</div>
+      ))
         return (
             <>
 

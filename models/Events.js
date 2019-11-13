@@ -22,14 +22,12 @@ module.exports = function(sequelize, DataTypes) {
     events.belongsTo(models.videos, {foreignKey : 'video_id'});
   };
 
-  events.associate = function(models){
-    events.belongsTo(models.videos, {foreignKey : 'video_id'});
-  };
-
+  
   events.associate = function(models){
     events.belongsToMany(models.users,  {
       through: 'EventUsers',
-      foreignKey : 'event_id'
+      foreignKey : 'event_id',
+      otherKey: 'email'
     });
   };
 
