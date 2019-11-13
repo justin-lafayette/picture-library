@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { withRouter } from 'react-router-dom';
-<<<<<<< HEAD
-import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner, Row, Col } from 'react-bootstrap';
-=======
 import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner, Col, Row } from 'react-bootstrap';
->>>>>>> b8b7835a13de4aa46c8706b32b7f2bfe8a1e7346
 import Scanner from './Scan';
 
 
