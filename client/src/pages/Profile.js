@@ -42,16 +42,17 @@ class Profile extends Component {
     }
 
     loadMyPictures = () => {
+        console.log("in profile loadMyPics");
         Api.getMyPics()
             .then(res => {
-                // console.log("mypics", res)
+                 console.log("in profile loadMyPics - mypics", res.data);
                 this.setState({ images: res.data, imagesId: "", picture: "" })
             })
     }
 
     componentDidMount() {
-        console.log("Component did mount");
-        // this.loadMyPictures();
+        console.log("Profile - Component did mount");
+        this.loadMyPictures();
 
 
         Api.isAuth()
@@ -85,9 +86,7 @@ class Profile extends Component {
 
     // Render Elements
     render() {
-      const showEvents = this.state.events.map(event => (
-      <div>{event.title}</div>
-      ))
+      
         return (
             <>
 
