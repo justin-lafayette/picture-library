@@ -130,8 +130,7 @@ class Login extends Component {
                         <Row>
                             <Col
                             >
-                                <Card>
-                                    <Card.Body>
+                
                                         <Card.Title>Sign In</Card.Title>
 
                                             <Form>
@@ -186,16 +185,12 @@ class Login extends Component {
                                                 )}
 
                                             </Form>
-
-                                    </Card.Body>
-                                </Card>
                             
                             </Col>
 
                             <Col
                             >
-                                <Card>
-                                    <Card.Body>
+                            
                                         <Card.Title>Sign Up</Card.Title>
 
                                         <Form>
@@ -273,9 +268,6 @@ class Login extends Component {
                                             )}
 
                                         </Form>
-
-                                    </Card.Body>
-                                </Card>
 
                             </Col>
 

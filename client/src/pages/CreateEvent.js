@@ -6,6 +6,8 @@ import Api from '../utils/Api';
 import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
 import ReactToPrint from 'react-to-print';
+import { Link } from "react-router-dom";
+
 // import QRCode from 'react-qr-svg';
 
 
@@ -52,28 +54,28 @@ class CreateEvent extends Component {
         this.setState({
             [name]: value,
         });
-        
+
     }
 
     onChange = date => this.setState({ date });
 
-    
+
     componentDidMount() {
         Api.isAuth()
-          .then( res => {
-            if( res.data.user ) {
-              this.setState({
-                email: res.data.user.email,
-                isAuth: true
-              });
-            } else {
-              this.setState({
-                email: "",
-                isAuth: false
-              })
-              this.props.history.push('/login');
-            }
-        })
+            .then(res => {
+                if (res.data.user) {
+                    this.setState({
+                        email: res.data.user.email,
+                        isAuth: true
+                    });
+                } else {
+                    this.setState({
+                        email: "",
+                        isAuth: false
+                    })
+                    this.props.history.push('/login');
+                }
+            })
     }
 
     // Render Elements
@@ -86,67 +88,66 @@ class CreateEvent extends Component {
                 />
 
                 <Container>
+                    {/* if this.state.qrCode has a value */}
+                    {/* render <QrCode value={this.state.qrCodeValue} */}
+                    {/* else, render the form below. NOTE: this form needs to be put into its own component so that it can be rendered conditionally (in one line)  */}
 
-                    <Jumbotron>
-                        {/* if this.state.qrCode has a value */}
-                        {/* render <QrCode value={this.state.qrCodeValue} */}
-                        {/* else, render the form below. NOTE: this form needs to be put into its own component so that it can be rendered conditionally (in one line)  */}
+                    <Form>
 
-                        <Form>
-
-                            <Form.Group controlId="event-name">
-                                <Form.Label
-                                    label="Event Name"
-                                >
-                                    Event Name
-                            </Form.Label>
-                                <Form.Control
-                                    value={this.state.eventTitle}
-                                    onChange={this.handleInputChange}
-                                    name="eventTitle"
-                                />
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>
-                                    Date
-                                </Form.Label>
-                                <DatePicker 
-                                    value={this.state.date}
-                                    onChange={this.onChange}
-                                />
-                            </Form.Group>
-
-                            <Form.Group controlId="event-description">
-                                <Form.Label
-                                    label="Event Description"
-                                >
-                                    Event Description
-                                </Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    rows="3"
-                                    value={this.state.eventDescription}
-                                    onChange={this.handleInputChange}
-                                    name="eventDescription"
-                                />
-                            </Form.Group>
-
-                            <Button
-                                // disabled={!(this.state.email && this.state.password)}
-                                onClick={this.handleFormSubmit}
+                        <Form.Group controlId="event-name">
+                            <Form.Label
+                                label="Event Name"
                             >
-                                Submit
-                            </Button> 
+                                Event Name
+                            </Form.Label>
+                            <Form.Control
+                                value={this.state.eventTitle}
+                                onChange={this.handleInputChange}
+                                name="eventTitle"
+                            />
+                        </Form.Group>
 
-                        </Form>
+                        <Form.Group>
+                            <Form.Label>
+                                Date
+                                </Form.Label>
+                            <DatePicker
+                                value={this.state.date}
+                                onChange={this.onChange}
+                            />
+                        </Form.Group>
 
-                        {this.state.qrCodeValue ? <div><img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue}></img></div> : (<></>)}
+                        <Form.Group controlId="event-description">
+                            <Form.Label
+                                label="Event Description"
+                            >
+                                Event Description
+                                </Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows="3"
+                                value={this.state.eventDescription}
+                                onChange={this.handleInputChange}
+                                name="eventDescription"
+                            />
+                        </Form.Group>
 
-                    </Jumbotron>
+                        <Button
+                            // disabled={!(this.state.email && this.state.password)}
+                            onClick={this.handleFormSubmit}
+                        >
+                            Submit
+                            </Button>
 
-                </Container>
+                    </Form>
                 
+                        {this.state.qrCodeValue ? (
+                            <div>
+                                <img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue}></img>
+                                <Link to={"/qrprint/" + this.state.qrCodeValue}>Print your QR Code</Link>
+                            </div> ) : (<></>)}
+                </Container>
+
 
             </>
 
