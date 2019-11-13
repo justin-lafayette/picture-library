@@ -16,6 +16,7 @@ const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item)=>{return 
 class ImageUpload extends  Component {
   constructor(props){
     super(props)
+    console.log(props.event_id)
     this.state = {
       file: null,
       imgSrc: null,
@@ -68,8 +69,12 @@ class ImageUpload extends  Component {
     //console.log("imgSrc", this.state.imgSrc)
     console.log("FILE!");
     console.log(this.state.file);
+    console.log(this.props.event_id);
     const formData = new FormData();
-    formData.append('image',this.state.file, "this.state.filename");
+    formData.append('image',this.state.file, this.state.filename);
+    formData.append('event_id', this.props.event_id)
+
+ 
 
     Api.uploadPic(formData)
       .then()

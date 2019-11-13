@@ -14,8 +14,10 @@ console.log("s3 instance created");
 // Matches with "/uploadpic"
 router.route('/uploadpic') 
 .post(upload.single("image"), function(req, res) {
+  console.log(req.body.event_id)
+  const eventId = req.body.event_id
   const file = req.file;
-  console.log("File!")
+  console.log("!")
   console.log(file)
   const s3FileURL = "https://s3-us-east-2.amaxonaws.com/project3.pic.library"
 
@@ -24,10 +26,11 @@ router.route('/uploadpic')
     secretAccessKey: process.env.SECRET,
     region: "us-east-2"
   });
-
+  // Use the event_id to create or use a folder for the images
+  var folderName = eventId
   //Where you want to store your file
   var params = {
-    Bucket: "project3.pic.library",///jackfolder",
+    Bucket: "project3.pic.library" + "/"+ folderName,///jackfolder",
     Key: file.originalname,
     Body: file.buffer,
     ContentType: file.mimetype,

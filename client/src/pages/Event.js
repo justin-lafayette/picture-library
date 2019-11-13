@@ -18,19 +18,18 @@ class Event extends Component {
         event: [],
         event_id: "",
         title: "",
-        description: "",
-        memberOf: false,
+        event_description: "",
+        event_date: "",
+        memberOf: true,
         eventPics: "",
         slideshow: "",
         auth: true,
         uploadShow: false,
-        
 
     }
     
     
     // Functions
-    /* TODO: Function to show event search if sign-in is valid */
     componentDidMount() {
         console.log("Component did mount");
         console.log(this.props.match.params.id);
@@ -58,17 +57,15 @@ class Event extends Component {
 
         Api.loadSingleEvent(this.props.match.params.id)
             .then( res => {
-                // this.props.history.push(`/event/${this.state.event_id}`);
-                console.log(res);
+                console.log("loadSingleEvent: ", res);
+                this.setState({
+                    event_date: res.data.event_date,
+                    event_description: res.data.event_description,
+                    title: res.data.title
+                })
             })
             .catch( err => console.log( err ) )
 
-        // this is not kicking off
-        // Api.loadSingleEvent(this.props.location)
-        //     .then( res => {
-        //         console.log(res)
-        //     })
-        //     .catch(err => console.log( err ))
     }
 
     /* Handle input change */
@@ -99,7 +96,7 @@ class Event extends Component {
 
         Api.SubStatus()
             .then( res => {
-                this.setState({event: res.data, email: "", event_id: "", title: "", description: "",  memberOf: ""})
+                this.setState({event: res.data, email: "", event_id: "", title: "", event_description: "",  memberOf: ""})
             })
     }
 
@@ -107,7 +104,7 @@ class Event extends Component {
 
     // Render Elements
     render() {
-        console.log(this.state.event_id)
+        console.log("this.state: ", this.state)
         return(
             <>
                 
@@ -116,11 +113,9 @@ class Event extends Component {
                         <Navbar
                             isAuth={this.state.isAuth}
                         >
-                            <Container>
-                                {this.state.open}
-                            </Container>
                             <Button
                                 onClick={() => this.handleUploadShow()}
+                                
                             >
                                 Upload Image
                             </Button>
@@ -138,7 +133,9 @@ class Event extends Component {
                                     </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <ImageUpload />
+                                    <ImageUpload
+                                        event_id={this.state.event_id}
+                                    />
                                 </Modal.Body>
                             </Modal>
                         </Navbar>
@@ -157,7 +154,8 @@ class Event extends Component {
                             <Row>
                                 <Col>
                                     <p>Description
-                                        {this.state.description}
+                                        <br />{this.state.event_description}
+                                        <br />{this.state.event_date}
                                     </p>
                                 </Col>
                             </Row>
