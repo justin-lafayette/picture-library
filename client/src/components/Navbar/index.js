@@ -9,13 +9,14 @@ function Navbar(props) {
 
         return (
 
-            <nav className="navbar navbar-expand-lg navbar-custom">
+            <nav className="navbar navbar-expand-lg navbar-custom bg-alert">
 
                 <div className="navbar-brand" href="/">
                     {/* TODO: remove hard codded require for img */}
                     <img
                         alt=""
-                        src={require('../../assets/pixpectivetoo.png')}
+                        // src={require('../../assets/pixpectivetoo.png')}
+                        src={require('../../assets/pixpective_trans.PNG')}
                         width="150"
                         height="50"
                         padding="0"
