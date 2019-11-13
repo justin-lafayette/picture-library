@@ -25,7 +25,7 @@ router.route("/uploadpic").post(upload.single("image"), function(req, res) {
     region: "us-east-2"
   });
   // Use the event_id to create or use a folder for the images
-  const folderName = eventId;
+  const folderName = "Event_"+eventId;
   //Where you want to store your file
   // const folderName = "Events";
   const urlPrefix =
