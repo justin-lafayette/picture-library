@@ -1,10 +1,11 @@
 /* div {
     border: black solid 1px;
 } */
+
 #root {
     background: url("https://image.freepik.com/free-vector/colorful-abstract-background-with-squares_1035-3033.jpg");
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Merienda', cursive;
 }
 

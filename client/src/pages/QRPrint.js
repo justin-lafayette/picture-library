@@ -4,7 +4,7 @@ const QRPrintPage = (props) => {
     return (
         <div>
             <img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + props.match.params.qrCode} alt="qr code"></img>
-            <div>[EVENT NAME GOES HERE]</div>
+            <div>{props.match.params.eventName}</div>
         </div>
     );
 }

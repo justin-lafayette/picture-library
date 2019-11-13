@@ -144,7 +144,7 @@ class CreateEvent extends Component {
                         {this.state.qrCodeValue ? (
                             <div>
                                 <img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue}></img>
-                                <Link to={"/qrprint/" + this.state.qrCodeValue}>Print your QR Code</Link>
+                                <Link to={"/qrprint/" + this.state.qrCodeValue + "/" + this.state.eventTitle}>Print your QR Code</Link>
                             </div> ) : (<></>)}
                 </Container>
 
