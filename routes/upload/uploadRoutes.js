@@ -17,7 +17,7 @@ router.route('/uploadpic')
   console.log(req.body.event_id)
   const eventId = req.body.event_id
   const file = req.file;
-  console.log("!")
+  console.log("In UploadRoutes.js - File!")
   console.log(file)
   const s3FileURL = "https://s3-us-east-2.amaxonaws.com/project3.pic.library"
 
@@ -27,10 +27,12 @@ router.route('/uploadpic')
     region: "us-east-2"
   });
   // Use the event_id to create or use a folder for the images
-  var folderName = eventId
+  const folderName = eventId
   //Where you want to store your file
+  // const folderName = "Events";
+  const urlPrefix = "https://s3.us-east-2.amazonaws.com/project3.pic.library/"+folderName+"/";
   var params = {
-    Bucket: "project3.pic.library" + "/"+ folderName,///jackfolder",
+    Bucket: "project3.pic.library"+"/"+folderName, // need to add event_id here
     Key: file.originalname,
     Body: file.buffer,
     ContentType: file.mimetype,
@@ -44,19 +46,26 @@ router.route('/uploadpic')
       res.status(501).json(err);
     } else {
       res.send({ data });
+       // sample url https://s3.us-east-2.amazonaws.com/project3.pic.library/Eventsfolder/wedding_1.jpg
+
       var newFileUploaded = {
         description: req.body.description,
-        fileLink: s3FileURL + file.originalname,
+        fileLink: s3FileURL + '/' +file.originalname,
         s3_key: params.Key
       };
+      var fileUrl =  urlPrefix+file.originalname;
+        
       // var document = new DOCUMENT(newFileUploaded);
       // document.save(function(error, newFile) {
       //   if (error) {
       //     throw error;
       //   }
       // });
+      console.log("file link",fileUrl);
     }
   });
 });
 
 module.exports = router;
+
+

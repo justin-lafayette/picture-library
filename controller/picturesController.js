@@ -3,10 +3,11 @@ const db = require("../models");
 // Defining methods for the booksController
 module.exports = {
   findAll: function(req, res) {
-    db.Pictures
+    console.log("in pictureController findAll event_id ", req.params.event_id);
+    db.pictures
       .findAll({
           where: {
-              email:req.email
+              event_id:req.params.event_id
           }
       }).then(function(pictures){
           res.json(pictures);

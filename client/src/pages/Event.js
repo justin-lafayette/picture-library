@@ -4,12 +4,8 @@ import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal } from 'react-bootstrap';
 import Api from '../utils/Api';
 import ImageUpload from '../components/ImageUpload';
-// import Slideshow from '../components/Slideshow/slideshow';
-// import Api from '../utils/Api';
-
-/* This page used REACT-BOOTSTRAP in-place */
-/* Page is rendered within a JSX fragment */
-
+import Slideshow from '../components/Slideshow/slideshow';
+import axios from 'axios';
 
 class Event extends Component {
 
@@ -21,7 +17,7 @@ class Event extends Component {
         event_description: "",
         event_date: "",
         memberOf: true,
-        eventPics: "",
+        eventPics: [],
         slideshow: "",
         auth: true,
         uploadShow: false,
@@ -100,7 +96,13 @@ class Event extends Component {
             })
     }
 
-    handleUploadShow = () => this.setState({uploadShow: true})
+    handleUploadShow = () => this.setState({uploadShow: true});
+
+    uploadImage = () =>{
+        console.log('in Event.js - uploadImage');
+        return axios.post("/uploadpic" )
+            .catch( err => console.log(err.response));
+    }
 
     // Render Elements
     render() {
@@ -141,12 +143,11 @@ class Event extends Component {
                         </Navbar>
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}
-                        ></div>
+                        >
 
                         
-                            // style={{backgroundColor: "black", height: "92vh"}}
-                        >
                             {this.state.event_id}
+                        </div>
 
                     
                         <Container>
@@ -162,9 +163,11 @@ class Event extends Component {
 
                             <Row>
                                 <Col>
-                                    <div>Slideshow
-                                        {this.state.slideshow}
-                                    </div>
+                                    <Slideshow
+                                        images={this.state.eventPics}
+                                    >
+                                        
+                                    </Slideshow>
                                 </Col>
                             </Row>
 

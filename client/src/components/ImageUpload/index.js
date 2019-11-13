@@ -67,14 +67,12 @@ class ImageUpload extends  Component {
     event.preventDefault();
 
     //console.log("imgSrc", this.state.imgSrc)
-    console.log("FILE!");
+    console.log("in ImageUpload - FILE!");
     console.log(this.state.file);
     console.log(this.props.event_id);
     const formData = new FormData();
     formData.append('image',this.state.file, this.state.filename);
     formData.append('event_id', this.props.event_id)
-
- 
 
     Api.uploadPic(formData)
       .then()

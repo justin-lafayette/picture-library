@@ -27,7 +27,6 @@ export default {
     },
 
     getEventsByUserEmail: function(data){
-        console.log('ran getEventsByUserEmail', data);
         return axios.get(`/events/user/${data}`)
     },
     // Create event
@@ -43,7 +42,7 @@ export default {
             }
         }
         return axios.post("/uploadpic", data, config);
-    },
+    }, 
 
     // Load Events
     loadAllEvents: function() {
@@ -58,7 +57,7 @@ export default {
     // Subscribe a user to an event based on their email address and event ID
     /* TODO: verify api routes are valid syntax */
     subscribe: function( data ) {
-        return axios.post("/api/:id/subscribe", data)
+        return axios.post("/api/subscribe/:id", data)
     },
 
     // Load specific event
@@ -69,7 +68,7 @@ export default {
 
     // Load images uploaded by one person
     getMyPics: function( data ) {
-        return axios.get("/api/:id/pictures", data)
+        return axios.get("/events/event/:event_id/pictures", data)
     },
 
     // Is auth
