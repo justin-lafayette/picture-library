@@ -123,8 +123,7 @@ class Login extends Component {
                 <Navbar
                     isAuth={this.state.isAuth}
                 />
-                
-                <Jumbotron>
+            
 
                     <Container>
 
@@ -284,7 +283,7 @@ class Login extends Component {
 
                     </Container>
                 
-                </Jumbotron>
+                
                 
             </>
                         

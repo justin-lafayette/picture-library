@@ -1,5 +1,8 @@
 import React, { Component } from "react"
 import Dropzone from "react-dropzone"
+//import 
+import {Button} from 'react-bootstrap'
+import Api from "../../utils/Api";
 import {Jumbotron} from 'react-bootstrap';
 
 import { FaFileUpload } from 'react-icons/fa';
@@ -15,6 +18,7 @@ class ImageUpload extends  Component {
   constructor(props){
     super(props)
     this.state = {
+      file: null,
       imgSrc: null,
       // crop: {
       //   aspect: 1/1
@@ -43,20 +47,13 @@ class ImageUpload extends  Component {
       console.log(rejectedFiles)
       this.verifyFile(rejectedFiles)
     }
-     
+
     if (files && files.length > 0) {
       const isVerified = this.verifyFile(files)
       if (isVerified){
         // imageBase64Data
-        const currentFile = files[0]
-        const myFileReader = new FileReader()
-        myFileReader.addEventListener("load", () => {
-          console.log (myFileReader.result)
-          this.setState({
-            imgSrc: myFileReader.result
-          })
-        }, false)
-        myFileReader.readAsDataURL (currentFile)
+        const currentFile = files[0];
+        this.setState({file: currentFile});
       }
     }
   }
@@ -65,12 +62,22 @@ class ImageUpload extends  Component {
   //   this.setState({crop})
   //   console.log(this.state)
   // }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+
+    //console.log("imgSrc", this.state.imgSrc)
+    console.log("FILE!");
+    console.log(this.state.file);
+    const formData = new FormData();
+    formData.append('image',this.state.file, "this.state.filename");
+
+    Api.uploadPic(formData)
+      .then()
+      .catch( err => console.log(err));
+  }
   render() {
-  //   const dropzoneStyle = {
-  //     width  : "500px",
-  //     height : "500px",
-  //     border : "5px solid black"
-  // };
+
     const {imgSrc} = this.state
     return (
       <>
@@ -78,13 +85,7 @@ class ImageUpload extends  Component {
         
         <div className="ImageUpload">
         <Jumbotron className="text-center">
-{/* {        
-          <h1>Image Upload</h1>
-          {imgSrc !== null ?
-          <div> 
-           
-          <img className={"dropzone-custom"} src ={imgSrc} alt = ' ' /> 
-          </div>: ''}  */}
+
           
             <Dropzone
               className=" "
@@ -117,6 +118,19 @@ class ImageUpload extends  Component {
               )}
             </Dropzone>
             </Jumbotron>
+          
+              {
+              // this is from add-s3 branch. Do we need this button and the click handler?  
+              // <Button
+              //   onClick={this.handleFormSubmit}
+              // >
+              //   Upload
+              // </Button>
+    
+            
+            /* <button type="submit" className="btn btn-primary mb-2">
+              Upload
+            </button> */}
           
         </div>
       </>

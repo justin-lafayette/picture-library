@@ -1,85 +1,21 @@
 /* div {
     border: black solid 1px;
 } */
-/* #root {
-    background-color: rgb(187, 167, 167);
-} */
-
 #root {
-    background-color:gray;
-}
-/* #root {
     background: url("https://image.freepik.com/free-vector/colorful-abstract-background-with-squares_1035-3033.jpg");
     background-size: cover;
+    height: 100vh;
+    font-family: 'Merienda', cursive;
+}
+
+p {
+    font-size: 20px;
+    margin: 100px;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+html, body {
     height:100%;
-} */
-
-.jumbotron{
-    color:wheat;
-    background-color: gray !important;
-    margin-block-end: 0px;
-    height:100vh;
-    
-}
-/* qr button */
-/* .navbar button {
-    margin-right: auto;
-
-} */
-
-/* .nav-item{
-    color: black !important;
-} */
-
-a.nav-link{
-    color : wheat;
-}
-/* .d-inline-block align-top{
-    
-        border-radius: 50%;
-      
-} */
-img{
-    border-radius: 50%;
-    border: solid black;
-    /* filter : opacity (0.5) drop-shadow (0 0 0 blue); */
-    
-    /* background-color: gray; */
-    /* -webkit-filter : hue-rotate(180deg);
-    filter : hue-rotate(180deg); */
-
 }
 
-img:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-  }
-  /* #changed {
-    -webkit-filter : hue-rotate(180deg);
-    filter : hue-rotate(180deg);
-} */
-
-/* login page styling */
-label.form-label{
-    color: black;
-}
-
-div.card-title.h5{
-    color: black;
-}
-
-div.card-body{
-    border-radius: 5px !important;
-    padding-bottom : 5px !important;
-    padding-top: 5px;
-    margin-bottom: 0px !important;
-    margin-top: 0% !important;
-    /* border: solid wheat; */
-    /* border-right-color: 5px solid blue !important; */
-}
-
-input.form-control{
-    background: rgb(213, 223, 230);
-    border-radius: 5px;
-    /* border-color: lightslategray; */
-    border-color: blue;
-}
