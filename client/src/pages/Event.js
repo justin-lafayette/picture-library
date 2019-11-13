@@ -117,12 +117,12 @@ class Event extends Component {
                             style={{backgroundColor: "red", height: "40vh"}}
                         ></div>
 
-                        <Jumbotron
+                        
                             // style={{backgroundColor: "black", height: "92vh"}}
                         >
                             {this.state.event_id}
 
-                        </Jumbotron>
+                    
                         <Container>
 
                             <Row>

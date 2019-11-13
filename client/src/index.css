@@ -4,10 +4,16 @@
 #root {
     background: url("https://image.freepik.com/free-vector/colorful-abstract-background-with-squares_1035-3033.jpg");
     background-size: cover;
-    height:100%;
+    height: 100vh;
+    font-family: 'Merienda', cursive;
 }
 
-
+p {
+    font-size: 20px;
+    margin: 100px;
+    padding: 10px;
+    padding-top: 20px;
+}
 
 html, body {
     height:100%;
