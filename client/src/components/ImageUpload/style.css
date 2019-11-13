@@ -16,9 +16,10 @@ justify-content: center;
 div.dropzone-custom {
   position: relative;
     width : 50%;
-    height : 30%;
+    /* height : 30%; */
     /* height : 200px; */
-    border : 2px solid wheat;
+    /* border : 2px solid wheat; */
+    border-style: dashed;
     border-radius: 5px;
     justify-items: center;
     justify-content: center;
@@ -26,16 +27,26 @@ div.dropzone-custom {
     margin-left: 25%;
     background-color: white;
     color: black;
+    
   }
+  p {
+    margin-bottom: 0px;
+  }
+
+  /* .btn btn-primary mb-2{
+    position: centered;
+    
+
+  } */
 
 
  /* body {
    background-color: gray;
  } */
 
-.ImgaeUpload{
+/* .ImgaeUpload{
   background-color: #2a2a2a;
-}
+} */
 
 /* 
 .jumbotron-custom {

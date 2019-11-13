@@ -3,6 +3,7 @@ import Dropzone from "react-dropzone"
 import {Jumbotron} from 'react-bootstrap';
 
 import { FaFileUpload } from 'react-icons/fa';
+
 // import ReactCrop from 'react-image-crop'
 // import 'react-image-crop/dist/ReactCrop.css';
 import './style.css';
@@ -65,11 +66,11 @@ class ImageUpload extends  Component {
   //   console.log(this.state)
   // }
   render() {
-    const dropzoneStyle = {
-      width  : "500px",
-      height : "500px",
-      border : "5px solid black"
-  };
+  //   const dropzoneStyle = {
+  //     width  : "500px",
+  //     height : "500px",
+  //     border : "5px solid black"
+  // };
     const {imgSrc} = this.state
     return (
       <>
@@ -77,17 +78,13 @@ class ImageUpload extends  Component {
         
         <div className="ImageUpload">
         <Jumbotron className="text-center">
-        
+{/* {        
           <h1>Image Upload</h1>
           {imgSrc !== null ?
           <div> 
-            {/* {imgSrc} */}
+           
           <img className={"dropzone-custom"} src ={imgSrc} alt = ' ' /> 
-          </div>: ''}
-
-          {/* // <div>
-          // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
-          // </div>:''}  */}
+          </div>: ''}  */}
           
             <Dropzone
               className=" "
@@ -96,28 +93,30 @@ class ImageUpload extends  Component {
               accept={acceptedFileTypes}
               maxSize={imageMaxSize}
               minSize={0}
-              style= {dropzoneStyle}
+              // style= {dropzoneStyle}
               
             >
               {({ getRootProps, getInputProps }) => (
               // className="dropzone-custom"
                   <div className="dropzone-custom" {...getRootProps()} >
-                    <input {...getInputProps()} />
-                   
-                      Drag 'n' drop image here, or click to select files <FaFileUpload/>
+                    {imgSrc !== null ?
+          <div> 
+            {/* {imgSrc} */}
+          <img className={"dropzone-custom"} src ={imgSrc} alt = ' ' /> 
+          </div>: ''}
+                   <FaFileUpload/><br/> 
+                   <p style={{marginBottom:0}}>Drag and Drop image here</p> 
+                   <p style={{marginBottom:0}}>or</p>  
+                    <input {...getInputProps()} /><br/>  
                       <button type="submit" className="btn btn-primary mb-2">
-              Upload
-            </button>
+                      Browse Files
+                    </button>
                     
                   </div>
                 
               )}
             </Dropzone>
             </Jumbotron>
-          
-            <button type="submit" className="btn btn-primary mb-2">
-              Upload
-            </button>
           
         </div>
       </>
