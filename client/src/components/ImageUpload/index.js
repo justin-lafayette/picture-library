@@ -16,6 +16,7 @@ const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item)=>{return 
 class ImageUpload extends  Component {
   constructor(props){
     super(props)
+    console.log(props.event_id)
     this.state = {
       file: null,
       imgSrc: null,
@@ -68,8 +69,10 @@ class ImageUpload extends  Component {
     //console.log("imgSrc", this.state.imgSrc)
     console.log("in ImageUpload - FILE!");
     console.log(this.state.file);
+    console.log(this.props.event_id);
     const formData = new FormData();
     formData.append('image',this.state.file, this.state.filename);
+    formData.append('event_id', this.props.event_id)
 
     Api.uploadPic(formData)
       .then()
@@ -87,7 +90,7 @@ class ImageUpload extends  Component {
          
         
         <div className="ImageUpload">
-        <Jumbotron className="text-center">
+        <Jumbotron className="text-center" style={{height: "70vh"}}>
         
           <h1>Image Upload</h1>
           {imgSrc !== null ?
@@ -124,19 +127,16 @@ class ImageUpload extends  Component {
               )}
             </Dropzone>
             </Jumbotron>
-          
-              {
-              // this is from add-s3 branch. Do we need this button and the click handler?  
-              <Button
-                onClick={this.handleFormSubmit}
-              >
-                Upload
-              </Button>
+
+            <Button
+              onClick={this.handleFormSubmit}
+              type="submit"
+            >
+              Upload
+            </Button>
     
             
-            /* <button type="submit" className="btn btn-primary mb-2">
-              Upload
-            </button> */}
+            
           
         </div>
       </>

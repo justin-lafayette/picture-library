@@ -14,6 +14,8 @@ console.log("s3 instance created");
 // Matches with "/uploadpic"
 router.route('/uploadpic') 
 .post(upload.single("image"), function(req, res) {
+  console.log(req.body.event_id)
+  const eventId = req.body.event_id
   const file = req.file;
   console.log("In UploadRoutes.js - File!")
   console.log(file)
@@ -24,9 +26,10 @@ router.route('/uploadpic')
     secretAccessKey: process.env.SECRET,
     region: "us-east-2"
   });
-
+  // Use the event_id to create or use a folder for the images
+  const folderName = eventId
   //Where you want to store your file
-  const folderName = "Events";
+  // const folderName = "Events";
   const urlPrefix = "https://s3.us-east-2.amazonaws.com/project3.pic.library/"+folderName+"/";
   var params = {
     Bucket: "project3.pic.library"+"/"+folderName, // need to add event_id here
