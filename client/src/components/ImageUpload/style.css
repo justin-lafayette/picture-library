@@ -1,60 +1,32 @@
 img.dropzone-custom {
-position: relative; 
- width: 200px;
-/* height : 20%; */
-height: 200px; 
-/* width:100%; */
-border-width: 2px;
-border-color: blue;
-border-style: dashed;
-border-radius: 5px;
-justify-items: center;
-justify-content: center;
-
+  position: relative;
+  width: 200px;
+  /* height : 20%; */
+  height: 200px;
+  /* width:100%; */
+  border-width: 2px;
+  border-color: blue;
+  border-style: dashed;
+  border-radius: 5px;
+  justify-items: center;
+  justify-content: center;
 }
 
 div.dropzone-custom {
   position: relative;
-    width : 50%;
-    /* height : 30%; */
-    /* height : 200px; */
-    /* border : 2px solid wheat; */
-    border-style: dashed;
-    border-radius: 5px;
-    justify-items: center;
-    justify-content: center;
-    margin-left: 20%;
-    margin-left: 25%;
-    background-color: white;
-    color: black;
-    
-  }
-  p {
-    margin-bottom: 0px;
-  }
+  width: 50%;
+  border-style: dashed;
+  border-radius: 5px;
+  margin-left: 25%;
+  margin-top: 20px;
+  background-color: white;
+  color: rgb(17, 15, 129);
+}
+p {
+  margin-bottom: 0px;
+}
 
-  /* .btn btn-primary mb-2{
-    position: centered;
-    
-
-  } */
-
-
- /* body {
-   background-color: gray;
- } */
-
-/* .ImgaeUpload{
-  background-color: #2a2a2a;
-} */
-
-/* 
-.jumbotron-custom {
-  height: 100px !important;
-  width: 100px !important;
-  border: 5px dashed red !important;
-} */
-/* 
-#root {
-  background-color: rgb(187, 167, 167);
-} */
+div.text-center.jumbotron {
+  /* opacity: 0.5!important; */
+  height: 100vh;
+}
