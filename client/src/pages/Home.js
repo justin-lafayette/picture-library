@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { withRouter } from 'react-router-dom';
-import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner, Col, Row } from 'react-bootstrap';
+import { Form, Modal, Container, Button, ButtonToolbar, Alert, Spinner, Col, Row } from 'react-bootstrap';
 import Scanner from './Scan';
 
 
