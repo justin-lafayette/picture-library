@@ -24,6 +24,7 @@ div.dropzone-custom {
 }
 p {
   margin-bottom: 0px;
+  color:black;
 }
 
 #iconid{
@@ -34,6 +35,12 @@ p {
 }
 
 div.text-center.jumbotron {
-  /* opacity: 0.5!important; */
-  height: 100vh;
+  background: url("https://image.freepik.com/free-vector/colorful-abstract-background-with-squares_1035-3033.jpg");
+    background-size: cover;
+    height: 100vh;
+  
+}
+
+nav.navbar.navbar-expand-lg.navbar-custom.bg-alert{
+  background-color: white;
 }
