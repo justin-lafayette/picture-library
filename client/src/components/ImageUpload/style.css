@@ -5,8 +5,8 @@ img.dropzone-custom {
   height: 200px;
   /* width:100%; */
   border-width: 2px;
-  border-color: blue;
-  border-style: dashed;
+  color: rgb(17, 15, 129);
+  border-style: solid;
   border-radius: 5px;
   justify-items: center;
   justify-content: center;
@@ -15,15 +15,22 @@ img.dropzone-custom {
 div.dropzone-custom {
   position: relative;
   width: 50%;
-  border-style: dashed;
+  border-style: solid;
   border-radius: 5px;
   margin-left: 25%;
   margin-top: 20px;
   background-color: white;
-  color: rgb(17, 15, 129);
+  color: gray;
 }
 p {
   margin-bottom: 0px;
+}
+
+#iconid{
+  color: #007BFF;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 1.8em;
+  margin-top: 5px;
 }
 
 div.text-center.jumbotron {

@@ -1,4 +1,5 @@
 const eventsController = require("../../controller/eventsController");
+const eventUserController = require("../../controller/eventUserController");
 const pictureControlller = require("../../controller/picturesController");
 const router = require("express").Router();
 
@@ -18,7 +19,7 @@ router.route('/newevent')
 router.route('/allEvents')
 .get(eventsController.findAll);
 
-router.route('/pics')
-.get(pictureControlller.findAll);
+router.route('/event/:event_id/pictures')
+.get(eventsController.findMyPics);
 
 module.exports = router;

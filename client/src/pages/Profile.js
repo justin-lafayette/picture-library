@@ -35,23 +35,24 @@ class Profile extends Component {
         console.log('in Profile.js - loadEvents email ', this.state.email);
         Api.getEventsByUserEmail(this.state.email)
             .then(res => {
-                console.log(res.data)
-                this.setState({ events: res.data, title:"", event_escription:"", event_id:"" })
+                console.log(res.data[0]);
+                this.setState({ events: res.data[0].events, title:"", event_escription:"", event_id:"" })
             })
             .catch(err => console.log(err))
     }
 
     loadMyPictures = () => {
+        console.log("in profile loadMyPics");
         Api.getMyPics()
             .then(res => {
-                // console.log("mypics", res)
+                 console.log("in profile loadMyPics - mypics", res.data);
                 this.setState({ images: res.data, imagesId: "", picture: "" })
             })
     }
 
     componentDidMount() {
-        console.log("Component did mount");
-        // this.loadMyPictures();
+        console.log("Profile - Component did mount");
+        this.loadMyPictures();
 
 
         Api.isAuth()
@@ -85,6 +86,7 @@ class Profile extends Component {
 
     // Render Elements
     render() {
+      
         return (
             <>
 

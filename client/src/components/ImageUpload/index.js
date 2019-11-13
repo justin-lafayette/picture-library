@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
+//import
+import { Button } from "react-bootstrap";
+import Api from "../../utils/Api";
 import { Jumbotron } from "react-bootstrap";
+
 import { FaFileUpload } from "react-icons/fa";
+// import ReactCrop from 'react-image-crop'
+// import 'react-image-crop/dist/ReactCrop.css';
 import "./style.css";
 
 const imageMaxSize = 100000000;
@@ -14,6 +20,7 @@ class ImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      file: null,
       imgSrc: null
       
     };
@@ -46,7 +53,9 @@ class ImageUpload extends Component {
     if (files && files.length > 0) {
       const isVerified = this.verifyFile(files);
       if (isVerified) {
+        // imageBase64Data
         const currentFile = files[0];
+        this.setState({ file: currentFile });
         const myFileReader = new FileReader();
         myFileReader.addEventListener(
           "load",
@@ -62,13 +71,32 @@ class ImageUpload extends Component {
       }
     }
   };
+ 
 
+  handleFormSubmit = event => {
+    event.preventDefault();
+
+    //console.log("imgSrc", this.state.imgSrc)
+    console.log("in ImageUpload - FILE!");
+    console.log(this.state.file);
+    console.log(this.props.event_id);
+    const formData = new FormData();
+    formData.append("image", this.state.file, this.state.filename);
+    formData.append("event_id", this.props.event_id);
+
+    Api.uploadPic(formData)
+      .then()
+      .catch(err => console.log(err));
+  };
   render() {
+   
     const { imgSrc } = this.state;
     return (
       <>
         <div className="ImageUpload">
           <Jumbotron className="text-center">
+            <h1>Image Upload</h1>
+
             <Dropzone
               className=" "
               onDrop={this.handleOnDrop}
@@ -76,6 +104,7 @@ class ImageUpload extends Component {
               accept={acceptedFileTypes}
               maxSize={imageMaxSize}
               minSize={0}
+              
             >
               {({ getRootProps, getInputProps }) => (
                 <div className="dropzone-custom" {...getRootProps()}>
@@ -86,7 +115,7 @@ class ImageUpload extends Component {
                   ) : (
                     ""
                   )}
-                  <FaFileUpload />
+                  <FaFileUpload id = "iconid"/>
                   <br />
                   <p style={{ marginBottom: 0 }}>Drag and Drop image here</p>
                   <p style={{ marginBottom: 0 }}>or</p>
@@ -99,6 +128,10 @@ class ImageUpload extends Component {
               )}
             </Dropzone>
           </Jumbotron>
+
+          <Button onClick={this.handleFormSubmit} type="submit">
+            Upload
+          </Button>
         </div>
       </>
     );
