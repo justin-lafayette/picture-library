@@ -1,11 +1,17 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal } from 'react-bootstrap';
+import { Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal } from 'react-bootstrap';
 import Api from '../utils/Api';
-import ImageUpload from '../components/ImageUpload';
 import Slideshow from '../components/Slideshow/slideshow';
 import axios from 'axios';
+import Dropzone from "react-dropzone";
+import { FaFileUpload } from 'react-icons/fa';
+import '../components/ImageUpload/style.css';
+
+const imageMaxSize = 100000000;
+const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item)=>{return item.trim()})
 
 class Event extends Component {
 
@@ -16,11 +22,13 @@ class Event extends Component {
         title: "",
         event_description: "",
         event_date: "",
-        memberOf: true,
+        memberOf: false,
         eventPics: [],
-        slideshow: "",
         auth: true,
         uploadShow: false,
+        file: null,
+        imgSrc: null,
+        loading: false,
 
     }
     
@@ -34,22 +42,22 @@ class Event extends Component {
         // ID from the selected event
         console.log("this location: ", this.props.location);
 
-        Api.isAuth()
-          .then( res => {
-            if( res.data.user ) {
-              this.setState({
-                email: res.data.user.email,
-                isAuth: true
-              });
-            } else {
-              this.setState({
-                email: "",
-                isAuth: false
-              })
-              this.props.history.push('/login');
-              console.log("email", this.state.email);
-            }
-        })
+        // Api.isAuth()
+        //   .then( res => {
+        //     if( res.data.user ) {
+        //       this.setState({
+        //         email: res.data.user.email,
+        //         isAuth: true
+        //       });
+        //     } else {
+        //       this.setState({
+        //         email: "",
+        //         isAuth: false
+        //       })
+        //       this.props.history.push('/login');
+        //       console.log("email", this.state.email);
+        //     }
+        // })
 
         Api.loadSingleEvent(this.props.match.params.id)
             .then( res => {
@@ -75,16 +83,16 @@ class Event extends Component {
     // needs back-end route
     handleSubscribe = event => {
         event.preventDefault();
-        // this.props.location.reload();
+        Location.reload()
 
-        Api.subscribe({
-            email: this.state.email,
-            eventID: this.state.eventID,
-            subscribe: true
-        })
-            .then( res => {
-                // this.props.location.reload();
-            })
+        // Api.subscribe({
+        //     email: this.state.email,
+        //     eventID: this.state.eventID,
+        //     subscribe: true
+        // })
+        //     .then( res => {
+        //         this.props.refresh();
+        //     })
     }
 
     // Needs back-end route
@@ -104,9 +112,72 @@ class Event extends Component {
             .catch( err => console.log(err.response));
     }
 
-    // Render Elements
+    // For image upload component
+    verifyFile = (files) =>{
+        if (files && files.length > 0) {
+            const currentFile = files[0];
+            const currentFileType = currentFile.type;
+            const currentFileSize = currentFile.size;
+            if (currentFileSize > imageMaxSize) {
+            alert("This file is not allowed. " + currentFileSize + " bytes is too large")
+            return false
+            }
+            if (!acceptedFileTypesArray.includes(currentFileType)){
+            alert("This file is not allowed. Only images are allowed.")
+            return false
+            }
+            return true
+        }
+    }
+    
+    handleOnDrop = (files, rejectedFiles) => {
+        if (rejectedFiles && rejectedFiles.length > 0) {
+            console.log(rejectedFiles)
+            this.verifyFile(rejectedFiles)
+        }
+
+        if (files && files.length > 0) {
+            const isVerified = this.verifyFile(files)
+            if (isVerified){
+            // imageBase64Data
+            const currentFile = files[0];
+            this.setState({file: currentFile});
+            }
+        }
+    }
+    
+    handleOnCropChange = (crop)=> {
+        console.log(crop)
+        this.setState({crop})
+        console.log(this.state)
+    }
+    
+    handleFormSubmit = event => {
+        event.preventDefault();
+        
+        console.log("in ImageUpload - FILE!");
+        console.log(this.state.file);
+        console.log(this.props.event_id);
+        const formData = new FormData();
+        formData.append('image',this.state.file, this.state.filename);
+        formData.append('event_id', this.props.event_id)
+    
+        Api.uploadPic(formData)
+          .then(
+    
+          )
+          .catch( err => console.log(err));
+        
+    }
+
     render() {
         console.log("this.state: ", this.state)
+        //   const dropzoneStyle = {
+        //     width  : "500px",
+        //     height : "500px",
+        //     border : "5px solid black"
+        // };
+        const {imgSrc} = this.state
         return(
             <>
                 
@@ -128,6 +199,7 @@ class Event extends Component {
                                 onHide={() =>  this.setState({uploadShow: false})}
                                 aria-labelledby="upload-modal"
                                 centered
+                                id="modal"
                             >
                                 <Modal.Header closeButton>
                                     <Modal.Title id="upload-modal">
@@ -135,9 +207,52 @@ class Event extends Component {
                                     </Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <ImageUpload
-                                        event_id={this.state.event_id}
-                                    />
+                                    <div className="ImageUpload">
+                                        <Jumbotron className="text-center" style={{height: "70vh"}}>
+                                        
+                                            <h1>Image Upload</h1>
+                                            {imgSrc !== null ?
+                                            <div> 
+                                                {/* {imgSrc} */}
+                                                <img className={"dropzone-custom"} src ={imgSrc} alt = ' ' /> 
+                                            </div>: ''}
+
+                                            {/* // <div>
+                                            // <ReactCrop src = {imgSrc} crop ={this.state.crop} onChange={this.handleOnCropChange}/>
+                                            // </div>:''}  */}
+                                        
+                                            <Dropzone
+                                            className=""
+                                            onDrop={this.handleOnDrop}
+                                            multiple={false}
+                                            accept={acceptedFileTypes}
+                                            maxSize={imageMaxSize}
+                                            minSize={0}
+                                            // style= {dropzoneStyle}
+                                            
+                                            >
+                                            {({ getRootProps, getInputProps }) => (
+                                            // className="dropzone-custom"
+                                                <div   {...getRootProps()} >
+                                                    <input {...getInputProps()} />
+                                                    
+                                                    Drag 'n' drop image here, or click to select files <FaFileUpload/>
+                                                    
+                                                </div>
+                                                
+                                                
+                                                
+                                            )}
+                                            </Dropzone>
+                                        </Jumbotron>
+
+                                        <Button
+                                        onClick={this.handleFormSubmit}
+                                        type="submit"
+                                        >
+                                        Upload
+                                        </Button>        
+                                    </div>
                                 </Modal.Body>
                             </Modal>
                         </Navbar>

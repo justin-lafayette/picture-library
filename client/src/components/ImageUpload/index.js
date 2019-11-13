@@ -1,9 +1,8 @@
 import React, { Component } from "react"
 import Dropzone from "react-dropzone"
-//import 
-import {Button} from 'react-bootstrap'
-import Api from "../../utils/Api";
-import {Jumbotron} from 'react-bootstrap';
+import { Button } from 'react-bootstrap'
+// import Api from "../../utils/Api";
+import { Jumbotron } from 'react-bootstrap';
 
 import { FaFileUpload } from 'react-icons/fa';
 // import ReactCrop from 'react-image-crop'
@@ -13,13 +12,13 @@ import './style.css';
 const imageMaxSize = 100000000;
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
 const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item)=>{return item.trim()})
-class ImageUpload extends  Component {
+class ImageUpload extends Component {
   constructor(props){
     super(props)
-    console.log(props.event_id)
     this.state = {
       file: null,
       imgSrc: null,
+      loading: false,
       // crop: {
       //   aspect: 1/1
       // }
@@ -40,8 +39,9 @@ class ImageUpload extends  Component {
         return false
       }
       return true
+    }
   }
-}
+
   handleOnDrop = (files, rejectedFiles) => {
     if (rejectedFiles && rejectedFiles.length > 0) {
       console.log(rejectedFiles)
@@ -57,6 +57,7 @@ class ImageUpload extends  Component {
       }
     }
   }
+
   handleOnCropChange = (crop)=> {
     console.log(crop)
     this.setState({crop})
@@ -65,19 +66,22 @@ class ImageUpload extends  Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
-    //console.log("imgSrc", this.state.imgSrc)
+    
     console.log("in ImageUpload - FILE!");
     console.log(this.state.file);
     console.log(this.props.event_id);
     const formData = new FormData();
-    formData.append('image',this.state.file, this.state.filename);
-    formData.append('event_id', this.props.event_id)
+    // formData.append('image',this.state.file, this.state.filename);
+    // formData.append('event_id', this.props.event_id)
 
-    Api.uploadPic(formData)
-      .then()
-      .catch( err => console.log(err));
+    // Api.uploadPic(formData)
+    //   .then(
+
+    //   )
+    //   .catch( err => console.log(err));
+    
   }
+
   render() {
   //   const dropzoneStyle = {
   //     width  : "500px",
