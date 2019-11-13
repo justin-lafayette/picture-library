@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { withRouter } from 'react-router-dom';
+<<<<<<< HEAD
 import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner, Row, Col } from 'react-bootstrap';
+=======
+import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar, Alert, Spinner, Col, Row } from 'react-bootstrap';
+>>>>>>> b8b7835a13de4aa46c8706b32b7f2bfe8a1e7346
 import Scanner from './Scan';
 
 
@@ -143,16 +147,14 @@ class Home extends Component {
                     </Navbar>
 
                     <Container>
-                        
-                        <Jumbotron>
-                            <p>Welcome to PixPective!  Where memories are shared.</p>
-                            <p> </p>
-                            <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
-                            <p> </p>
-                            <p>Is it secure?  Yes!  The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator.  You must register for and be admitted to the event as a qualified user.   You will always be the only one (other than the Administrator) that can remove your photos.</p>
-                            <p> </p>
-                            <p>Take your memories to the next level.  Add them to PixPective! and gain a more comprehensive view of your events than has ever been available until now.</p>
-                        </Jumbotron>
+                    
+                        <p>What is PixPective?</p>
+                        <p>PixPective allows you to join an event via a QR Code or via the “Join an Event” button on the app.
+                        Once you have joined an event, you will upload any photos from that event into the library. Once in the library, they will be added to a slideshow of the event that will show multiple viewpoints, 
+                        including yours and any person from the same event you attended.
+                        Wherever multiple people are experiencing the same trip, concert, event or happening, this app is for you!</p>
+                        <p>Is it secure?  Yes! The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator. You will always be the only one (other than the Administrator) that can remove your photos.</p> 
+                
                     </Container> 
                     {this.state.showScanner? <Scanner/>: <></>}
                     
@@ -166,19 +168,23 @@ class Home extends Component {
                         isAuth={this.state.isAuth}
                     >
                         <ButtonToolbar>
+                            <Col>
+                                <Button
+                                    onClick={() => this.handleSigninShow()}
+                                >
+                                    SignIn
+                                </Button>
+                            </Col>
 
-                            <Button
-                                onClick={() => this.handleSigninShow()}
+                            <Col
+                                sm={5.5}
                             >
-                                Sign-In
-                            </Button>
-
-                            <Button
-                                onClick={() => this.handleSignupShow()}
-                            >
-                                Sign-Up
-                            </Button>
-                            
+                                <Button
+                                    onClick={() => this.handleSignupShow()}
+                                >
+                                    SignUp
+                                </Button>
+                            </Col>
                             <Modal
                                 size="md"
                                 show={this.state.signinShow}
@@ -353,25 +359,19 @@ class Home extends Component {
                     </Navbar>
                     
                     <Row>
-                        <Col>
+                        <Col
+                            md={5}
+                            className="text-center"
+                        >
                         
                             <p>Welcome to PixPective!</p> 
                             <p>Where memories are shared.</p>
                             <p>Just scan, join and </p>
-                            <p>What is PixPective?  It is a place to augment your experiences with those that shared the same event.</p>
-                            <p> </p>
                             <p>Take your memories to the next level. </p> 
                             <p>Gain a more comprehensive view of your event and share them!</p>
 
                         </Col>
                     </Row>
-                    
-                        
-                        
-
-                    
-                    
-                    
                        
                 </>
                             
