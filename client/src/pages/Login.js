@@ -123,18 +123,17 @@ class Login extends Component {
                     isAuth={this.state.isAuth}
                 />
             
-
                     <Container>
-
+                            
+            <div className="jumbotron" style={{marginTop: 50, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                         <Row>
+                            
                             <Col
-                            >
-                                <Card>
-                                    <Card.Body>
+                            >                         
                                         <Card.Title>Sign In</Card.Title>
-
+                                        
                                             <Form>
-
+                                            
                                             {this.state.badSignin ? (
                                                 <Alert variant={"danger"}>
                                                     Wrong Username or Password
@@ -185,16 +184,12 @@ class Login extends Component {
                                                 )}
 
                                             </Form>
-
-                                    </Card.Body>
-                                </Card>
                             
                             </Col>
-
+                            
                             <Col
                             >
-                                <Card>
-                                    <Card.Body>
+                            
                                         <Card.Title>Sign Up</Card.Title>
 
                                         <Form>
@@ -273,18 +268,16 @@ class Login extends Component {
 
                                         </Form>
 
-                                    </Card.Body>
-                                </Card>
-
                             </Col>
 
                         </Row>
-
+                        </div>
                     </Container>
                 
                 
                 
             </>
+
                         
         );
         
