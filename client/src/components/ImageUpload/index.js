@@ -98,7 +98,7 @@ class ImageUpload extends Component {
             <h1>Image Upload</h1>
 
             <Dropzone
-              className=" "
+              // className=" "
               onDrop={this.handleOnDrop}
               multiple={false}
               accept={acceptedFileTypes}
