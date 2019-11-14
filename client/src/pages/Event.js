@@ -1,7 +1,7 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal } from 'react-bootstrap';
+import { Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal, Spinner } from 'react-bootstrap';
 import Api from '../utils/Api';
 import Slideshow from '../components/Slideshow/slideshow';
 import axios from 'axios';
@@ -153,7 +153,7 @@ class Event extends Component {
                     () => {
                         console.log(myFileReader.result);
                         this.setState({
-                        imgSrc: myFileReader.result
+                            imgSrc: myFileReader.result
                         });
                     },
                     false
@@ -165,19 +165,20 @@ class Event extends Component {
     
     handleFormSubmit = event => {
         event.preventDefault();
-        
-        console.log("in ImageUpload - FILE!");
-        console.log(this.state.file);
-        console.log(this.props.event_id);
+        this.setState({loading: true});
+
         const formData = new FormData();
         formData.append('image',this.state.file, this.state.filename);
         formData.append('event_id', this.props.event_id)
     
         Api.uploadPic(formData)
-          .then(
-    
-          )
-          .catch( err => console.log(err));
+            .then(
+                this.setState({
+                    uploadShow: false,
+                    loading: false
+                })
+            )
+            .catch( err => console.log(err));
         
     }
 
@@ -251,16 +252,36 @@ class Event extends Component {
                                             </Dropzone>
                                         </Jumbotron>
 
-                                        <Button
-                                        onClick={this.handleFormSubmit}
-                                        type="submit"
-                                        >
-                                        Upload
-                                        </Button>        
+                                        {this.state.loading ? (
+
+                                            <Button variant="primary" disabled>
+                                                <Spinner
+                                                    as="span"
+                                                    animation="grow"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                />
+                                                Loading...
+                                            </Button>
+
+                                        ):(
+                                            
+                                            <Button
+                                                onClick={this.handleFormSubmit}
+                                                type="submit"
+                                                disabled={!(this.state.file)}
+                                            >
+                                                Upload
+                                            </Button>
+
+                                        )}
+
                                     </div>
                                 </Modal.Body>
                             </Modal>
                         </Navbar>
+
                         <div
                             style={{backgroundColor: "red", height: "40vh"}}
                         >
