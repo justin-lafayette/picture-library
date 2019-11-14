@@ -15,6 +15,7 @@ class EventSearch extends Component {
         event_id: ""
 
     }
+
     
     // Functions
     /* Handle input change */
@@ -117,7 +118,8 @@ class EventSearch extends Component {
                 />
 
                 <Container>
-
+                    
+                <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                     <Col
                     
                     >
@@ -126,13 +128,14 @@ class EventSearch extends Component {
                             
                             >
                                 {/* TODO: convert to custom dropdown component like in docs online */}
-                                <Dropdown>
+                                <Dropdown style= {{padding: 10}}>
 
                                     <Dropdown.Toggle 
                                     variant="success"
                                     id="events-dropdown"
                                     >
                                         Search Events!
+
                                     </Dropdown.Toggle>
 
                                     {this.state.events.length ? (
@@ -170,7 +173,7 @@ class EventSearch extends Component {
                             >
                                 {this.state.events.map(events => (
 
-                                    <Row key={events.event_id}>
+                                    <Row key={events.event_id} style= {{padding: 10}}>
                                         <Card style={{width:"100rem"}}>
                                             
                                             <Card.Body>
@@ -219,7 +222,7 @@ class EventSearch extends Component {
                     ) : (<h3>No events to display!</h3>)}
                     
                     </Col>
-                    
+                </div>
                 </Container>
                 
             </>

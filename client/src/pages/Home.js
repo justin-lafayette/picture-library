@@ -144,13 +144,15 @@ class Home extends Component {
 
                     <Container>
                     
-                        <p>What is PixPective?</p>
-                        <p>PixPective allows you to join an event via a QR Code or via the “Join an Event” button on the app.
-                        Once you have joined an event, you will upload any photos from that event into the library. Once in the library, they will be added to a slideshow of the event that will show multiple viewpoints, 
-                        including yours and any person from the same event you attended.
-                        Wherever multiple people are experiencing the same trip, concert, event or happening, this app is for you!</p>
-                        <p>Is it secure?  Yes! The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator. You will always be the only one (other than the Administrator) that can remove your photos.</p> 
-                
+                    <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
+                            <p>What is PixPective?</p>
+                            <p>PixPective allows you to join an event via a QR Code or via the “Join an Event” button on the app.
+                            Once you have joined an event, you will upload any photos from that event into the library. Once in the library, they will be added to a slideshow of the event that will show multiple viewpoints, 
+                            including yours and any person from the same event you attended.
+                            Wherever multiple people are experiencing the same trip, concert, event or happening, this app is for you!</p>
+                            <p>Is it secure?  Yes! The ability to add, remove, print, etc. images from this library is reserved for the owner of the images and the site Administrator. You will always be the only one (other than the Administrator) that can remove your photos.</p>
+                           
+                    </div>
                     </Container> 
                     {this.state.showScanner? <Scanner/>: <></>}
                     
@@ -359,12 +361,14 @@ class Home extends Component {
                             md={5}
                             className="text-center"
                         >
-                        
+                        <div className="jumbotron" style={{borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
+
                             <p>Welcome to PixPective!</p> 
                             <p>Where memories are shared.</p>
                             <p>Just scan, join and </p>
                             <p>Take your memories to the next level. </p> 
                             <p>Gain a more comprehensive view of your event and share them!</p>
+                        </div>
 
                         </Col>
                     </Row>

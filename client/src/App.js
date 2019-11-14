@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
 import Upload from './pages/Upload'
 import Scanner from './pages/Scan';
+import QRCodePrint from './pages/QRPrint'
 
 // import axios from 'axios';
 
@@ -68,6 +69,7 @@ class App extends Component {
             <Route exact path="/createevent" component={CreateEvent} />
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/scan" component={Scanner} />
+            <Route exact path="/qrprint/:qrCode/:eventName" component={QRCodePrint}/>
 
             {/* <Route path="/" 
               render={(props) => <Home {...props} 
