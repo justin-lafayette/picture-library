@@ -1,7 +1,7 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import { Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal, Spinner } from 'react-bootstrap';
+import { Row, Col, Container, Image, Button, Card, CardGroup, Jumbotron, Modal, Spinner } from 'react-bootstrap';
 import Api from '../utils/Api';
 import Slideshow from '../components/Slideshow/slideshow';
 import axios from 'axios';
@@ -9,12 +9,27 @@ import Dropzone from "react-dropzone";
 import { FaFileUpload } from 'react-icons/fa';
 import '../components/ImageUpload/style.css';
 
+// import one from '../assets/images/pkm1.png';
+// import two from '../assets/images/pkm2.png';
+// import three from '../assets/images/pkm3.png';
+// import four from '../assets/images/pkm4.png';
+// import five from '../assets/images/pkm5.png';
+// import six from '../assets/images/pkm6.png';
+// import seven from '../assets/images/pkm7.png';
+// import eight from '../assets/images/pkm8.png';
+
 const imageMaxSize = 100000000;
 const acceptedFileTypes =
   "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
 const acceptedFileTypesArray = acceptedFileTypes.split(",").map(item => {
   return item.trim();
 });
+
+
+
+// const tempPics = [
+//     one, two, three, four, five, six, seven, eight
+// ]
 
 class Event extends Component {
 
@@ -32,6 +47,7 @@ class Event extends Component {
         file: null,
         imgSrc: null,
         loading: false,
+        testPic: null
 
     }
     
@@ -40,7 +56,7 @@ class Event extends Component {
     componentDidMount() {
         console.log("Component did mount");
         console.log(this.props.match.params.id);
-        this.setState({event_id: this.props.match.params.id})
+        this.setState({event_id: this.props.match.params.id});
         
         // ID from the selected event
         console.log("this location: ", this.props.location);
@@ -71,7 +87,22 @@ class Event extends Component {
                     title: res.data.title
                 })
             })
+            .then(res =>{
+                axios.get(`/events/event/${this.state.event_id}/pictures`)
+                .then( res => {
+                    console.log("inside get my pics: event");
+                    console.log(this.state.event_id)
+                    console.log(res);
+                    console.log(res.data);
+                    this.setState({eventPics: res.data});
+                    // this.setState({testPic: res.data[1].picture_url});
+                    console.log(this.state.eventPics)
+                })
+                .catch( err => console.log( err ));
+            })
             .catch( err => console.log( err ) )
+
+        
 
     }
 
@@ -94,7 +125,7 @@ class Event extends Component {
         //     subscribe: true
         // })
         //     .then( res => {
-        //         this.props.refresh();
+            // this.props.history.push(`/event/${targetId}`)
         //     })
     }
 
@@ -172,12 +203,18 @@ class Event extends Component {
         formData.append('event_id', this.props.event_id)
     
         Api.uploadPic(formData)
-            .then(
+            .then( res => {
+
                 this.setState({
+
                     uploadShow: false,
                     loading: false
-                })
-            )
+
+                });
+                
+                this.props.history.push(`/event/${this.state.event_id}`);
+
+            })
             .catch( err => console.log(err));
         
     }
@@ -282,13 +319,26 @@ class Event extends Component {
                             </Modal>
                         </Navbar>
 
-                        <div
+                        <Jumbotron
                             style={{backgroundColor: "red", height: "40vh"}}
                         >
 
-                        
-                            {this.state.event_id}
-                        </div>
+                            <h3>
+                                {this.state.title}
+                            </h3>
+
+
+                            <Col
+                                md={{span: 4, offset: 4}}
+                            >
+                                <Slideshow
+                                    images={this.state.eventPics}
+                                >
+                                    
+                                </Slideshow>
+                            </Col>
+
+                        </Jumbotron>
 
                     
                         <Container>
@@ -304,28 +354,26 @@ class Event extends Component {
 
                             <Row>
                                 <Col>
-                                    <Slideshow
-                                        images={this.state.eventPics}
-                                    >
-                                        
-                                    </Slideshow>
+                                    
                                 </Col>
                             </Row>
 
                             <Row>
                                 <Col>
                                     <CardGroup>
-                                        {/* {this.state.event.map( (event) => {
+                                        {this.state.eventPics.map( (event) => {
+                                            return(
 
-                                            <Card
-                                            key={event.eventID}
-                                            >
-                                                <Card.Img>
-                                                    {event.eventPics}
-                                                </Card.Img>
-                                            </Card>
-                                         }
-                                        })*/}
+                                                <Card
+                                                    key={event.picture_id}
+                                                >
+                                                    <Card.Img
+                                                        src={event.picture_url}
+                                                    />
+                                                </Card>
+                                            
+                                            )
+                                        })}
                                     </CardGroup>
                                 </Col>
                             </Row>
