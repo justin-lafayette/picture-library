@@ -23,11 +23,11 @@ export default {
     getEvents: function(data) {
         console.log('in api.getEvents user email ', data);
         //return axios.get("/events", data);
-        return axios.get(`/events?email=${data}`);
+        return axios.get(`/event/?email=${data}`);
     },
 
     getEventsByUserEmail: function(data){
-        return axios.post("/events/:email", data)
+        return axios.get(`/events/user/${data}`)
     },
     // Create event
     createEvent: function(data) {
@@ -36,12 +36,17 @@ export default {
 
     // Upload picture
     uploadPic: function(data) {
-        return axios.post("/api/uploadpics", data)
-    },
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return axios.post("/uploadpic", data, config);
+    }, 
 
     // Load Events
-    loadEvents: function() {
-        return axios.get("/api/allevents")
+    loadAllEvents: function() {
+        return axios.get("/events/allevents")
     },
 
     // Get event subscription status
@@ -51,19 +56,19 @@ export default {
 
     // Subscribe a user to an event based on their email address and event ID
     /* TODO: verify api routes are valid syntax */
-    subscribe: function( data ) {
-        return axios.post("/api/:id/subscribe", data)
+    subscribe: function( data, data2 ) {
+        return axios.post(`/events/event/subscribe/${data}/${data2}`)
     },
 
     // Load specific event
     loadSingleEvent: function( data ) {
         console.log('in Api.js - loadSingleEvent ', data);
-        return axios.get(`/events/?event_id=${data}`);
+        return axios.get(`/events/event/${data}`);
     },
 
     // Load images uploaded by one person
     getMyPics: function( data ) {
-        return axios.get("/api/:id/pictures", data)
+        return axios.get("/events/event/:event_id/pictures", data)
     },
 
     // Is auth

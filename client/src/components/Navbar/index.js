@@ -1,19 +1,22 @@
 import React from 'react';
+import "./style.css";
 
 function Navbar(props) {
 
-    console.log("navbar props.isAth: ", props.isAuth)
+    // console.log("navbar props.isAth: ", props.isAuth)
 
     if (props.isAuth) {
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+
+            <nav className="navbar navbar-expand-lg navbar-custom bg-alert">
 
                 <div className="navbar-brand" href="/">
                     {/* TODO: remove hard codded require for img */}
                     <img
                         alt=""
-                        src={require('../../assets/pixpectivetoo.png')}
+                        // src={require('../../assets/pixpectivetoo.png')}
+                        src={require('../../assets/pixpective_trans.PNG')}
                         width="150"
                         height="50"
                         padding="0"
@@ -63,7 +66,7 @@ function Navbar(props) {
     } else {
         return (
 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-custom">
 
                 <div className="navbar-brand" href="/">
                     {/* TODO: remove hard codded require for img */}

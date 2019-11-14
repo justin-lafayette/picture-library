@@ -1,17 +1,6 @@
 import React from 'react';
 import { Zoom } from 'react-slideshow-image';
 // import {findAll} from '../../../controller/picturesController';
- 
-const images = [
-  'images/img_6319.jpg',
-  'images/img_6329.jpg',
-  'images/img_6351.jpg',
-  'images/img_6369.jpg',
-  'images/img_6406.jpg',
-  'images/img_6421.jpg',
-  'images/img_6427.jpg',
-  'images/img_6430.jpg'
-];
 
 //===================== THIS LOOP =====================//
 
@@ -39,12 +28,23 @@ const zoomOutProperties = {
   arrows: true
 }
  
-const Slideshow = () => {
+function Slideshow(props) {
+  const images = props.images
     return (
       <div className="slide-container">
         <Zoom {...zoomOutProperties}>
           {
-            images.map((each, index) => <img key={index} style={{width: "100%"}} src={each} />)
+            images.map((each, index) => {
+              return (
+
+                  <img 
+                    key={index} 
+                    style={{maxWidth: "100px", height: "auto"}} 
+                    src={each.picture_url} 
+                  />
+
+                )
+            })
           }
         </Zoom>
       </div>

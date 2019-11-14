@@ -15,6 +15,7 @@ class EventSearch extends Component {
         event_id: ""
 
     }
+
     
     // Functions
     /* Handle input change */
@@ -25,9 +26,19 @@ class EventSearch extends Component {
         });
     }
     
+    // loadEvents = ()=> {
+    //     Api.getEvents(this.state.email)
+    //         .then(res => {
+    //             console.log('in loadEvents email ', this.state.email);
+    //             this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
+    //         })
+    //         .catch( err => console.log( err ) )
+    // }
+
     loadAllEvents = ()=> {
         Api.loadAllEvents()
             .then(res => {
+                console.log(res)
                 this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
             })
             .catch( err => console.log( err ) )
@@ -36,7 +47,8 @@ class EventSearch extends Component {
     
     componentDidMount() {
         console.log("Component did mount");
-
+        //this.loadAllEvents();
+            
         Api.isAuth()
           .then( res => {
             // console.log('in Api.isAuth');
@@ -53,20 +65,33 @@ class EventSearch extends Component {
               })
               this.props.history.push('/login');
             }
-             console.log("calling loadEvents email", this.state.email);
             })
             
         this.loadAllEvents();
     }
 
+    // goToEvent = (e) => {
+    //     e.preventDefault();
+    //     console.log('e.target.id', e.target.id);
+    //     Api.loadSingleEvent(e.target.id)
+    //         .then( res => {
+    //             this.props.history.push(`/event/${res.data.event_id}`);
+    //             console.log(res);
+    //         })
+    //         .catch( err => console.log( err ) )
+    // }
+
     goToEvent = (e) => {
         e.preventDefault();
-        console.log('e.target.id', e.target.id);
-        Api.loadSingleEvent(e.target.id)
-            .then( res => {
-                console.log(res);
-            })
-            .catch( err => console.log( err ) )
+        let targetId = e.target.id;
+        console.log(e.target.id)
+        console.log(targetId)
+        this.setState({event_id: targetId}, () => {
+            
+            console.log(this.state.event_id)
+            this.props.history.push(`/event/${targetId}`, [this.state.event_id])
+        
+        })   
     }
 
     // sendToEvent = (e) => {
@@ -93,7 +118,8 @@ class EventSearch extends Component {
                 />
 
                 <Container>
-
+                    
+                <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                     <Col
                     
                     >
@@ -102,13 +128,14 @@ class EventSearch extends Component {
                             
                             >
                                 {/* TODO: convert to custom dropdown component like in docs online */}
-                                <Dropdown>
+                                <Dropdown style= {{padding: 10}}>
 
                                     <Dropdown.Toggle 
                                     variant="success"
                                     id="events-dropdown"
                                     >
                                         Search Events!
+
                                     </Dropdown.Toggle>
 
                                     {this.state.events.length ? (
@@ -146,7 +173,7 @@ class EventSearch extends Component {
                             >
                                 {this.state.events.map(events => (
 
-                                    <Row key={events.event_id}>
+                                    <Row key={events.event_id} style= {{padding: 10}}>
                                         <Card style={{width:"100rem"}}>
                                             
                                             <Card.Body>
@@ -195,7 +222,7 @@ class EventSearch extends Component {
                     ) : (<h3>No events to display!</h3>)}
                     
                     </Col>
-                    
+                </div>
                 </Container>
                 
             </>

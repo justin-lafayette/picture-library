@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
 import Upload from './pages/Upload'
 import Scanner from './pages/Scan';
+import QRCodePrint from './pages/QRPrint'
 
 // import axios from 'axios';
 
@@ -63,16 +64,12 @@ class App extends Component {
             <Route exact path="/eventsearch" component={EventSearch} />
             <Route exact path="/404" component={PageNotFound} />
             <Route exact path="/profile" component={Profile} />
-
             <Route exact path="/event/:id" component={Event} />
-            {/* <Route path="/event/:id">
-              <Event />
-            </Route>  */}
-
             <Route exact path="/login" component={Login} />
             <Route exact path="/createevent" component={CreateEvent} />
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/scan" component={Scanner} />
+            <Route exact path="/qrprint/:qrCode/:eventName" component={QRCodePrint}/>
 
             {/* <Route path="/" 
               render={(props) => <Home {...props} 

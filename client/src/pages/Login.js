@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Api from '../utils/Api';
 import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner, Alert } from 'react-bootstrap';
-import Scanner from './Scan';
 
 class Login extends Component {
 
@@ -123,20 +122,18 @@ class Login extends Component {
                 <Navbar
                     isAuth={this.state.isAuth}
                 />
-
-                <Jumbotron>
-
+            
                     <Container>
-
+                            
+            <div className="jumbotron" style={{marginTop: 50, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                         <Row>
+                            
                             <Col
-                            >
-                                <Card>
-                                    <Card.Body>
+                            >                         
                                         <Card.Title>Sign In</Card.Title>
-
+                                        
                                             <Form>
-
+                                            
                                             {this.state.badSignin ? (
                                                 <Alert variant={"danger"}>
                                                     Wrong Username or Password
@@ -187,16 +184,12 @@ class Login extends Component {
                                                 )}
 
                                             </Form>
-
-                                    </Card.Body>
-                                </Card>
                             
                             </Col>
-
+                            
                             <Col
                             >
-                                <Card>
-                                    <Card.Body>
+                            
                                         <Card.Title>Sign Up</Card.Title>
 
                                         <Form>
@@ -275,18 +268,16 @@ class Login extends Component {
 
                                         </Form>
 
-                                    </Card.Body>
-                                </Card>
-
                             </Col>
 
                         </Row>
-
+                        </div>
                     </Container>
                 
-                </Jumbotron>
+                
                 
             </>
+
                         
         );
         

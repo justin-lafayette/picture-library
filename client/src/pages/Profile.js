@@ -31,51 +31,54 @@ class Profile extends Component {
 
     // Functions
     
-    getEvents = ()=> {
-        Api.getEvents(this.state.email)
+    loadEvents = ()=> {
+        console.log('in Profile.js - loadEvents email ', this.state.email);
+        Api.getEventsByUserEmail(this.state.email)
             .then(res => {
-                console.log('in loadEvents email ', this.state.email);
-                this.setState({ events: res.data, title:"", event_description:"", event_id:"" });
+                console.log(res.data[0]);
+                this.setState({ events: res.data[0].events, title:"", event_escription:"", event_id:"" })
             })
             .catch(err => console.log(err))
     }
 
     loadMyPictures = () => {
+        console.log("in profile loadMyPics");
         Api.getMyPics()
             .then(res => {
-                // console.log("mypics", res)
+                 console.log("in profile loadMyPics - mypics", res.data);
                 this.setState({ images: res.data, imagesId: "", picture: "" })
             })
     }
 
     componentDidMount() {
-        console.log("Component did mount");
-        this.getEvents();
-        // this.loadMyPictures();
+        console.log("Profile - Component did mount");
+        this.loadMyPictures();
 
 
         Api.isAuth()
-            .then(res => {
-                console.log("auth res: ", res)
-                if (res.data.user) {
-                    this.setState({
-                        firstName: res.data.user.firstname,
-                        lastName: res.data.user.lastname,
-                        email: res.data.user.email,
-                        isAuth: true
-                    });
-                    console.log("if")
-                    console.log("email: ", this.state.email);
-                    console.log("first name: ", this.state.firstName);
-                    console.log("last name: ", this.state.lastName);
-                } else {
-                    this.setState({
-                        email: "",
-                        isAuth: false
-                    })
-                    this.props.history.push('/login');
-                }
-            })
+          .then( res => {
+              console.log("auth res: ", res)
+            if( res.data.user ) {
+              this.setState({
+                firstName: res.data.user.firstname,
+                lastName: res.data.user.lastname,
+                email: res.data.user.email,
+                isAuth: true
+              });
+              console.log("if")
+              console.log("email: ", this.state.email);
+              console.log("first name: ", this.state.firstName);
+              console.log("last name: ", this.state.lastName);
+              this.loadEvents();
+        
+            } else {
+              this.setState({
+                email: "",
+                isAuth: false
+              })
+              this.props.history.push('/login');
+            }
+        })
         console.log("email: ", this.state.email);
         console.log("first name: ", this.state.firstName);
         console.log("last name: ", this.state.lastName);
@@ -83,17 +86,15 @@ class Profile extends Component {
 
     // Render Elements
     render() {
+      
         return (
             <>
 
                 <Navbar
                     isAuth={this.state.isAuth}
                 />
-
-                <Jumbotron fluid>
-
-                    <Container className={"bg-success"}>
-
+                    <Container>
+                    <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                         <Row>
                             {/* Personal info */}
                             <Col
@@ -173,9 +174,9 @@ class Profile extends Component {
                             <h3>No Pictures Available!</h3>
                         )} */}
                      
-
+                    </div>
                     </Container>
-                </Jumbotron>
+            
 
 
 
