@@ -91,7 +91,21 @@ module.exports = {
         res.json(pictures);
       });
   }
-  //,
+  ,
+  subscribe: function(req,res){
+    console.log('in eventsController - subscribe req ',req.params);
+    //console.log('in eventsController - subscribe  email ',req.body.email);
+    // create an entry in the relationship table
+    db.EventUsers.create({
+      event_id: req.params.event_id,
+      email: req.params.email
+    })
+    .then((eventUser)=>{
+      res.json(eventUser);
+    })
+    .catch((err) => {console.log("error while subscribing", err)
+     res.json(err)})
+  }
   //   findByTitle: function(req, res) {
   //     console.log('in eventsController.js - req ', req.body);
   //    db.events

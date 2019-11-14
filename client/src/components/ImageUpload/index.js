@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
-//import
 import { Button } from "react-bootstrap";
 import Api from "../../utils/Api";
 import { Jumbotron } from "react-bootstrap";
-
 import { FaFileUpload } from "react-icons/fa";
 // import ReactCrop from 'react-image-crop'
 // import 'react-image-crop/dist/ReactCrop.css';
@@ -44,6 +42,7 @@ class ImageUpload extends Component {
       return true;
     }
   };
+  
   handleOnDrop = (files, rejectedFiles) => {
     if (rejectedFiles && rejectedFiles.length > 0) {
       console.log(rejectedFiles);
@@ -75,19 +74,22 @@ class ImageUpload extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
-    //console.log("imgSrc", this.state.imgSrc)
+    
     console.log("in ImageUpload - FILE!");
     console.log(this.state.file);
     console.log(this.props.event_id);
     const formData = new FormData();
-    formData.append("image", this.state.file, this.state.filename);
-    formData.append("event_id", this.props.event_id);
+    formData.append('image',this.state.file, this.state.filename);
+    formData.append('event_id', this.props.event_id)
 
     Api.uploadPic(formData)
-      .then()
-      .catch(err => console.log(err));
-  };
+      .then(
+
+      )
+      .catch( err => console.log(err));
+    
+  }
+
   render() {
    
     const { imgSrc } = this.state;

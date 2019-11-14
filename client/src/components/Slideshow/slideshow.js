@@ -30,11 +30,23 @@ const zoomOutProperties = {
  
 function Slideshow(props) {
   const images = props.images
+  console.log(images)
     return (
       <div className="slide-container">
         <Zoom {...zoomOutProperties}>
           {
-            images.map((each, index) => <img key={index} style={{width: "100%"}} src={each} />)
+            images.map((each, index) => {
+              console.log("each",each)
+              return (
+
+                  <img 
+                    key={index} 
+                    style={{maxWidth: "100px", height: "auto"}} 
+                    src={each.picture_url} 
+                  />
+
+                )
+            })
           }
         </Zoom>
       </div>
