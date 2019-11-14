@@ -124,6 +124,7 @@ class Event extends Component {
         
         Api.subscribe(this.state.email,this.state.event_id)
             .then( res => {
+                console.log(res)
                 this.setState({memberOf: true})
             })
         
