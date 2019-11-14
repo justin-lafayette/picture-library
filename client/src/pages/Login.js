@@ -123,17 +123,17 @@ class Login extends Component {
                     isAuth={this.state.isAuth}
                 />
             
-
                     <Container>
-
+                            
+            <div className="jumbotron" style={{marginTop: 50, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                         <Row>
+                            
                             <Col
-                            >
-                
+                            >                         
                                         <Card.Title>Sign In</Card.Title>
-
+                                        
                                             <Form>
-
+                                            
                                             {this.state.badSignin ? (
                                                 <Alert variant={"danger"}>
                                                     Wrong Username or Password
@@ -186,7 +186,7 @@ class Login extends Component {
                                             </Form>
                             
                             </Col>
-
+                            
                             <Col
                             >
                             
@@ -271,12 +271,13 @@ class Login extends Component {
                             </Col>
 
                         </Row>
-
+                        </div>
                     </Container>
                 
                 
                 
             </>
+
                         
         );
         
