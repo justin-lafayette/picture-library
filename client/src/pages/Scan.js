@@ -21,6 +21,7 @@ class Scanner extends Component {
   }
   render() {
     return (
+        <div className="jumbotron" style={{marginTop: 20, marginLeft: 350, marginRight: 350,  borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
       <div>
         <QrReader
           delay={300}
@@ -29,6 +30,7 @@ class Scanner extends Component {
           style={{ width: '200px' }}
         />
         <p>{this.state.result}</p>
+      </div>
       </div>
     )
   }

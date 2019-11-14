@@ -94,10 +94,10 @@ class Profile extends Component {
                     isAuth={this.state.isAuth}
                 />
 
-                <Jumbotron fluid>
+                
 
-                    <Container className={"bg-success"}>
-
+                    <Container>
+                    <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                         <Row>
                             {/* Personal info */}
                             <Col
@@ -177,9 +177,9 @@ class Profile extends Component {
                             <h3>No Pictures Available!</h3>
                         )} */}
                      
-
+                    </div>
                     </Container>
-                </Jumbotron>
+            
 
 
 
