@@ -16,7 +16,7 @@ class Event extends Component {
         title: "",
         event_description: "",
         event_date: "",
-        memberOf: true,
+        memberOf: false,
         eventPics: [],
         slideshow: "",
         auth: true,
@@ -76,7 +76,7 @@ class Event extends Component {
     handleSubscribe = event => {
         event.preventDefault();
         // this.props.location.reload();
-
+        console.log('in handleSubscribe');
         Api.subscribe({
             email: this.state.email,
             eventID: this.state.eventID,

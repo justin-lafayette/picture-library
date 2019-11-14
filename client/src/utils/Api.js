@@ -57,8 +57,8 @@ export default {
     // Subscribe a user to an event based on their email address and event ID
     /* TODO: verify api routes are valid syntax */
     subscribe: function( data ) {
-        return axios.post("/api/subscribe/:id", data)
-    },
+        return axios.post(`/event/subscribe`, data)
+      },
 
     // Load specific event
     loadSingleEvent: function( data ) {
