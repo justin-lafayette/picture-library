@@ -40,7 +40,7 @@ class Event extends Component {
         title: "",
         event_description: "",
         event_date: "",
-        memberOf: true,
+        memberOf: false,
         eventPics: [],
         auth: true,
         uploadShow: false,
@@ -117,16 +117,16 @@ class Event extends Component {
     // needs back-end route
     handleSubscribe = event => {
         event.preventDefault();
-        Location.reload()
-
-        // Api.subscribe({
-        //     email: this.state.email,
-        //     eventID: this.state.eventID,
-        //     subscribe: true
-        // })
-        //     .then( res => {
-            // this.props.history.push(`/event/${targetId}`)
-        //     })
+        // this.props.location.reload();
+        console.log('in handleSubscribe');
+        console.log("email",this.state.email);
+        console.log("event_id",this.state.event_id);
+        
+        Api.subscribe(this.state.email,this.state.event_id)
+            .then( res => {
+                this.setState({memberOf: true})
+            })
+        
     }
 
     // Needs back-end route
