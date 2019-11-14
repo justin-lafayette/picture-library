@@ -139,7 +139,7 @@ class CreateEvent extends Component {
                         </Form.Group>
 
                         <Button
-                            // disabled={!(this.state.email && this.state.password)}
+                            disabled={!(this.state.eventTitle && this.state.date && this.state.eventDescription)}
                             onClick={this.handleFormSubmit}
                         >
                             Submit
@@ -147,13 +147,16 @@ class CreateEvent extends Component {
 
                     </Form>
                     </div>
-                    <div className="jumbotron" style={{marginTop: 50, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
+                    <>
                         {this.state.qrCodeValue ? (
-                            <div>
-                                <img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue}></img>
-                                <Link to={"/qrprint/" + this.state.qrCodeValue + "/" + this.state.eventTitle}><h3>Print your QR Code</h3> </Link>
-                            </div> ) : (<></>)}
-                        </div>
+                            <div className="jumbotron" style={{marginTop: 50, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
+                                <div>
+                                    <img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.qrCodeValue}></img>
+                                    <Link to={"/qrprint/" + this.state.qrCodeValue + "/" + this.state.eventTitle}><h3>Print your QR Code</h3> </Link>
+                                </div> 
+                            </div>
+                        ) : (<></>)}
+                    </>
                 </Container>
 
 

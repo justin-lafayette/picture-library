@@ -30,13 +30,11 @@ const zoomOutProperties = {
  
 function Slideshow(props) {
   const images = props.images
-  console.log(images)
     return (
       <div className="slide-container">
         <Zoom {...zoomOutProperties}>
           {
             images.map((each, index) => {
-              console.log("each",each)
               return (
 
                   <img 
