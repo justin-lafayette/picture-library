@@ -93,9 +93,6 @@ class Profile extends Component {
                 <Navbar
                     isAuth={this.state.isAuth}
                 />
-
-                
-
                     <Container>
                     <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
                         <Row>

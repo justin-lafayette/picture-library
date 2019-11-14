@@ -321,7 +321,7 @@ class Event extends Component {
                         </Navbar>
 
                         <Jumbotron
-                            style={{backgroundColor: "red", height: "40vh"}}
+                            style={{backgroundColor: "rgba(255, 255, 255, 0.75)", height: "40vh"}}
                         >
 
                             <h3>
