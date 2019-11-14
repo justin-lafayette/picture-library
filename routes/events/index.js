@@ -22,7 +22,7 @@ router.route('/allEvents')
 router.route('/event/:event_id/pictures')
 .get(eventsController.findMyPics);
 
-router.route('/event/subscribe')
+router.route('/event/subscribe/:email/:event_id')
 .post(eventsController.subscribe);
 
 module.exports = router;

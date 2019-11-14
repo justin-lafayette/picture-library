@@ -93,12 +93,12 @@ module.exports = {
   }
   ,
   subscribe: function(req,res){
-    console.log('in eventsController - subscribe req ',req.body.id);
-    console.log('in eventsController - subscribe  email ',req.body.email);
+    console.log('in eventsController - subscribe req ',req.params);
+    //console.log('in eventsController - subscribe  email ',req.body.email);
     // create an entry in the relationship table
     db.EventUsers.create({
-      event_id: req.body.event_id,
-      email: req.body.email
+      event_id: req.params.event_id,
+      email: req.params.email
     })
     .then((eventUser)=>{
       res.json(eventUser);

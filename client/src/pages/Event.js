@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import {Row, Col, Container, Image, Button, /* Card, */ CardGroup, Jumbotron, Modal } from 'react-bootstrap';
 import Api from '../utils/Api';
+// import EventUsers from "../../../models/EventUsers";
 import ImageUpload from '../components/ImageUpload';
 import Slideshow from '../components/Slideshow/slideshow';
 import axios from 'axios';
@@ -77,14 +78,26 @@ class Event extends Component {
         event.preventDefault();
         // this.props.location.reload();
         console.log('in handleSubscribe');
-        Api.subscribe({
-            email: this.state.email,
-            eventID: this.state.eventID,
-            subscribe: true
-        })
+        console.log("email",this.state.email);
+        console.log("event_id",this.state.event_id);
+        
+        Api.subscribe(this.state.email,this.state.event_id)
             .then( res => {
-                // this.props.location.reload();
+                this.setState({memberOf: true})
             })
+
+        // EventUsers.create({
+        //     event_id: this.state.event_id,
+        //     email: this.state.email
+        //   })
+        //   .then((eventUser)=>{
+        //       console.log("in .then of subscribe eventusers.create");
+        //     this.props.location.reload();
+        //   })
+        //   .catch((err) => {console.log("error while subscribing", err)
+        //   this.props.location.reload();
+        // });
+        
     }
 
     // Needs back-end route
