@@ -23,7 +23,7 @@ class Scanner extends Component {
       //the "/events/join/:event_id" route handler will simply add a record to your database that associates the current user with the event_id
       this.goToEvent(data)
     } else {
-      this.setState()
+      this.setState({scanFail: true})
     }
   }
 
