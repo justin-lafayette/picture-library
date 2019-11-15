@@ -1,11 +1,11 @@
 /* This page is dedicated to creating events. A modal should be added to event search to create events. */
 
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import Api from '../utils/Api';
-import { Container, Jumbotron, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
-import ReactToPrint from 'react-to-print';
+// import ReactToPrint from 'react-to-print';
 import { Link } from "react-router-dom";
 
 // import ReactToPrint from 'react-to-print';
@@ -86,7 +86,7 @@ class CreateEvent extends Component {
         return (
             <>
 
-                <Navbar
+                <SiteNavbar
                     isAuth={this.state.isAuth}
                 />
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import Api from '../utils/Api';
 // import { withRouter } from 'react-router-dom';
 import { Form, Modal, Container, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
@@ -92,7 +92,7 @@ class PageNotFound extends Component {
 
                 <>
         
-                    <Navbar
+                    <SiteNavbar
                         auth={this.state.auth}
                     />
 
@@ -112,7 +112,7 @@ class PageNotFound extends Component {
             return(
                 <>
 
-                    <Navbar
+                    <SiteNavbar
                         auth={this.state.auth}
                     >
                         <ButtonToolbar>
@@ -266,7 +266,7 @@ class PageNotFound extends Component {
                             </Modal>
 
                         </ButtonToolbar>
-                    </Navbar>
+                    </SiteNavbar>
                     
                     
 

@@ -1,6 +1,6 @@
 /* This page will show specific events */
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import { Row, Col, Container, Image, Button, Card, CardGroup, Jumbotron, Modal, Spinner } from 'react-bootstrap';
 import Api from '../utils/Api';
 import Slideshow from '../components/Slideshow/slideshow';
@@ -8,6 +8,8 @@ import axios from 'axios';
 import Dropzone from "react-dropzone";
 import { FaFileUpload } from 'react-icons/fa';
 import '../components/ImageUpload/style.css';
+import { Link } from 'react-router-dom';
+// import Gallery from 'react-grid-gallery';
 
 // import one from '../assets/images/pkm1.png';
 // import two from '../assets/images/pkm2.png';
@@ -91,12 +93,19 @@ class Event extends Component {
                 axios.get(`/events/event/${this.state.event_id}/pictures`)
                 .then( res => {
                     console.log("inside get my pics: event");
-                    console.log(this.state.event_id)
-                    console.log(res);
+
+                    for( let i = 0; i < res.length; i++) {
+                        console.log("start loop")
+                        if( this.state.event_id == res.event_id ) { 
+                            console.log(res.event_id);
+                            console.log(this.state.event_id);
+                            
+                            this.setState({memberOf: true});
+                        }
+                    }
+                
                     console.log(res.data);
                     this.setState({eventPics: res.data});
-                    // this.setState({testPic: res.data[1].picture_url});
-                    console.log(this.state.eventPics)
                 })
                 .catch( err => console.log( err ));
             })
@@ -197,11 +206,12 @@ class Event extends Component {
     
     handleFormSubmit = event => {
         event.preventDefault();
+
         this.setState({loading: true});
 
         const formData = new FormData();
         formData.append('image',this.state.file, this.state.filename);
-        formData.append('event_id', this.props.event_id)
+        formData.append('event_id', this.state.event_id)
     
         Api.uploadPic(formData)
             .then( res => {
@@ -211,9 +221,14 @@ class Event extends Component {
                     uploadShow: false,
                     loading: false
 
+                }, () => {
+
+                    this.props.history.push(`/event/${this.state.event_id}`, [this.state.memberOf]);
+
                 });
+
+                console.log("event_id: ", this.state.event_id)
                 
-                this.props.history.push(`/event/${this.state.event_id}`);
 
             })
             .catch( err => console.log(err));
@@ -228,7 +243,7 @@ class Event extends Component {
                 
                 {this.state.memberOf ? (
                     <>
-                        <Navbar
+                        <SiteNavbar
                             isAuth={this.state.isAuth}
                         >
                             <Button
@@ -318,7 +333,7 @@ class Event extends Component {
                                     </div>
                                 </Modal.Body>
                             </Modal>
-                        </Navbar>
+                        </SiteNavbar>
 
                         <Jumbotron
                             style={{backgroundColor: "rgba(255, 255, 255, 0.75)", height: "40vh"}}
@@ -385,7 +400,7 @@ class Event extends Component {
                 ):(
 
                     <>
-                        <Navbar
+                        <SiteNavbar
                             isAuth={this.state.isAuth}
                         />
             
@@ -395,14 +410,17 @@ class Event extends Component {
                             
                                 <Row>
                                     <Col 
-                                    xs={2}
-                                    md={4}
+                                        xs={2}
+                                        md={4}
                                     >
+                                        <Row>
 
-                                        <Image 
-                                            src={"https://i2.wp.com/www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo.jpg?resize=825%2C510&ssl=1"}
-                                            style={{maxHeight: 200}}
-                                        />
+                                            <div>
+                                                <img src={"http://api.qrserver.com/v1/create-qr-code/?data=" + this.state.event_id}></img>
+                                                <Link to={"/qrprint/" + this.state.event_id + "/" + this.state.eventTitle}> </Link>
+                                            </div>
+
+                                        </Row>
 
                                     </Col>    
 
@@ -411,13 +429,16 @@ class Event extends Component {
                                         <Row
                                         style={{height:100}}
                                         >
-                                            {this.state.title}
+                                            <h1>
+                                                {this.state.title}
+                                            </h1>
                                         </Row>
 
                                         <Row
                                         style={{height:100}}
                                         >           
-                                            <Button 
+                                            <Button
+                                                style={{height: "40px"}}
                                                 onClick={this.handleSubscribe}
                                             >Subscribe</Button>
                                         </Row>

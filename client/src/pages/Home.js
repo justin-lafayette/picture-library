@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import Api from '../utils/Api';
 import { withRouter } from 'react-router-dom';
 import { Form, Modal, Container, Button, ButtonToolbar, Alert, Spinner, Col, Row } from 'react-bootstrap';
@@ -129,7 +129,7 @@ class Home extends Component {
 
                 <>
         
-                    <Navbar
+                    <SiteNavbar
                         isAuth={this.state.isAuth}
                     >
                          <Button
@@ -138,7 +138,7 @@ class Home extends Component {
                             QRscan
                         </Button>
                         
-                    </Navbar>
+                    </SiteNavbar>
 
                     <Container>
                     
@@ -160,7 +160,7 @@ class Home extends Component {
             
             return(
                 <>
-                    <Navbar
+                    <SiteNavbar
                         isAuth={this.state.isAuth}
                     >
                         <ButtonToolbar>
@@ -352,7 +352,7 @@ class Home extends Component {
                                 </Modal.Body>
                             </Modal>
                         </ButtonToolbar>
-                    </Navbar>
+                    </SiteNavbar>
                     
                     <Row>
                         <Col

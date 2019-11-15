@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ImageUpload from '../components/ImageUpload';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import Api from '../utils/Api';
 
 
@@ -33,7 +33,7 @@ class Upload extends Component {
     render (){
       return(
         <>
-          <Navbar
+          <SiteNavbar
             isAuth={this.state.isAuth}
           />
           

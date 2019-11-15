@@ -40,7 +40,8 @@ function Slideshow(props) {
                   <img 
                     key={index} 
                     style={{maxWidth: "100px", height: "auto"}} 
-                    src={each.picture_url} 
+                    src={each.picture_url}
+                    alt={index}
                   />
 
                 )

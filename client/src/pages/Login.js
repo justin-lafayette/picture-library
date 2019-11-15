@@ -1,6 +1,6 @@
 /* TODO: create a landing page for non-authenticated users */
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import Api from '../utils/Api';
 import { Container, Row, Col, Form, Button, Jumbotron, Card, Spinner, Alert } from 'react-bootstrap';
 
@@ -119,7 +119,7 @@ class Login extends Component {
             <>
         
                 {/* Needs to be passed as an arrow function and the onclick event written as an arrow function in the component */}
-                <Navbar
+                <SiteNavbar
                     isAuth={this.state.isAuth}
                 />
             

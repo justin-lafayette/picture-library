@@ -3,8 +3,8 @@
 /* TODO: Render personal info */
 
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
-import { Row, Col, Card, Image, ListGroup, Container, Jumbotron, Button } from 'react-bootstrap';
+import SiteNavbar from '../components/SiteNavbar';
+import { Row, Col, /* Card, Image, */ ListGroup, Container, /* Button */ } from 'react-bootstrap';
 import Api from '../utils/Api';
 
 
@@ -51,13 +51,11 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        console.log("Profile - Component did mount");
         this.loadMyPictures();
 
 
         Api.isAuth()
           .then( res => {
-              console.log("auth res: ", res)
             if( res.data.user ) {
               this.setState({
                 firstName: res.data.user.firstname,
@@ -65,10 +63,6 @@ class Profile extends Component {
                 email: res.data.user.email,
                 isAuth: true
               });
-              console.log("if")
-              console.log("email: ", this.state.email);
-              console.log("first name: ", this.state.firstName);
-              console.log("last name: ", this.state.lastName);
               this.loadEvents();
         
             } else {
@@ -79,9 +73,6 @@ class Profile extends Component {
               this.props.history.push('/login');
             }
         })
-        console.log("email: ", this.state.email);
-        console.log("first name: ", this.state.firstName);
-        console.log("last name: ", this.state.lastName);
     }
 
     // Render Elements
@@ -90,7 +81,7 @@ class Profile extends Component {
         return (
             <>
 
-                <Navbar
+                <SiteNavbar
                     isAuth={this.state.isAuth}
                 />
                     <Container>

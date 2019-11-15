@@ -35,13 +35,14 @@ export default {
     },
 
     // Upload picture
-    uploadPic: function(data) {
+    uploadPic: function(data, data2) {
+        console.log("data:", data)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }
-        return axios.post("/uploadpic", data, config);
+        return axios.post("/uploadpic", data, config, data2);
     }, 
 
     // Load Events

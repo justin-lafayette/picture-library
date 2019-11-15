@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import SiteNavbar from '../components/SiteNavbar';
 import Api from '../utils/Api';
 import { Container, Col, Row, Dropdown, Card, Image, Button } from 'react-bootstrap';
 
@@ -46,18 +46,14 @@ class EventSearch extends Component {
 
     
     componentDidMount() {
-        console.log("Component did mount");
-        //this.loadAllEvents();
             
         Api.isAuth()
           .then( res => {
-            // console.log('in Api.isAuth');
             if( res.data.user ) {
               this.setState({
                 email: res.data.user.email,
                 isAuth: true
               });
-              console.log('email in componentDidMount', this.state.email);
             } else {
               this.setState({
                 email: "",
@@ -84,8 +80,6 @@ class EventSearch extends Component {
     goToEvent = (e) => {
         e.preventDefault();
         let targetId = e.target.id;
-        console.log(e.target.id)
-        console.log(targetId)
         this.setState({event_id: targetId}, () => {
             
             console.log(this.state.event_id)
@@ -113,7 +107,7 @@ class EventSearch extends Component {
         return(
             <>
         
-                <Navbar
+                <SiteNavbar
                     isAuth={this.state.isAuth}
                 />
 
