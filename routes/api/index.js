@@ -19,4 +19,8 @@ router.route("/:id").get(userController.findById);
 // .put(userController.update)
 // .delete(userController.remove);
 
+router.route("/about").get(userController.findAll);
+
+router.route("/contact").get(userController.findAll);
+
 module.exports = router;
