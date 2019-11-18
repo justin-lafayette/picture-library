@@ -48,6 +48,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react-date-picker": "^7.8.2",
+    "react-hook-form": "^3.28.1",
     "sequelize": "^5.21.1"
   }
 }
