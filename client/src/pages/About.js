@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import Navbar from '../components/Navbar';
-import { Document } from 'react-pdf/dist/entry.webpack';
+import { Document, Page } from 'react-pdf';
+import { Button } from 'react-bootstrap';
  
-class About extends Component {
+export default class About extends Component {
   state = {
     numPages: null,
     pageNumber: 1,
@@ -17,6 +18,7 @@ class About extends Component {
  
     return (
 
+      <>
         <Navbar
             isAuth={this.state.isAuth}
             >
@@ -28,15 +30,16 @@ class About extends Component {
                         
         </Navbar>
 
-      <div>
-        <Document
-          file="./assets/limits.pdf"
-          onLoadSuccess={this.onDocumentLoadSuccess}
-        >
-          <Page pageNumber={pageNumber} />
-        </Document>
-        <p>Page {pageNumber} of {numPages}</p>
-      </div>
+        <div>
+          <Document
+            file="./assets/limits.pdf"
+            onLoadSuccess={this.onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+          <p>Page {pageNumber} of {numPages}</p>
+        </div>
+      </>
     );
   }
 }
