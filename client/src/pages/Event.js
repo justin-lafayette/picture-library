@@ -8,10 +8,10 @@ import {
   Image,
   Button,
   Card,
-  CardGroup,
   Jumbotron,
   Modal,
-  Spinner
+  Spinner,
+  CardDeck
 } from "react-bootstrap";
 import Api from "../utils/Api";
 import Slideshow from "../components/Slideshow/slideshow";
@@ -375,15 +375,16 @@ class Event extends Component {
 
               <Row>
                 <Col>
-                  <CardGroup>
-                    {this.state.eventPics.map(event => {
+                  <CardDeck>
+                    {this.state.eventPics.map((event, index) => {
+                      
                       return (
                         <Card key={event.picture_id}>
                           <Card.Img src={event.picture_url} />
                         </Card>
                       );
                     })}
-                  </CardGroup>
+                  </CardDeck>
                 </Col>
               </Row>
             </Container>
