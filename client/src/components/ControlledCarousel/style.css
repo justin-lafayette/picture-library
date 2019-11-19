@@ -1,0 +1,43 @@
+.carousel-inner img {
+    margin: auto;
+    max-width: 500px;
+    max-height: 250px;
+    height: auto;
+}
+
+.carousel {
+    height: 300px;
+    width: 100vw
+}
+
+/* .carousel-control-prev-icon, .carousel-control-next-icon {
+    outline: black;
+} */
+
+/* .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-image: none;
+} */
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: red;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: red;
+}
+
+ol.carousel-indicators> li {
+    background-color: red;
+}

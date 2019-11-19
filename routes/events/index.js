@@ -25,4 +25,7 @@ router.route('/event/:event_id/pictures')
 router.route('/event/subscribe/:email/:event_id')
 .post(eventsController.subscribe);
 
+router.route('/event/isSubscribed/:email/:event_id')
+.get(eventUserController.findByEventNEmail);
+
 module.exports = router;
