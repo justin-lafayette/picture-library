@@ -12,7 +12,6 @@ console.log("s3 instance created");
 
 // Matches with "/uploadpic"
 router.route("/uploadpic").post(upload.single("image"), function(req, res) {
-  console.log(req.body.event_id);
   const eventId = req.body.event_id;
   const file = req.file;
   console.log("In UploadRoutes.js - File!");
