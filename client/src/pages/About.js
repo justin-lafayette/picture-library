@@ -16,6 +16,18 @@ class About extends Component {
     const { pageNumber, numPages } = this.state;
  
     return (
+
+        <Navbar
+            isAuth={this.state.isAuth}
+            >
+                <Button
+                // disabled={!(this.state.QrReader)}
+                    onClick={this.showScanner}>
+                    QRscan
+                </Button>
+                        
+        </Navbar>
+
       <div>
         <Document
           file="./assets/limits.pdf"

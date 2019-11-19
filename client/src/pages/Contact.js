@@ -16,6 +16,18 @@ class Contact extends Component {
     const { pageNumber, numPages } = this.state;
  
     return (
+
+        <Navbar
+            isAuth={this.state.isAuth}
+            >
+            <Button
+                // disabled={!(this.state.QrReader)}
+                onClick={this.showScanner}>
+                QRscan
+                </Button>
+                        
+        </Navbar>
+
         <Container>
                     
         <div className="jumbotron" style={{marginTop: 20, borderRadius: 10, backgroundColor: "rgba(255, 255, 255, 0.75)"}}>
