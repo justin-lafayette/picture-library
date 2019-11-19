@@ -19,6 +19,7 @@ import axios from "axios";
 import Dropzone from "react-dropzone";
 import { FaFileUpload } from "react-icons/fa";
 import "../components/ImageUpload/style.css";
+import ControlledCarousel from "../components/ControlledCarousel";
 
 // import one from '../assets/images/pkm1.png';
 // import two from '../assets/images/pkm2.png';
@@ -42,13 +43,12 @@ const acceptedFileTypesArray = acceptedFileTypes.split(",").map(item => {
 
 class Event extends Component {
   state = {
-    email: "",
+    email: "justin.kyle.barfield@gmail.com",
     event: [],
     event_id: "",
     title: "",
     event_description: "",
     event_date: "",
-    memberOf: false,
     eventPics: [],
     auth: true,
     uploadShow: false,
@@ -56,11 +56,12 @@ class Event extends Component {
     imgSrc: null,
     loading: false,
     testPic: null,
-    subscribedToEvent: null
+    subscribedToEvent: null,
+    pageLoaded: false,
   };
 
   // Functions
-  componentDidMount() {
+  componentWillMount() {
     console.log("Component did mount");
     console.log(this.props.match.params.id);
     this.setState({ event_id: this.props.match.params.id });
@@ -68,21 +69,21 @@ class Event extends Component {
     // ID from the selected event
     console.log("this location: ", this.props.location);
 
-    Api.isAuth().then(res => {
-      if (res.data.user) {
-        this.setState({
-          email: res.data.user.email,
-          isAuth: true
-        });
-      } else {
-        this.setState({
-          email: "",
-          isAuth: false
-        });
-        this.props.history.push("/login");
-        console.log("email", this.state.email);
-      }
-    });
+    // Api.isAuth().then(res => {
+    //   if (res.data.user) {
+    //     this.setState({
+    //       email: res.data.user.email,
+    //       isAuth: true
+    //     });
+    //   } else {
+    //     this.setState({
+    //       email: "",
+    //       isAuth: false
+    //     });
+    //     this.props.history.push("/login");
+    //     console.log("email", this.state.email);
+    //   }
+    // });
 
     Api.loadSingleEvent(this.props.match.params.id)
       .then(res => {
@@ -95,20 +96,6 @@ class Event extends Component {
       })
       .then(res => {
         this.checkIfSubscribed();
-        //  call isSubscribed
-        // console.log('in checkIfSubscribed ');
-        // console.log("email in checkIfSubscribed",this.state.email);
-        // console.log("event_id in checkIfSubscribed",this.state.event_id);
-
-        // /* Call a controller function to chekc if the user has subscribed to the event already */
-        // Api.isSubscribed(this.state.email,this.state.event_id)
-        // .then( res => {
-        //     console.log("In checkIfSubscribed res");
-        //     console.log(res);
-        //     console.log("After  checkIfSubscribed");
-
-        //     });
-
         axios
           .get(`/events/event/${this.state.event_id}/pictures`)
           .then(res => {
@@ -120,9 +107,12 @@ class Event extends Component {
             // this.setState({testPic: res.data[1].picture_url});
             console.log(this.state.eventPics);
           })
+          .then(() => this.setState({pageLoaded: true}))
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
+
+
   }
 
   /* Handle input change */
@@ -164,7 +154,7 @@ class Event extends Component {
 
     Api.subscribe(this.state.email, this.state.event_id).then(res => {
       console.log(res);
-      this.setState({ memberOf: true });
+      this.setState({ subscribedToEvent: true });
     });
   };
 
@@ -177,7 +167,7 @@ class Event extends Component {
         event_id: "",
         title: "",
         event_description: "",
-        memberOf: ""
+        subscribedToEvent: ""
       });
     });
   };
@@ -259,10 +249,13 @@ class Event extends Component {
 
   render() {
     console.log("this.state: ", this.state);
+    console.log("sub state: ", this.state.subscribedToEvent)
     const { imgSrc } = this.state;
     return (
       <>
-        {this.state.memberOf ? (
+      {this.state.pageLoaded ? (
+      <>
+        {this.state.subscribedToEvent ? (
           <>
             <Navbar isAuth={this.state.isAuth}>
               <Button onClick={() => this.handleUploadShow()}>
@@ -352,15 +345,16 @@ class Event extends Component {
             <Jumbotron
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.75)",
-                height: "40vh"
+                height: "45vh"
               }}
             >
               <h3>{this.state.title}</h3>
 
-              <Col md={{ span: 4, offset: 4 }}>
-                <Slideshow images={this.state.eventPics}></Slideshow>
-              </Col>
+              <ControlledCarousel images={this.state.eventPics} />
+
             </Jumbotron>
+
+            
 
             <Container>
               <Row>
@@ -429,6 +423,12 @@ class Event extends Component {
             </Container>
           </>
         )}
+      </>
+      ):(
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      )}
       </>
     );
   }
