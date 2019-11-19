@@ -22,9 +22,9 @@ function SiteNavbar(props) {
                 <Nav className="mr-auto">
                     {props.isAuth ? (
                         <>
-                            <Nav.Link>Home</Nav.Link>
-                            <Nav.Link>Events</Nav.Link>
-                            <Nav.Link>Create Event</Nav.Link>
+                            <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/eventsearch">Events</Nav.Link>
+                            <Nav.Link href="/createevent">Create Event</Nav.Link>
                         </>
                     ):(<></>)}
                 </Nav>

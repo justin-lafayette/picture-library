@@ -15,19 +15,19 @@ module.exports = {
       console.log('Error in findAll of eventUser', err);
     });
   },
-  // findByUserEmail: function(req,res){
-  //     console.log('in findByUserEmail of eventUser controller email ', req.params.email);
-  //     db.EventUsers.findAll({
-  //       where: {
-  //         email:req.params.email
-  //       }
-  //     }).then(function(events){
-  //         // now call findAll of events to get events data
-  //       console.log(events);
-  //       // res.json(events);
-  //       res.json(events)
-  //     });
-  // },
+  findByEventNEmail: function(req,res){
+      console.log('in findByUserEmail of eventUser controller email ', req.params.email);
+      console.log('in findByUserEmail of eventUser controller event_id ', req.params.event_id);
+      db.EventUsers.findAll({
+        where: {
+          email:req.params.email,
+          event_id: req.params.event_id
+        }
+      }).then(function(subscription){
+        console.log(subscription);
+        res.json(subscription)
+      });
+  },
    findById: function(req, res) {
      console.log('in eventUserController.js - req event id ', req.params);
     db.EventUsers

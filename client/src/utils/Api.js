@@ -75,5 +75,10 @@ export default {
     // Is auth
     isAuth: function() {
         return axios.get("/auth/isauth")
+    },
+
+    isSubscribed: function(data, data2) {
+        console.log('in Api.isSubscribed',data, data2);
+        return axios.get(`/events/event/isSubscribed/${data}/${data2}`) ;      
     }
 }
