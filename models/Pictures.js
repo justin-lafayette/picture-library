@@ -10,7 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     title: DataTypes.STRING,
     picture_url: DataTypes.STRING,
-    picture_file: DataTypes.BLOB
+    picture_height: DataTypes.INTEGER,
+    picture_width: DataTypes.INTEGER,
+    picture_attribute_unit: {
+      type: DataTypes.STRING,
+      defaultValue: "Inches"
+    }
   },
   {
     freezeTableName: true
