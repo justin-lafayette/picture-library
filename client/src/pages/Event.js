@@ -43,7 +43,7 @@ const acceptedFileTypesArray = acceptedFileTypes.split(",").map(item => {
 
 class Event extends Component {
   state = {
-    email: "justin.kyle.barfield@gmail.com",
+    email: "",
     event: [],
     event_id: "",
     title: "",
@@ -57,7 +57,7 @@ class Event extends Component {
     loading: false,
     testPic: null,
     subscribedToEvent: null,
-    pageLoaded: false,
+    eventLoaded: false,
   };
 
   // Functions
@@ -69,21 +69,21 @@ class Event extends Component {
     // ID from the selected event
     console.log("this location: ", this.props.location);
 
-    // Api.isAuth().then(res => {
-    //   if (res.data.user) {
-    //     this.setState({
-    //       email: res.data.user.email,
-    //       isAuth: true
-    //     });
-    //   } else {
-    //     this.setState({
-    //       email: "",
-    //       isAuth: false
-    //     });
-    //     this.props.history.push("/login");
-    //     console.log("email", this.state.email);
-    //   }
-    // });
+    Api.isAuth().then(res => {
+      if (res.data.user) {
+        this.setState({
+          email: res.data.user.email,
+          isAuth: true
+        });
+      } else {
+        this.setState({
+          email: "",
+          isAuth: false
+        });
+        this.props.history.push("/login");
+        console.log("email", this.state.email);
+      }
+    });
 
     Api.loadSingleEvent(this.props.match.params.id)
       .then(res => {
@@ -107,7 +107,7 @@ class Event extends Component {
             // this.setState({testPic: res.data[1].picture_url});
             console.log(this.state.eventPics);
           })
-          .then(() => this.setState({pageLoaded: true}))
+          .then(() => this.setState({eventLoaded: true}))
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
@@ -253,7 +253,7 @@ class Event extends Component {
     const { imgSrc } = this.state;
     return (
       <>
-      {this.state.pageLoaded ? (
+      {this.state.eventLoaded ? (
       <>
         {this.state.subscribedToEvent ? (
           <>

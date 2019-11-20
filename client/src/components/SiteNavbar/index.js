@@ -26,7 +26,7 @@ function SiteNavbar(props) {
                             <Nav.Link href="/eventsearch">Events</Nav.Link>
                             <Nav.Link href="/createevent">Create Event</Nav.Link>
                         </>
-                    ):(<></>)}
+                    ):(null)}
                 </Nav>
                 <>
                     {props.isAuth ? (

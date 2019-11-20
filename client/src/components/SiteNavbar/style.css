@@ -1,4 +1,4 @@
-.nav-custom-background {
+.navbar {
     background-color:rgb(221, 219, 219);
     /* opacity: 0.5; */
 }
@@ -24,3 +24,8 @@ background-color: rgb(212, 209, 209);
 /* .button, input, optgroup, select, textarea{
     margin: 0px,0px,5px,0px; 
 } */
+
+button.navbar-toggler {
+    background-color: #DDDBDB;
+    border: 1px solid darkgray;
+}

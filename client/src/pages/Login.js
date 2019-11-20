@@ -158,6 +158,7 @@ class Login extends Component {
                                                         onChange={this.handleInputChange}
                                                         name="rtnPassword" 
                                                         placeholder="Password"
+                                                        type="password"
                                                     />
                                                 </Form.Group>
 
@@ -240,6 +241,7 @@ class Login extends Component {
                                                     onChange={this.handleInputChange}
                                                     name="newPassword"
                                                     placeholder="Password"
+                                                    type="password"
                                                 />
                                             </Form.Group>
 

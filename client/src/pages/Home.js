@@ -224,6 +224,7 @@ class Home extends Component {
                                                 onChange={this.handleInputChange}
                                                 name="password" 
                                                 placeholder="Password"
+                                                type="password"
                                             />
                                         </Form.Group>
 
@@ -320,6 +321,7 @@ class Home extends Component {
                                                 onChange={this.handleInputChange}
                                                 name="password"
                                                 placeholder="Password"
+                                                type="password"
                                             />
                                         </Form.Group>
 
